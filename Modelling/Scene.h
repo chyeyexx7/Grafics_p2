@@ -30,7 +30,7 @@ public:
     vector<shared_ptr<Mesh>> objects;
     vector<shared_ptr<Light>>  lights;
 
-    vec3    lightAmbientGlobal;
+    vec3 lightAmbientGlobal;
     shared_ptr<Camera> camera;
     // Capsa contenedora de l'escena
     Capsa3D capsaMinima;

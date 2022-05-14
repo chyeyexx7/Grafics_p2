@@ -35,6 +35,7 @@ void Scene::addObject(shared_ptr<Mesh> obj) {
  * @brief Scene::toGPU
  */
 void Scene::toGPU(shared_ptr<QGLShaderProgram> p) {
+    lightsToGPU(p);
     for(unsigned int i=0; i < objects.size(); i++){
         objects.at(i)->toGPU(p);
     }
@@ -68,8 +69,6 @@ void Scene::setLightActual(shared_ptr<Light> l){
     lights[lights.size()-1]=l;
 }
 
-
-
 /**
  * @brief Scene::lightsToGPU
  * @param program
@@ -77,6 +76,9 @@ void Scene::setLightActual(shared_ptr<Light> l){
 void Scene::lightsToGPU(shared_ptr<QGLShaderProgram> program){
 // TO DO: A implementar a la fase 1 de la practica 2
 
+    for(unsigned int i=0; i < this->lights.size(); i++){
+        lights[i]->LightsToGPU(program.get(),i);
+    }
 }
 
 void Scene::addLight(shared_ptr<Light> l) {
@@ -84,12 +86,13 @@ void Scene::addLight(shared_ptr<Light> l) {
 }
 
 /**
- * @brief Scene::setAmbientToGPU
+ * @brief Scene::setAmbientGlobalToGPU
  * @param program
  */
 void Scene::setAmbientGlobalToGPU(shared_ptr<QGLShaderProgram> program){
     // TO DO: A implementar a la fase 1 de la practica 2
-
+    GLuint ambientLight = program->uniformLocation(QString("ambientGlobalLight"));
+    glUniform3fv(ambientLight,1,lightAmbientGlobal);
 }
 
 /**

@@ -1,8 +1,20 @@
 #pragma once
 
-#include <library/vec.h>
+#include <QObject>
+#include <vector>
+#include <memory>
+
+#include <library/Common.h>
 using namespace Common;
 
+#include <QGLShaderProgram>
+#include <QOpenGLTexture>
+#include <library/vec.h>
+#include <QJsonArray>
+#include <QJsonObject>
+
+using namespace std;
+#define MAX 6
 // Tipus de Lights
 enum LightType {Puntual, Direccional, Spot};
 
@@ -12,6 +24,9 @@ enum LightType {Puntual, Direccional, Spot};
 class Light {
     public:
         Light(LightType l);
+        Light(LightType l, vec3 lightIS, vec3 lightID, vec3 lightIA, vec4 lightPosition, vec4 lightDirection);
+
+        void LightsToGPU(QGLShaderProgram *program, int i);
 
         vec4 getLightPosition();
         void setLightPosition(vec4 v);
@@ -30,5 +45,16 @@ class Light {
 
         LightType getTipusLight() const;
         void setTipusLight(const LightType &value);
+
+        vec4 getLightDirection();
+        void setLightDirection(vec4 lightDirection);
+
+        LightType typeLight;
+        vec3 lightIS;
+        vec3 lightID;
+        vec3 lightIA;
+        vec3 coeficients;
+        vec4 lightPosition;
+        vec4 lightDirection;
 };
 
