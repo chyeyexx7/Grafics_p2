@@ -15,8 +15,8 @@ Segona pràctica de GiVD 2021-22
 
 - Fase 1
     - Adaptació a la lectura de fitxers de dades
-        - [ ] Objectes
-        - [ ] Escenes virtuals
+        - [X] Objectes
+        - [X] Escenes virtuals
         - [ ] Escenes de dades Reals 
     - Material
     - Light
