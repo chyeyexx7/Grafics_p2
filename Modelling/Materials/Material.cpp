@@ -2,11 +2,11 @@
 /*Desarrollado por Endimbeer Enrique Nuñez Matos */
 
 Material::Material() {
-     Ka = vec3(1, 0,0);
-     Ks = vec3(0, 0, 0);
-     Kd = vec3(0, 0, 0);
-     shininess = 10.0;
-     opacity = 0;
+     this->Ka = vec3(0, 0,0);
+     this->Ks = vec3(0, 0, 0);
+     this->Kd = vec3(0, 1, 0);
+     this->shininess = 10.0;
+     this->opacity = 0;
 }
 
 Material::~Material(){
@@ -36,20 +36,26 @@ Material::Material(vec3 a, vec3 d, vec3 s, float shin, float opac) {
  * @param program
  */
 void Material::toGPU(shared_ptr<QGLShaderProgram> program){
-    struct gl_material mt;
 
-    mt.kd = program->uniformLocation("material.Kd");
-    mt.ks = program->uniformLocation("material.Ka");
-    mt.ka = program->uniformLocation("material.Ks");
-    mt.shine = program->uniformLocation("material.shininess");
-    mt.opac = program->uniformLocation("material.opacity");
+    struct {
+        GLuint kd;
+        GLuint ks;
+        GLuint ka;
+        GLuint shine;
+        GLuint opac;
+    }gl_material;
 
+    gl_material.kd = program->uniformLocation("material.Kd");
+    gl_material.ks = program->uniformLocation("material.Ka");
+    gl_material.ka = program->uniformLocation("material.Ks");
+    gl_material.shine = program->uniformLocation("material.shininess");
+    gl_material.opac = program->uniformLocation("material.opacity");
 
-    glUniform3fv(mt.kd, 1, Kd);
-    glUniform3fv(mt.ka, 1, Kd);
-    glUniform3fv(mt.ks, 1, Ks);
-    glUniform1f(mt.shine, shininess);
-    glUniform1f(mt.opac, opacity);
+    glUniform3fv(gl_material.kd, 1, Kd);
+    glUniform3fv(gl_material.ks, 1, Ka);
+    glUniform3fv(gl_material.ka, 1, Ks);
+    glUniform1f(gl_material.shine, shininess);
+    glUniform1f(gl_material.opac, opacity);
 
 }
 
@@ -57,6 +63,13 @@ void Material::toGPU(shared_ptr<QGLShaderProgram> program){
 
 void Material::read (const QJsonObject &json)
 {
+    this->Ka = vec3(0, 0,0);
+    this->Ks = vec3(0, 0, 0);
+    this->Kd = vec3(0, 1, 0);
+    this->shininess = 10.0;
+    this->opacity = 0;
+
+
     if (json.contains("ka") && json["ka"].isArray()) {
         QJsonArray auxVec = json["ka"].toArray();
         Ka[0] = auxVec[0].toDouble();

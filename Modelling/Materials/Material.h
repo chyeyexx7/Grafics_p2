@@ -39,13 +39,6 @@ public:
     virtual void write(QJsonObject &json) const;
     virtual void print(int indentation) const;
 
-    struct gl_material{
-        GLuint kd;
-        GLuint ks;
-        GLuint ka;
-        GLuint shine;
-        GLuint opac;
-    };
 
 
 };

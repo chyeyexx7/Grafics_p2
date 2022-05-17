@@ -11,7 +11,8 @@ Mesh::Mesh(int npoints, QObject *parent) : QObject(parent){
     points = new point4[numPoints];
     normals= new point4[numPoints];
     colors = new point4[numPoints];
-    auto material = make_shared<Material> ();
+    this->material = make_shared<Material> ();
+
 
  }
 
@@ -26,7 +27,7 @@ Mesh::Mesh(int npoints, QString n) : numPoints(npoints){
     points = new point4[numPoints];
     normals= new point4[numPoints];
     colors = new point4[numPoints];
-    auto material = make_shared<Material> ();
+    this->material = make_shared<Material> ();
     parseObjFile(n);
     make();
 }
@@ -68,7 +69,7 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
 
     glBufferData( GL_ARRAY_BUFFER, sizeof(point4)*Index + sizeof(point4)*Index, NULL, GL_STATIC_DRAW );
     glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(point4)*Index, points );
-    glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, colors );
+    //glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, colors );
 
     // set up vertex arrays
     glBindVertexArray( vao );
@@ -90,6 +91,7 @@ void Mesh::draw(){
     // Activació a GL del Vertex Buffer Object.
     // TO  DO: A modificar a la fase 1 de la practica 2
     // Cal activar també les normals  a la GPU
+    this->material->toGPU(program);
 
     glBindVertexArray( vao );
     glEnableVertexAttribArray(0);
@@ -97,8 +99,6 @@ void Mesh::draw(){
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays( GL_TRIANGLES, 0, Index );
-
-    this->material->toGPU(this->program);
 
 
     glDisableVertexAttribArray(0);
@@ -114,18 +114,22 @@ void Mesh::make(){
     // TO  DO: A modificar a la fase 1 de la practica 2
     // Cal calcular la normal a cada vertex a la CPU
 
+    /*
     static vec3  base_colors[] = {
         vec3( 1.0, 0.0, 0.0 ),
         vec3( 0.0, 1.0, 0.0 ),
         vec3( 0.0, 0.0, 1.0 ),
         vec3( 1.0, 1.0, 0.0 )
-    };
+    };*/
+
+
+
 
     Index = 0;
     for(unsigned int i=0; i<cares.size(); i++){
         for(unsigned int j=0; j<cares[i].idxVertices.size(); j++){
             points[Index] = vertexs[cares[i].idxVertices[j]];
-            colors[Index] = vec4(base_colors[j%4], 1.0);
+            //colors[Index] = vec4(base_colors[j%4], 1.0);
             Index++;
         }
     }
@@ -214,7 +218,7 @@ void Mesh::parseObjFile(const QString &fileName)
                         cara->idxNormals.push_back( lineParts.at(3).split("/").at(2).toInt() - 1);
 
 
-                        // cara->calculaNormal();
+                        //cara->calculaNormal();
                         cares.push_back(*cara);
                     }
 
