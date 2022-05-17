@@ -11,7 +11,11 @@ Mesh::Mesh(int npoints, QObject *parent) : QObject(parent){
     points = new point4[numPoints];
     normals= new point4[numPoints];
     colors = new point4[numPoints];
+    auto material = make_shared<Material> ();
+
  }
+
+
 
 /**
  * @brief Mesh::Mesh
@@ -22,7 +26,7 @@ Mesh::Mesh(int npoints, QString n) : numPoints(npoints){
     points = new point4[numPoints];
     normals= new point4[numPoints];
     colors = new point4[numPoints];
-
+    auto material = make_shared<Material> ();
     parseObjFile(n);
     make();
 }
@@ -93,6 +97,9 @@ void Mesh::draw(){
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays( GL_TRIANGLES, 0, Index );
+
+    this->material->toGPU(this->program);
+
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
