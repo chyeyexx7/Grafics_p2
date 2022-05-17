@@ -6,12 +6,24 @@
  */
 Light::Light(LightType t) {
     // TO DO: A canviar a la fase 1 de la practica 2
-    typeLight = t;
-    lightIS = vec3(0.4,0.4,0.4);
-    lightID = vec3(0.8,0.8,0.8);
-    lightIA = vec3(0.3,0.3,0.3);
-    lightPosition = vec4(8,10,7,9);
-    lightDirection = vec4(0.9,0.9,0.9,0.9);
+    this->typeLight = t;
+    this->lightIS = vec3(0.4,0.4,0.4);
+    this->lightID = vec3(0.8,0.8,0.8);
+    this->lightIA = vec3(0.3,0.3,0.3);
+    this->lightPosition = vec4(8,10,7,9);
+    this->lightDirection = vec4(0.9,0.9,0.9,0.9);
+    this->coeficients = vec3(0,1,0);
+}
+
+Light::Light(LightType t, vec3 lightIS, vec3 lightID, vec3 lightIA, vec4 lightPosition, vec4 lightDirection, vec3 coeficients) {
+    // TO DO: A canviar a la fase 1 de la practica 2
+    this->typeLight = t;
+    this->lightIS = lightIS;
+    this->lightID = lightID;
+    this->lightIA = lightIA;
+    this->lightPosition = lightPosition;
+    this->lightDirection = lightDirection;
+    this->coeficients = coeficients;
 }
 
 /**
@@ -147,21 +159,10 @@ void Light::setTipusLight(const LightType &value)
 // Aquest métode el crida lightsToGPU de scene.cpp
 void Light::LightsToGPU(QGLShaderProgram *program, int i) {
 
-    struct lightsid
-    {
-        GLuint type;
-        GLuint lightIS;
-        GLuint lightID;
-        GLuint lightIA;
-        GLuint coeficients_gpu;
-        GLuint lightPosition;
-        GLuint lightDirection;
-    };
-    lightsid gl_IdLightsVec[MAX];
-
     gl_IdLightsVec[i].type = program->uniformLocation(QString("lights[%1].lightType_gpu").arg(i));
     gl_IdLightsVec[i].lightIS = program->uniformLocation(QString("lights[%1].lightIS_gpu").arg(i));
     gl_IdLightsVec[i].lightID = program->uniformLocation(QString("lights[%1].lightID_gpu").arg(i));
+    gl_IdLightsVec[i].lightIA = program->uniformLocation(QString("lights[%1].lightIA_gpu").arg(i));
     gl_IdLightsVec[i].lightIA = program->uniformLocation(QString("lights[%1].lightIA_gpu").arg(i));
     gl_IdLightsVec[i].coeficients_gpu = program->uniformLocation(QString("lights[%1].coeficients_gpu").arg(i));
     gl_IdLightsVec[i].lightPosition = program->uniformLocation(QString("lights[%1].lightPosition_gpu").arg(i));

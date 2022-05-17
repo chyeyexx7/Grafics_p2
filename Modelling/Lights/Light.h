@@ -24,7 +24,7 @@ enum LightType {Puntual, Direccional, Spot};
 class Light {
     public:
         Light(LightType l);
-        Light(LightType l, vec3 lightIS, vec3 lightID, vec3 lightIA, vec4 lightPosition, vec4 lightDirection);
+        Light(LightType l, vec3 lightIS, vec3 lightID, vec3 lightIA, vec4 lightPosition, vec4 lightDirection, vec3 coeficients);
 
         void LightsToGPU(QGLShaderProgram *program, int i);
 
@@ -56,5 +56,17 @@ class Light {
         vec3 coeficients;
         vec4 lightPosition;
         vec4 lightDirection;
+
+        struct lightsid
+        {
+            GLuint type;
+            GLuint lightIS;
+            GLuint lightID;
+            GLuint lightIA;
+            GLuint coeficients_gpu;
+            GLuint lightPosition;
+            GLuint lightDirection;
+        };
+        lightsid gl_IdLightsVec[MAX];
 };
 
