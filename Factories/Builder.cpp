@@ -29,52 +29,57 @@ void Builder::newVirtualScene() {
     // Usa la teva SceneFactoryVirtual
     // per a construir l'escena tal i com feies a la practica 1
     QString fileName = QFileDialog::getOpenFileName();
+    // Comprovem si el fitxer d'escena virtual existeix
+    if (!fileName.isNull()){
+        QFile file(fileName);
 
-            // Comprovem si el fitxer d'escena virtual existeix
-            if (!fileName.isNull()){
-                QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly)){
+            qDebug() << "File open error";
+        }
+        else {
+            qDebug() << "File open !";
+        }
 
-                if (!file.open(QIODevice::ReadOnly)){
-                    qDebug() << "File open error";
-                }
-                else {
-                    qDebug() << "File open !";
-                }
+        QByteArray saveData = file.readAll();
+        QJsonParseError error;
+        QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, &error));
 
-                QByteArray saveData = file.readAll();
-                QJsonParseError error;
-                QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, &error));
+        if (loadDoc.isNull()){
+            qWarning("Parse error in json virtual scene file.");
+        }
+        else{
+            QJsonObject json = loadDoc.object();
+            if (json.contains("objects") && json["objects"].isArray()) {
+                QJsonArray objectsArray = json["objects"].toArray();
 
-                if (loadDoc.isNull()){
-                    qWarning("Parse error in json virtual scene file.");
-                }
+                for (int objectIndex = 0; objectIndex < objectsArray.size(); objectIndex ++){
+                    QJsonObject objectObject = objectsArray[objectIndex].toObject();
 
-                else{
-                    QJsonObject json = loadDoc.object();
-                    if (json.contains("objects") && json["objects"].isArray()) {
-                    QJsonArray objectsArray = json["objects"].toArray();
+                    // Comprovem si l'objecte del fitxer es tipus mesh
+                    if (objectObject.contains("type") && objectObject["type"].isString()
+                            && objectObject["type"] == "MESH"){
 
-                    for (int objectIndex = 0; objectIndex < objectsArray.size(); objectIndex ++){
-                        QJsonObject objectObject = objectsArray[objectIndex].toObject();
+                        // Busquem el fitxer de l'objecte mesh
+                        if (objectObject.contains("objFileName") && objectObject["objFileName"].isString()){
 
-                        // Comprovem si l'objecte del fitxer es tipus mesh
-                        if (objectObject.contains("type") && objectObject["type"].isString()
-                                && objectObject["type"] == "MESH"){
+                            QString filename = objectObject["objFileName"].toString();
 
-                            // Busquem el fitxer de l'objecte mesh
-                            if (objectObject.contains("objFileName") && objectObject["objFileName"].isString()){
-
-                                QString filename = objectObject["objFileName"].toString();
-
-                                // Afegim a la llista d'objectes la nova mesh
-                                auto obj = make_shared<Mesh>(1000000, filename);
-                                scene->addObject(obj);
+                            // Afegim a la llista d'objectes la nova mesh
+                            auto obj = make_shared<Mesh>(1000000, filename);
+                            // Afegim el material al objecte
+                            if (objectObject.contains("material") && objectObject["material"].isObject()) {
+                                QJsonObject auxMat = objectObject["material"].toObject();
+                                auto mat = make_shared<Material>();
+                                mat->read(auxMat);
+                                obj->setMaterial(mat);
                             }
+                            scene->addObject(obj);
                         }
                     }
                 }
             }
         }
+    }
 
      emit newScene(scene);
 }
@@ -87,6 +92,27 @@ void Builder::newDataScene()
     // El nom del fitxer s'obtindrà amb un QFileDialog
     // Utilitza la teva SceneFactoryData per a llegir el fitxer
     // i crear l'escena corresponent.
+    QString fileName = QFileDialog::getOpenFileName();
+    // Comprovem si el fitxer d'escena virtual existeix
+    if (!fileName.isNull()){
+        QFile file(fileName);
+
+        if (!file.open(QIODevice::ReadOnly)){
+            qDebug() << "File open error";
+        }
+        else {
+            qDebug() << "File open !";
+        }
+
+        QByteArray saveData = file.readAll();
+        QJsonParseError error;
+        QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, &error));
+
+        if (loadDoc.isNull()){
+            qWarning("Parse error in json virtual scene file.");
+        }
+
+    }
 
      emit newScene(scene);
 }

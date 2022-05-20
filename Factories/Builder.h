@@ -3,6 +3,7 @@
 
 #include <QtWidgets>
 #include <Rendering/GLWidget.h>
+#include <Modelling/Materials/Material.h>
 
 class Builder : public QObject {
         Q_OBJECT

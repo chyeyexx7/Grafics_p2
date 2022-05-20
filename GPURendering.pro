@@ -17,6 +17,7 @@ SOURCES += \
     Modelling/Materials/Material.cpp \
     Modelling/Objects/Cara.cpp \
     Modelling/Objects/Mesh.cpp \
+    Modelling/Objects/Plane.cpp \
     Modelling/Scene.cpp \
     Modelling/TG/TG.cpp \
     Modelling/TG/TranslateTG.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     Modelling/Materials/Material.h \
     Modelling/Objects/Cara.h \
     Modelling/Objects/Mesh.h \
+    Modelling/Objects/Pane.h \
     Modelling/Scene.h \
     Modelling/TG/TG.h \
     Modelling/TG/TranslateTG.h \
