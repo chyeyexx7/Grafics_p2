@@ -1,12 +1,9 @@
 #version 330
 
-layout (location = 0) in vec4 vPosition;
-layout (location = 1) in vec4 normals;
+in vec4 normal;
+in vec4 position;
 
-uniform mat4 model_view;
-uniform mat4 projection;
-
-out vec4 color;
+out vec4 colorOut;
 
 //Struct luces
 struct lightsGpu
@@ -16,8 +13,8 @@ struct lightsGpu
     vec3 lightID_gpu;
     vec3 lightIA_gpu;
     vec3 coeficients_gpu;
-    vec3 lightPosition_gpu;
-    vec3 lightDirection_gpu;
+    vec4 lightPosition_gpu;
+    vec4 lightDirection_gpu;
 };
 uniform lightsGpu lights[1];
 
@@ -39,18 +36,15 @@ uniform vec4 obs;
 
 void main()
 {
-    gl_Position = projection*model_view*vPosition;
-    gl_Position = gl_Position/gl_Position.w;
-
     vec3 Itotal = ambientGlobalLight * material.Ka;
     vec3 idkd;
     vec3 isks;
     vec3 iaka;
 
     //N es la normal al punto normalizada
-    vec4 N = normalize(normals);
+    vec4 N = normalize(normal);
     //V es el vector normalizado entre el observador y el punto
-    vec4 V = normalize(obs - vPosition);
+    vec4 V = normalize(obs - position);
     //L es el vector normalizado entre la luz y el punto
     //Su calculo varia segun el tipo de luz
     vec4 L;
@@ -64,7 +58,7 @@ void main()
     for(int i=0; i<lights.length(); i++){
         //Luz puntual
         if(lights[i].lightType_gpu == 0){
-            L = normalize(vec4(lights[i].lightPosition_gpu,1) - vPosition);
+            L = normalize(lights[i].lightPosition_gpu - position);
             //Calculamos el valor de la distancia
             distance = length(L);
             //Nos guardamos cada uno de los coeficientes a,b,c
@@ -76,7 +70,7 @@ void main()
         }
         //Luz direccional (no tenemos posición, solo dirección)
         else if(lights[i].lightType_gpu == 1){
-            L = normalize(-vec4(lights[i].lightDirection_gpu,0));
+            L = normalize(-lights[i].lightDirection_gpu);
             attenuation = 1.0;
         }
         H = normalize(L+V);
@@ -86,5 +80,6 @@ void main()
         Itotal += ((idkd + isks)/attenuation) + iaka;
     }
     //El color de salida será el calculado con la fórmula de phong
-    color = vec4(Itotal,1.0);
+    colorOut = vec4(Itotal,1.0);
 }
+

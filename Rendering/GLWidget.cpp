@@ -46,7 +46,7 @@ void GLWidget::initializeGL() {
     scene->camera->init(this->size().width(), this->size().height(), scene->capsaMinima);
     emit ObsCameraChanged(scene->camera);
     emit FrustumCameraChanged(scene->camera);
-
+    scene->lightsToGPU(program);
     glViewport(scene->camera->vp.pmin[0], scene->camera->vp.pmin[1], scene->camera->vp.a, scene->camera->vp.h);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -83,7 +83,7 @@ void GLWidget::resizeGL(int width, int height) {
  * @brief GLWidget::initShadersGPU
  */
 void GLWidget::initShadersGPU(){
-    initShader("://resources/vshader1.glsl", "://resources/fshader1.glsl");
+    initShader("://resources/phong_vshader.glsl", "://resources/phong_fshader.glsl");
 }
 
 QSize GLWidget::minimumSizeHint() const {

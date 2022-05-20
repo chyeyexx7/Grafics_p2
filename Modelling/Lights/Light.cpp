@@ -10,9 +10,9 @@ Light::Light(LightType t) {
     this->lightIS = vec3(0.4,0.4,0.4);
     this->lightID = vec3(0.8,0.8,0.8);
     this->lightIA = vec3(0.3,0.3,0.3);
-    this->lightPosition = vec4(8,10,7,9);
-    this->lightDirection = vec4(0.9,0.9,0.9,0.9);
-    this->coeficients = vec3(0,1,0);
+    this->lightPosition = vec4(1.0,0.0,1.0,1.0);
+    this->lightDirection = vec4(1.0,1.0,1.0,1.0);
+    this->coeficients = vec3(0.0,1.0,0.0);
 }
 
 Light::Light(LightType t, vec3 lightIS, vec3 lightID, vec3 lightIA, vec4 lightPosition, vec4 lightDirection, vec3 coeficients) {
@@ -166,7 +166,7 @@ void Light::LightsToGPU(QGLShaderProgram *program, int i) {
     gl_IdLightsVec[i].lightIA = program->uniformLocation(QString("lights[%1].lightIA_gpu").arg(i));
     gl_IdLightsVec[i].coeficients_gpu = program->uniformLocation(QString("lights[%1].coeficients_gpu").arg(i));
     gl_IdLightsVec[i].lightPosition = program->uniformLocation(QString("lights[%1].lightPosition_gpu").arg(i));
-    gl_IdLightsVec[i].lightDirection = program->uniformLocation(QString("lights[%1].lightDirectiong_pu").arg(i));
+    gl_IdLightsVec[i].lightDirection = program->uniformLocation(QString("lights[%1].lightDirection_gpu").arg(i));
 
     glUniform1i(gl_IdLightsVec[i].type, this->typeLight);
     glUniform3fv(gl_IdLightsVec[i].lightIS, 1, this->lightIS);
@@ -176,3 +176,4 @@ void Light::LightsToGPU(QGLShaderProgram *program, int i) {
     glUniform4fv(gl_IdLightsVec[i].lightPosition, 1, this->lightPosition);
     glUniform4fv(gl_IdLightsVec[i].lightDirection, 1, this->lightDirection);
 }
+

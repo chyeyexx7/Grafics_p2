@@ -3,7 +3,6 @@
 #include <QObject>
 #include <vector>
 #include <memory>
-#include <library/vec.h>
 
 #include <library/Common.h>
 using namespace Common;
