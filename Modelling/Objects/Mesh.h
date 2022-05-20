@@ -61,6 +61,8 @@ public:
     Mesh(const int npoints, QString n);
     ~Mesh();
 
+
+    void setMaterial(shared_ptr<Material> m);
     void parseObjFile(const QString &fileName);
 
     void setTexture(shared_ptr<QOpenGLTexture> t);

@@ -63,13 +63,6 @@ void Material::toGPU(shared_ptr<QGLShaderProgram> program){
 
 void Material::read (const QJsonObject &json)
 {
-    this->Ka = vec3(0, 0,0);
-    this->Ks = vec3(0, 0, 0);
-    this->Kd = vec3(0, 1, 0);
-    this->shininess = 10.0;
-    this->opacity = 0;
-
-
     if (json.contains("ka") && json["ka"].isArray()) {
         QJsonArray auxVec = json["ka"].toArray();
         Ka[0] = auxVec[0].toDouble();
@@ -126,4 +119,6 @@ void Material::print(int indentation) const
     QTextStream(stdout) << indent << "shininess:\t" << shininess<< "\n";
     QTextStream(stdout) << indent << "opacity:\t" << opacity<< "\n";
 }
+
+
 

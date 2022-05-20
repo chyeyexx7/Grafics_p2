@@ -267,3 +267,7 @@ Capsa3D Mesh::calculCapsa3D()
 void Mesh::aplicaTG(shared_ptr<TG> tg){
 
 }
+
+void Mesh::setMaterial(shared_ptr<Material> m){
+    this->material = m;
+}

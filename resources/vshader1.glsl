@@ -43,6 +43,6 @@ void main()
     //color = vec4(lights[0].lightID_gpu, 1.0);
 
     //Test para comprobar que las normales se envían correctamente al shader
-    color = (vec4(1,1,1,0)+normals)/2.0;
-
+    //color = (vec4(1,1,1,0)+normals)/2.0;
+    color = vec4(material.Kd, 1.0);
 }
