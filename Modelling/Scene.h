@@ -1,5 +1,12 @@
 #pragma once
 
+#include <QObject>
+#include <vector>
+#include <memory>
+
+#include <library/Common.h>
+using namespace Common;
+
 #include <cmath>
 #include <iostream>
 #include <stdlib.h>
@@ -17,8 +24,13 @@
 #include <Modelling/Lights/Light.h>
 #include <Rendering/Camera.h>
 
+#include <QGLShaderProgram>
+#include <QOpenGLTexture>
+#include <library/vec.h>
+#include <QJsonArray>
+#include <QJsonObject>
+
 using namespace std;
-using namespace Common;
 
 // Scene: contains all objects, lights to visualize the scene
 // the viewer is placed in the z+ axis
@@ -30,7 +42,7 @@ public:
     vector<shared_ptr<Mesh>> objects;
     vector<shared_ptr<Light>>  lights;
 
-    vec3    lightAmbientGlobal;
+    vec3 lightAmbientGlobal;
     shared_ptr<Camera> camera;
     // Capsa contenedora de l'escena
     Capsa3D capsaMinima;

@@ -41,6 +41,7 @@ void GLWidget::initializeGL() {
     // Creacio d'una Light per a poder modificar el seus valors amb la interficie
     auto l  = make_shared<Light>(Puntual);
     scene->addLight(l);
+    scene->setAmbientGlobalToGPU(program);
 
     scene->camera->init(this->size().width(), this->size().height(), scene->capsaMinima);
     emit ObsCameraChanged(scene->camera);
@@ -139,8 +140,8 @@ void GLWidget::saveImage(){
 
 /** Metodes SLOTS que serveixen al builder per a actualitzar l'escena i els objectes */
 void GLWidget::updateObject(shared_ptr<Mesh> obj) {
-
     obj->toGPU(program);
+    scene->toGPU(program);
     updateGL();
 }
 

@@ -3,19 +3,17 @@
 #include <QObject>
 #include <vector>
 #include <memory>
+#include <library/vec.h>
 
 #include <library/Common.h>
 using namespace Common;
-
 #include <QGLShaderProgram>
 #include <QOpenGLTexture>
 #include <library/vec.h>
 #include <QJsonArray>
 #include <QJsonObject>
-
-
-
 using namespace std;
+
 
 // TO DO: A canviar a la fase 1 de la practica 2
 // Classe que representa els materials d'un objecte
@@ -24,6 +22,8 @@ class Material {
 
 public:
     Material();
+    vec3 light;
+
     Material(vec3 a, vec3 d, vec3 s, float shininess);
     Material(vec3 a, vec3 d, vec3 s, float shininess, float opacity);
     ~Material();
