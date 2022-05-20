@@ -1,0 +1,34 @@
+{
+"scene": "Primera escena Prueba",
+"typeScene": "VIRTUAL",
+"objects": [
+  {
+  "name": "F16",
+  "type":  "MESH",
+    "objFileName": "../p2-gpurendering-ab01/resources/models/f16.obj",
+    "material": {
+      "type": "lambertian",
+      "ka": [0.2, 0.2, 0.2],
+      "kd": [0.7,0.6,0.5],
+      "ks": [0.7, 0.7, 0.7],
+      "shininess": 10.0,
+      "kt": [0.0, 0.0, 0.0],
+      "nut": 1
+      }
+    },
+    {
+    "name": "Armadillo",
+    "type":  "MESH",
+      "objFileName": "../p2-gpurendering-ab01/resources/models/armadillo.obj",
+      "material": {
+        "type": "lambertian",
+        "ka": [0.2, 0.2, 0.2],
+        "kd": [0.7,0.6,0.5],
+        "ks": [0.7, 0.7, 0.7],
+        "shininess": 10.0,
+        "kt": [0.0, 0.0, 0.0],
+        "nut": 1
+        }
+    }
+]
+} 
