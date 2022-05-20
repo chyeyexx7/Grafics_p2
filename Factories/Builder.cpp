@@ -80,11 +80,11 @@ void Builder::newVirtualScene() {
             }
         }
     }
-
      emit newScene(scene);
 }
 
 
+#include <iostream>
 void Builder::newDataScene()
 {
     // TO DO Fase 1: Crear la nova escena a partir de les dades
@@ -94,10 +94,10 @@ void Builder::newDataScene()
     // i crear l'escena corresponent.
     QString fileName = QFileDialog::getOpenFileName();
     // Comprovem si el fitxer d'escena virtual existeix
-    if (!fileName.isNull()){
+    if (!fileName.isNull()) {
         QFile file(fileName);
 
-        if (!file.open(QIODevice::ReadOnly)){
+        if (!file.open(QIODevice::ReadOnly)) {
             qDebug() << "File open error";
         }
         else {
@@ -110,10 +110,96 @@ void Builder::newDataScene()
 
         if (loadDoc.isNull()){
             qWarning("Parse error in json virtual scene file.");
-        }
+        } else{
+            QJsonObject json = loadDoc.object();
+            if (json.contains("base") && json["base"].isObject()) {
+                QJsonObject jbase = json["base"].toObject();
+                shared_ptr<Plane> o;
+                //o->read(jbase);
+                //scene->addObject(o);
+                scene->base = dynamic_pointer_cast<Plane>(o);
+            }
 
+            mapping = make_shared<InfoMapping>();
+            mapping->read(json);
+            cout <<"hola\n";
+            if (json.contains("objFileName") && json["objFileName"].isString()) {
+                QString filename = json["objFileName"].toString();
+                buildRealScene(filename);
+                cout <<"hola2\n";
+                return;
+            }
+         }
     }
+    emit newScene(scene);
+}
 
-     emit newScene(scene);
+#include <iostream>
+void Builder::buildRealScene(QString filename) {
+
+    float maxX = mapping->Vxmax;
+    float maxY = mapping->Vzmax;
+    float maxS = 0.5*mapping->Vymax;
+    float minX = mapping->Vxmin;
+    float minY = mapping->Vzmin;
+    float minS = 0.1f;
+
+    float baseX = mapping->Rxmin;
+    float baseY = mapping->Rzmin;
+    float rangeX = mapping->Rxmax - baseX;
+    float rangeY = mapping->Rzmax - baseY;
+
+    for (unsigned int i=0; i<mapping->props.size(); i++) {
+        // A props[i].first es te la informació de la propietat per fer el mapping de cada valor
+         shared_ptr<PropertyInfo> propinfo = mapping->props[i].first;
+         // Per cada valor, es dona d'alta un objecte a l'escena
+         for (unsigned int j=0; j<mapping->props[i].second.size(); j++) {
+             // TO DO Fase 2:
+             // col.locació de l'objecte base de l'escena
+             //
+             // Col.locació de l'objecte o gizmo del valor de la dada al Mon Virtual
+             //  TODO Fase 2: Cal calcular l'escalat del gizmo segons el valor llegit
+             //QString s = "ObjectFactory::getInstance().getNameType(propinfo->gyzmo);"
+             auto o = make_shared<Mesh>(1000000, filename);
+             cout << mapping->props[i].second[j][2];
+             //shared_ptr<Mesh> o = make_shared<Mesh>(s, mapping->props[i].second[j][2]);
+
+             o->setMaterial(mapeigMaterial(propinfo, propinfo->colorMapType,
+                                           mapping->props[i].second[j][2]));
+
+             //TRANSLATE
+             float rX = ((mapping->props[i].second[j][0] - baseX) / rangeX) * (maxX - minX) + minX;
+             float rY = ((mapping->props[i].second[j][1] - baseY) / rangeY) * (maxY - minY) + minY;
+
+             vec3 trans(rX, 0, -rY);
+
+             //o->aplicaTG(make_shared<TranslateTG>(trans));
+
+             //SCALE
+             float realValue = mapping->props[i].second[j][2];
+             float value = ((realValue - propinfo->minValue) / (propinfo->maxValue - propinfo->minValue)*(maxS-minS)) + minS;
+             //o->aplicaTG(make_shared<ScaleTG>(value));
+
+             // Afegir objecte a l'escena
+             scene->objects.push_back(o);
+         }
+    }
+    emit newScene(scene);
+}
+
+shared_ptr<Material> Builder::mapeigMaterial(shared_ptr<PropertyInfo> propinfo, ColorMapStatic::ColorMapType tCM, double valorMonReal) {
+
+    // TO DO Fase 2: Cal mapejar el color difus al color de la paleta o ColorMap segons el valorMonReal i
+    // els valors minims i maxims de les propietats
+    // Tens els valors minims i maxim de cada propietat a l'estructura de setup d'aquesta classe
+
+    auto cm = make_shared<ColorMapStatic>(tCM);
+    int idx = (int)(255.0*(valorMonReal-propinfo->minValue)/(propinfo->maxValue-propinfo->minValue));
+    shared_ptr<Material> mat = make_shared<Material>(propinfo->material->Ka,
+                                                     cm->getColor(idx),
+                                                     propinfo->material->Ks,
+                                                     propinfo->material->shininess,
+                                                     propinfo->material->opacity);
+    return mat;
 }
 

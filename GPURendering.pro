@@ -9,7 +9,9 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    DataSettings/InfoMapping.cpp \
     DataSettings/Serializable.cpp \
+    DataSettings/propertyinfo.cpp \
     Factories/Builder.cpp \
     Modelling/Animation.cpp \
     Modelling/Lights/Light.cpp \
@@ -18,6 +20,7 @@ SOURCES += \
     Modelling/Objects/Cara.cpp \
     Modelling/Objects/Mesh.cpp \
     Modelling/Objects/Plane.cpp \
+    Modelling/Objects/object.cpp \
     Modelling/Scene.cpp \
     Modelling/TG/TG.cpp \
     Modelling/TG/TranslateTG.cpp \
@@ -28,6 +31,8 @@ SOURCES += \
     Rendering/MainWindow.cpp
 
 HEADERS += \
+    DataSettings/InfoMapping.h \
+    DataSettings/PropertyInfo.h \
     DataSettings/Serializable.h \
     Factories/Builder.h \
     IncludeWin32/GL/glut.h \
@@ -38,7 +43,8 @@ HEADERS += \
     Modelling/Materials/Material.h \
     Modelling/Objects/Cara.h \
     Modelling/Objects/Mesh.h \
-    Modelling/Objects/Pane.h \
+    Modelling/Objects/Plane.h \
+    Modelling/Objects/object.h \
     Modelling/Scene.h \
     Modelling/TG/TG.h \
     Modelling/TG/TranslateTG.h \

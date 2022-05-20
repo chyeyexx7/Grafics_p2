@@ -21,6 +21,7 @@ using namespace Common;
 
 
 #include <Modelling/Objects/Mesh.h>
+#include <Modelling/Objects/Plane.h>
 #include <Modelling/Lights/Light.h>
 #include <Rendering/Camera.h>
 
@@ -41,6 +42,7 @@ public:
 
     vector<shared_ptr<Mesh>> objects;
     vector<shared_ptr<Light>>  lights;
+    shared_ptr<Plane> base;
 
     vec3 lightAmbientGlobal;
     shared_ptr<Camera> camera;
@@ -51,6 +53,7 @@ public:
     ~Scene();
 
     void   addObject(shared_ptr<Mesh> obj);
+    void   addObject(shared_ptr<Plane> obj);
     void   addLight(shared_ptr<Light> l);
     shared_ptr<Light> getLightActual();
     void   setLightActual(shared_ptr<Light> l);
