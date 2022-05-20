@@ -20,6 +20,8 @@ using namespace Common;
 #include <Modelling/TG/TG.h>
 #include <Modelling/Animation.h>
 #include <Modelling/Objects/Cara.h>
+#include "Modelling/Materials/Material.h"
+
 
 typedef vec4  point4;
 
@@ -33,6 +35,8 @@ protected:
     vector<point4> vertexs;
     vector<point4> normalsVertexs;
     vector<vec2>   textVertexs;
+    shared_ptr<Material> material;
+
 
     // Estructures per passar a la GPU
     GLuint buffer;
