@@ -8,5 +8,7 @@
         <file>resources/phong_vshader.glsl</file>
         <file>resources/toon_vshader.glsl</file>
         <file>resources/toon_fshader.glsl</file>
+        <file>resources/depth_vshader.glsl</file>
+        <file>resources/depth_fshader.glsl</file>
     </qresource>
 </RCC>
