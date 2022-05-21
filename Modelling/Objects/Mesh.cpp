@@ -12,11 +12,7 @@ Mesh::Mesh(int npoints, QObject *parent) : QObject(parent){
     normals= new point4[numPoints];
     colors = new point4[numPoints];
     this->material = make_shared<Material> ();
-
-
  }
-
-
 
 /**
  * @brief Mesh::Mesh
@@ -126,9 +122,6 @@ void Mesh::make(){
         vec3( 0.0, 0.0, 1.0 ),
         vec3( 1.0, 1.0, 0.0 )
     };*/
-
-
-
 
     Index = 0;
     for(unsigned int i=0; i<cares.size(); i++){
