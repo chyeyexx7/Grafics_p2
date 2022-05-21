@@ -11,8 +11,10 @@ Mesh::Mesh(int npoints, QObject *parent) : QObject(parent){
     points = new point4[numPoints];
     normals= new point4[numPoints];
     colors = new point4[numPoints];
+    textures = new vec2[numPoints];
     this->material = make_shared<Material> ();
- }
+    make();
+}
 
 /**
  * @brief Mesh::Mesh
@@ -23,6 +25,7 @@ Mesh::Mesh(int npoints, QString n) : numPoints(npoints){
     points = new point4[numPoints];
     normals= new point4[numPoints];
     colors = new point4[numPoints];
+    textures = new vec2[numPoints];
     this->material = make_shared<Material> ();
     parseObjFile(n);
     make();
@@ -30,16 +33,17 @@ Mesh::Mesh(int npoints, QString n) : numPoints(npoints){
 
 
 /**
- * @brief Object::~Object
+ * @brief Mesh::~Mesh
  */
 Mesh::~Mesh(){
     delete points;
     delete normals;
     delete colors;
+    delete textures;
 }
 
 /**
- * @brief Object::toGPU
+ * @brief Mesh::toGPU
  * @param pr
  */
 void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
@@ -49,6 +53,8 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
 
     program = pr;
     // Creació d'un vertex array object
+
+    // S'activa la textura i es passa a la GPU
 
     glGenVertexArrays( 1, &vao );
 
@@ -64,11 +70,20 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
     // Cal passar les normals a la GPU
 
 
-    glBufferData( GL_ARRAY_BUFFER, sizeof(point4)*Index + sizeof(point4)*Index, NULL, GL_STATIC_DRAW );
+
+    glBufferData( GL_ARRAY_BUFFER, sizeof(point4)*Index * 2 + sizeof(vec2) * Index , NULL, GL_STATIC_DRAW );
     glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(point4)*Index, points );
 
     //normales
     glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals);
+
+    qDebug() << "Normales asignadas";
+
+
+    //Textures
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(point4)*Index * 2,sizeof(vec2) * Index,textures);
+
+    qDebug() << "Buffer asignado";
 
 
     // set up vertex arrays
@@ -78,13 +93,22 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
 
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0,  (void*)(sizeof(point4)*Index));
     glEnableVertexAttribArray(1);
+    qDebug() << "Antes de habilitar texturas ";
+
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0,  (void*)(2*sizeof(point4)*Index));
+    glEnableVertexAttribArray(2);
+
+    glEnable( GL_DEPTH_TEST );
+    glEnable(GL_TEXTURE_2D);
+
+    qDebug() << "Después de habilitar texturas ";
 
 }
 
 
 /**
  * Pintat en la GPU.
- * @brief Object::draw
+ * @brief Mesh::draw
  */
 void Mesh::draw(){
 
@@ -92,11 +116,16 @@ void Mesh::draw(){
     // Activació a GL del Vertex Buffer Object.
     // TO  DO: A modificar a la fase 1 de la practica 2
     // Cal activar també les normals  a la GPU
-    this->material->toGPU(program);
 
+    this->material->toGPU(program);
+    if(texture){
+        qDebug()<<"Envio a GPU TEXT";
+        this->toGPUTexture(program);
+    }
     glBindVertexArray( vao );
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays( GL_TRIANGLES, 0, Index );
@@ -104,6 +133,8 @@ void Mesh::draw(){
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
+
 
 }
 
@@ -128,25 +159,42 @@ void Mesh::make(){
         for(unsigned int j=0; j<cares[i].idxVertices.size(); j++){
             points[Index] = vertexs[cares[i].idxVertices[j]];
             normals[Index] = normalsVertexs[cares[i].idxNormals[j]];
+            if(hasTexture){
+                qDebug() << "Prueba";
+                textures[Index] = textVertexs[cares[i].idxTextures[j]];
+            }
+
             Index++;
         }
     }
+
 }
 
 void Mesh::setTexture(shared_ptr<QOpenGLTexture> t){
-   texture = t;
+    texture = t;
+    initTexture();
+
 }
 
 /**
  * @brief Object::initTexture
  */
 void Mesh::initTexture()
- {
+{
     // TO DO: A implementar a la fase 1 de la practica 2
     // Cal inicialitzar la textura de l'objecte: veure l'exemple del CubGPUTextura
     qDebug() << "Initializing textures...";
 
- }
+
+    qDebug() << "Initializing 222 textures...";
+    glActiveTexture(GL_TEXTURE0);
+    texture->setWrapMode(QOpenGLTexture::Repeat);
+    texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+    texture->setMagnificationFilter(QOpenGLTexture::Linear);
+    texture->bind(0);
+
+
+}
 
 
 void Mesh::parseObjFile(const QString &fileName)
@@ -170,23 +218,24 @@ void Mesh::parseObjFile(const QString &fileName)
                     else if(lineParts.at(0).compare("v", Qt::CaseInsensitive) == 0)
                     {
                         vertexs.push_back(point4(lineParts.at(1).toFloat(),
-                                           lineParts.at(2).toFloat(),
-                                           lineParts.at(3).toFloat(), 1.0f));
+                                                 lineParts.at(2).toFloat(),
+                                                 lineParts.at(3).toFloat(), 1.0f));
                     }
 
                     // if it’s a normal (vn)
                     else if(lineParts.at(0).compare("vn", Qt::CaseInsensitive) == 0)
                     {
                         normalsVertexs.push_back (point4(lineParts.at(1).toFloat(),
-                                            lineParts.at(2).toFloat(),
-                                            lineParts.at(3).toFloat(), 0.0f));
+                                                         lineParts.at(2).toFloat(),
+                                                         lineParts.at(3).toFloat(), 0.0f));
                     }
 
                     // if it’s a texture (vt)
                     else if(lineParts.at(0).compare("vt", Qt::CaseInsensitive) == 0)
                     {
+                        hasTexture = true;
                         textVertexs.push_back(vec2(lineParts.at(1).toFloat(),
-                                            lineParts.at(2).toFloat()));
+                                                   lineParts.at(2).toFloat()));
                     }
 
                     // if it’s face data (f)
@@ -260,6 +309,12 @@ Capsa3D Mesh::calculCapsa3D()
 void Mesh::aplicaTG(shared_ptr<TG> tg){
 
 }
+
+void Mesh::toGPUTexture(shared_ptr<QGLShaderProgram> pr){
+    texture->bind(0);
+    pr->setUniformValue("texMap", 0);
+}
+
 
 void Mesh::setMaterial(shared_ptr<Material> m){
     this->material = m;
