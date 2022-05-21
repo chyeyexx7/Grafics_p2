@@ -42,6 +42,7 @@ public slots:
     void saveImage();
     void saveAnimation();
 
+    void activaShader(shared_ptr<QGLShaderProgram> program);
     void activaDepthShader();
     void activaGouraudShader();
     void activaPhongShader();

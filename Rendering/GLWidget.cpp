@@ -185,6 +185,13 @@ void GLWidget::saveAnimation() {
 
 }
 
+void GLWidget::activaShader(shared_ptr<QGLShaderProgram> program) {
+    program->link();
+    program->bind();
+    scene->toGPU(program);
+    updateShader();
+}
+
 void GLWidget::activaDepthShader() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Toon";
@@ -194,22 +201,15 @@ void GLWidget::activaGouraudShader() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Gouraud";
     program = shader_list[2];
-    program->link();
-    program->bind();
+    activaShader(program);
 
-    scene->toGPU(program);
-    updateShader();
 
 }
 void GLWidget::activaPhongShader() {
     //Opcional: A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Phong";
     program = shader_list[1];
-    program->link();
-    program->bind();
-
-    scene->toGPU(program);
-    updateShader();
+    activaShader(program);
 }
 void GLWidget::activaToonShader() {
     //A implementar a la fase 1 de la practica 2
