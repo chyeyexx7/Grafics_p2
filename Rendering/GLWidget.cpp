@@ -36,7 +36,12 @@ void GLWidget::initializeGL() {
     glEnable(GL_RGBA);
     glEnable(GL_DOUBLE);
 
+    //Inicializamos la lista de shaders
     initShadersGPU();
+    //Indicamos que shader de la lista queremos utilizar
+    program = shader_list[2];
+    shader_list[2]->link();
+    shader_list[2]->bind();
 
     // Creacio d'una Light per a poder modificar el seus valors amb la interficie
     auto l  = make_shared<Light>(Puntual);
@@ -46,7 +51,7 @@ void GLWidget::initializeGL() {
     scene->camera->init(this->size().width(), this->size().height(), scene->capsaMinima);
     emit ObsCameraChanged(scene->camera);
     emit FrustumCameraChanged(scene->camera);
-
+    scene->lightsToGPU(program);
     glViewport(scene->camera->vp.pmin[0], scene->camera->vp.pmin[1], scene->camera->vp.a, scene->camera->vp.h);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -83,7 +88,9 @@ void GLWidget::resizeGL(int width, int height) {
  * @brief GLWidget::initShadersGPU
  */
 void GLWidget::initShadersGPU(){
-    initShader("://resources/vshader1.glsl", "://resources/fshader1.glsl");
+    initShader(0, "://resources/vshader1.glsl", "://resources/fshader1.glsl");
+    initShader(1, "://resources/phong_vshader.glsl", "://resources/phong_fshader.glsl");
+    initShader(2, "://resources/gouraud_vshader.glsl", "://resources/gouraud_fshader.glsl");
 }
 
 QSize GLWidget::minimumSizeHint() const {
@@ -98,18 +105,22 @@ QSize GLWidget::sizeHint() const {
  * @brief GLWidget::initShader()
  * Compila i linka el vertex i el fragment shader
  */
-void GLWidget::initShader(const char* vShaderFile, const char* fShaderFile){
+void GLWidget::initShader(int shader, const char* vShaderFile, const char* fShaderFile){
     QGLShader *vshader = new QGLShader(QGLShader::Vertex, this);
     QGLShader *fshader = new QGLShader(QGLShader::Fragment, this);
 
     vshader->compileSourceFile(vShaderFile);
     fshader->compileSourceFile(fShaderFile);
 
-    program = make_shared<QGLShaderProgram>(this);
-    program->addShader(vshader);
-    program->addShader(fshader);
-    program->link();
-    program->bind();
+    //program = make_shared<QGLShaderProgram>(this);
+    //program->addShader(vshader);
+    //program->addShader(fshader);
+    //program->link();
+    //program->bind();
+
+    shader_list[shader] = make_shared<QGLShaderProgram>(this);
+    shader_list[shader]->addShader(vshader);
+    shader_list[shader]->addShader(fshader);
 }
 
 /** Gestio de les animacions i la gravació d'imatges ***/
@@ -140,6 +151,7 @@ void GLWidget::saveImage(){
 
 /** Metodes SLOTS que serveixen al builder per a actualitzar l'escena i els objectes */
 void GLWidget::updateObject(shared_ptr<Mesh> obj) {
+    initShadersGPU();
     obj->toGPU(program);
     scene->toGPU(program);
     updateGL();
@@ -181,12 +193,23 @@ void GLWidget::activaDepthShader() {
 void GLWidget::activaGouraudShader() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Gouraud";
+    program = shader_list[2];
+    program->link();
+    program->bind();
+
+    scene->toGPU(program);
+    updateShader();
 
 }
 void GLWidget::activaPhongShader() {
     //Opcional: A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Phong";
+    program = shader_list[1];
+    program->link();
+    program->bind();
 
+    scene->toGPU(program);
+    updateShader();
 }
 void GLWidget::activaToonShader() {
     //A implementar a la fase 1 de la practica 2
@@ -220,8 +243,7 @@ void GLWidget::activaTransparency() {
 
 //Metode  per canviar de shaders.
 void GLWidget::updateShader(){
-
-
+    updateGL();
 ;}
 
 //Metode per canviar de shaders de textures

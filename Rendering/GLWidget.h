@@ -94,10 +94,10 @@ private:
 
     QPoint lastPos;   // per interactuar amb la camera
 
-    shared_ptr<QGLShaderProgram> program; // Per ars nomes es té un parell vertex-fragment
+    shared_ptr<QGLShaderProgram> program; // Per ara nomes es té un parell vertex-fragment
                                // Cal guardar-ne més d'un en la primera fase.
-
-    void initShader(const char* vertexShaderFile, const char* fragmentShaderFile);
+    shared_ptr<QGLShaderProgram> shader_list[4];
+    void initShader(int shader, const char* vertexShaderFile, const char* fragmentShaderFile);
     void initShadersGPU();
     void updateShader();
     void updateShaderTexture();

@@ -75,11 +75,15 @@ DISTFILES += \
     libWin32/glut32.lib \
     resources/README.fst \
     resources/fshader1.glsl \
+    resources/gouraud_fshader.glsl \
+    resources/gouraud_vshader.glsl \
     resources/models/common-cockle.mtl \
     resources/models/cruiser.mtl \
     resources/models/f16.mtl \
     resources/models/sphere0.mtl \
     resources/models/sphere1.mtl \
+    resources/phong_fshader.glsl \
+    resources/phong_vshader.glsl \
     resources/textures/2k_earth_clouds.jpg \
     resources/textures/2k_earth_daymap.jpg \
     resources/textures/2k_earth_nightmap.jpg \

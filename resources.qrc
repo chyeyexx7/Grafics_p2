@@ -4,5 +4,7 @@
         <file>resources/vshader1.glsl</file>
         <file>resources/gouraud_vshader.glsl</file>
         <file>resources/gouraud_fshader.glsl</file>
+        <file>resources/phong_fshader.glsl</file>
+        <file>resources/phong_vshader.glsl</file>
     </qresource>
 </RCC>

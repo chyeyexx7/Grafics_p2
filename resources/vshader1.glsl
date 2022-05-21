@@ -12,7 +12,7 @@ struct lightsGpu
     vec3 lightIA_gpu;
     vec3 coeficients_gpu;
     vec4 lightPosition_gpu;
-    vec4 lightDirectiong_pu;
+    vec4 lightDirection_gpu;
 };
 uniform lightsGpu lights[1];
 
@@ -37,7 +37,6 @@ void main()
 {
     gl_Position = projection*model_view*vPosition;
     gl_Position = gl_Position/gl_Position.w;
-
 
     //Test para comprobar que las luces se envían correctamente al shader
     //color = vec4(lights[0].lightID_gpu, 1.0);
