@@ -7,10 +7,10 @@
 Light::Light(LightType t) {
     // TO DO: A canviar a la fase 1 de la practica 2
     this->typeLight = t;
-    this->lightIS = vec3(0.4,0.4,0.4);
+    this->lightIS = vec3(1,1,1);
     this->lightID = vec3(0.8,0.8,0.8);
-    this->lightIA = vec3(0.3,0.3,0.3);
-    this->lightPosition = vec4(1.0,0.0,1.0,1.0);
+    this->lightIA = vec3(0.2,0.2,0.2);
+    this->lightPosition = vec4(10, 10, 20,1.0);
     this->lightDirection = vec4(1.0,1.0,1.0,1.0);
     this->coeficients = vec3(0.0,1.0,0.0);
 }

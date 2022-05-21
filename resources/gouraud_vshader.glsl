@@ -16,8 +16,8 @@ struct lightsGpu
     vec3 lightID_gpu;
     vec3 lightIA_gpu;
     vec3 coeficients_gpu;
-    vec3 lightPosition_gpu;
-    vec3 lightDirection_gpu;
+    vec4 lightPosition_gpu;
+    vec4 lightDirection_gpu;
 };
 uniform lightsGpu lights[1];
 
@@ -64,7 +64,7 @@ void main()
     for(int i=0; i<lights.length(); i++){
         //Luz puntual
         if(lights[i].lightType_gpu == 0){
-            L = normalize(vec4(lights[i].lightPosition_gpu,1) - vPosition);
+            L = normalize(lights[i].lightPosition_gpu - vPosition);
             //Calculamos el valor de la distancia
             distance = length(L);
             //Nos guardamos cada uno de los coeficientes a,b,c
@@ -76,13 +76,15 @@ void main()
         }
         //Luz direccional (no tenemos posición, solo dirección)
         else if(lights[i].lightType_gpu == 1){
-            L = normalize(-vec4(lights[i].lightDirection_gpu,0));
+            L = normalize(-lights[i].lightDirection_gpu);
             attenuation = 1.0;
         }
         H = normalize(L+V);
         idkd = lights[i].lightID_gpu * material.Kd * max(dot(N,L), 0.0);
-        isks = lights[i].lightIS_gpu * material.Ks * pow(max(dot(N,H), 0.0), mtr.shininess);
+        isks = lights[i].lightIS_gpu * material.Ks * pow(max(dot(N,H), 0.0), material.shininess);
         iaka = lights[i].lightIA_gpu * material.Ka;
+        //Para hacer pruebas con los ejemplos del campus hemos quitado la atenuación de la fórmula de phong
+        //Itotal += ((idkd + isks)/attenuation) + iaka;
         Itotal += ((idkd + isks)/attenuation) + iaka;
     }
     //El color de salida será el calculado con la fórmula de phong

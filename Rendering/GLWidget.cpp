@@ -40,6 +40,7 @@ void GLWidget::initializeGL() {
     initShadersGPU();
     //Indicamos que shader de la lista queremos utilizar
     program = shader_list[2];
+    shader_list[2]->link();
     shader_list[2]->bind();
 
     // Creacio d'una Light per a poder modificar el seus valors amb la interficie
@@ -120,8 +121,6 @@ void GLWidget::initShader(int shader, const char* vShaderFile, const char* fShad
     shader_list[shader] = make_shared<QGLShaderProgram>(this);
     shader_list[shader]->addShader(vshader);
     shader_list[shader]->addShader(fshader);
-    shader_list[shader]->link();
-    shader_list[shader]->bind();
 }
 
 /** Gestio de les animacions i la gravació d'imatges ***/
@@ -194,6 +193,12 @@ void GLWidget::activaDepthShader() {
 void GLWidget::activaGouraudShader() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Gouraud";
+    program = shader_list[2];
+    program->link();
+    program->bind();
+
+    scene->toGPU(program);
+    updateShader();
 
 }
 void GLWidget::activaPhongShader() {

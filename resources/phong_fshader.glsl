@@ -42,7 +42,7 @@ void main()
     vec3 iaka;
 
     //N es la normal al punto normalizada
-    vec4 N = normalize(normal);
+    vec4 N = normal;
     //V es el vector normalizado entre el observador y el punto
     vec4 V = normalize(obs - position);
     //L es el vector normalizado entre la luz y el punto
@@ -68,6 +68,7 @@ void main()
             //Calculo de la atenuación
             attenuation = a*distance*distance + b*distance + c;
         }
+
         //Luz direccional (no tenemos posición, solo dirección)
         else if(lights[i].lightType_gpu == 1){
             L = normalize(-lights[i].lightDirection_gpu);
@@ -75,8 +76,10 @@ void main()
         }
         H = normalize(L+V);
         idkd = lights[i].lightID_gpu * material.Kd * max(dot(N,L), 0.0);
-        isks = lights[i].lightIS_gpu * material.Ks * pow(max(dot(N,H), 0.0), mtr.shininess);
+        isks = lights[i].lightIS_gpu * material.Ks * pow(max(dot(N,H), 0.0), material.shininess);
         iaka = lights[i].lightIA_gpu * material.Ka;
+        //Para hacer pruebas con los ejemplos del campus hemos quitado la atenuación de la fórmula de phong
+        //Itotal += ((idkd + isks)/attenuation) + iaka;
         Itotal += ((idkd + isks)/attenuation) + iaka;
     }
     //El color de salida será el calculado con la fórmula de phong
