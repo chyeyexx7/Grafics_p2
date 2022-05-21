@@ -13,7 +13,7 @@ void Builder::newObjFromFile()
     if (!fileName.isNull()) {
             // OJO! El primer paràmetre de la constructora de l'Object és el número de punts del model.
             // Si l'objecte té més punts en el .bj, cal canviar aquest valor
-            auto obj = make_shared<Mesh>(100000, fileName);
+            auto obj = make_shared<Mesh>(1000000, fileName);
             scene->addObject(obj);
             scene->camera->actualitzaCamera(scene->capsaMinima);
             emit newObj(obj);
