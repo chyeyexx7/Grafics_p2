@@ -2,10 +2,10 @@
 /*Desarrollado por Endimbeer Enrique Nuñez Matos */
 
 Material::Material() {
-     this->Ka = vec3(0, 0,0);
-     this->Ks = vec3(0, 0, 0);
-     this->Kd = vec3(0, 1, 0);
-     this->shininess = 10.0;
+     this->Ka = vec3(0.2,0.2,0.2);
+     this->Ks = vec3(1.,1.,1.);
+     this->Kd = vec3(0.8,0.5,0.5);
+     this->shininess = 20.0;
      this->opacity = 0;
 }
 

@@ -69,4 +69,3 @@ class Light {
         };
         lightsid gl_IdLightsVec[MAX];
 };
-
