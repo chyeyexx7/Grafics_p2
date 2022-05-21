@@ -300,6 +300,7 @@ void GLWidget::setLighting(const QVector3D &lightPos, const QVector3D &Ia, const
     scene->lights[0]->setId(intensityD);
     scene->lights[0]->setIs(intensityS);
     scene->lights[0]->setLightPosition(lightPosition);
+    scene->lightsToGPU(program);
     updateGL();
 }
 

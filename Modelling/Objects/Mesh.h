@@ -26,7 +26,7 @@ using namespace Common;
 typedef vec4  point4;
 
 // Classe que conte la representacio d'un Objecte: geometria, topologia, material i textures
-class Mesh : public QObject, public Animable {
+class Mesh : public QObject, public Animable{
 
     Q_OBJECT
 protected:

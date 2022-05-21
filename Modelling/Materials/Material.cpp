@@ -88,25 +88,6 @@ void Material::read (const QJsonObject &json)
 
 }
 
-
-//! [1]
-void Material::write(QJsonObject &json) const
-{
-    QJsonArray auxArray;
-    auxArray.append(Ka[0]);auxArray.append(Ka[1]);auxArray.append(Ka[2]);
-    json["ka"] = auxArray;
-
-    QJsonArray auxArray2;
-    auxArray2.append(Kd[0]);auxArray2.append(Kd[1]);auxArray2.append(Kd[2]);
-    json["kd"] = auxArray2;
-
-    QJsonArray auxArray3;
-    auxArray3.append(Ks[0]);auxArray3.append(Ks[1]);auxArray3.append(Ks[2]);
-    json["ks"] = auxArray3;
-    json["opacity"] = opacity;
-    json["shininess"] = shininess;
-}
-
 //! [1]
 
 void Material::print(int indentation) const
