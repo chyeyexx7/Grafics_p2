@@ -161,6 +161,8 @@ En aquest apartat se'ns demana implementar 4 tipus de shading: Depth Shading, Go
 Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental global ja s'estan enviant des dels seus respectius mètodes toGpu. Per tant, el que falta és enviar les normals. Això ho haurem de fer des de 'Mesh.cpp'. Desde la Mesh calculem la normal a cada vèrtex a la CPU mitjançant un doble bucle for que passa per tots els vèrtex de totes les cares.
 
 <pre>
+    points[Index] = vertexs[cares[i].idxVertices[j]];
+    normals[Index] = normalsVertexs[cares[i].idxNormals[j]];
 </pre>
 
 Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode 'Mesh::toGPU(shared_ptr pr)' a 'glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)'.
