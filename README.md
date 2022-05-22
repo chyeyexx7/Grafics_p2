@@ -161,7 +161,6 @@ En aquest apartat se'ns demana implementar 4 tipus de shading: Depth Shading, Go
 Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental global ja s'estan enviant des dels seus respectius mètodes toGpu. Per tant, el que falta és enviar les normals. Això ho haurem de fer des de 'Mesh.cpp'. Desde la Mesh calculem la normal a cada vèrtex a la CPU mitjançant un doble bucle for que passa per tots els vèrtex de totes les cares:
 
 <pre>
-
 void Mesh::make(){
 
     // Cal calcular la normal a cada vertex a la CPU
@@ -174,7 +173,6 @@ void Mesh::make(){
         }
     }
 }
-
 </pre>
 
 Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode 'Mesh::toGPU(shared_ptr pr)' a 'glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)'.
@@ -190,21 +188,19 @@ En el cas de Gouraud, la diferència amb Phong és que en comptes de fer el càl
 * Toon shading **
 A Toon shading el que busquem és que els objectes tinguin una il·luminació similar a l'estil cartoon. Per aconseguir això calculem el producte entre el vector L (vector normalitzat entre la llum i el punt) i la normal i limitem el color resultant en quatre nivells amb una variable factorToon al fshader.
 <pre>
+toon = dot(L,N);
 
-    toon = dot(L,N);
-
-    if(toon>=0.25 && toon<=0.5 ){
-        factorToon = 0.25;
-    }else if(toon<0.75){
-        factorToon = 0.50;
-    }else if(toon >= 0.75){
-        factorToon = 0.75;
-    }
-
+if(toon>=0.25 && toon<=0.5 ){
+    factorToon = 0.25;
+}else if(toon<0.75){
+    factorToon = 0.50;
+}else if(toon >= 0.75){
+    factorToon = 0.75;
+}
 </pre>
-
 * Depth shading **
 Finalment, amb el Depth shading volem pintar en grisos la profunditat del triangle que s'ha rasteritzat en el píxel. Això ho aconseguim des de el fragment shader 'depth_fshader.glslde' la següent forma:
+
 <pre>
 
     float factorDepth = (2.0 * gl_FragCoord.z - gl_DepthRange.near - gl_DepthRange.far)
@@ -212,10 +208,10 @@ Finalment, amb el Depth shading volem pintar en grisos la profunditat del triang
 
     float clipDepth = factorDepth / gl_FragCoord.w;
     colorOut = vec4((clipDepth * 0.5) + 0.5);
-
 </pre>
 
 És important remarcar també que en carregar per primera vegada una escena, carreguem per defecte un dels shaders de la nostra llista a GLWidget després de compilar-los des de 'initShadersGPU', tot i que es poden canviar en qualsevol moment gràcies als diferents mètodes 'activaPhongShader', 'activaDepthShader'...
+
 <pre>
     initShadersGPU();
     program = shader_list[2];
