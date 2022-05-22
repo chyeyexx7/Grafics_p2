@@ -289,9 +289,9 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     
     ![image](https://user-images.githubusercontent.com/72166134/169706639-0635dd63-04c7-4932-8ef0-b4ebf1dcd909.png)
 
-    *Shading
+    ###Shading
         
-    *Depth
+    Depth
         
     ![image](https://user-images.githubusercontent.com/72166134/169710796-15e6e845-3719-4e73-a53d-78496f386e28.png)
     <br />
