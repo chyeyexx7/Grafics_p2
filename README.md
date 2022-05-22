@@ -343,3 +343,8 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 He empleado unas 4 horas a la semana, salvo en los últimos días en los cuales he dedicado prácticamente 2 o 3 días solo a la práctica. Mi principal problema han sido los errores con el orden en el cuál importaba las librerías que provocaban que el programa fallara. 
 
 También me costó la parte de texturas debido a que no controlaba si el fichero se había cargado o no. 
+
+### Chang Ye
+Alrededor de 3 o 4 horas (sin contar las de laboratorio) a la semana, aunque durante la última semana he estado 3 días seguidas (10h diarias). 
+
+Unos de los problemas principales que tuve era al hacer el <pre>Environment Mapping</pre>, el QTCreator siempre me daba muchos errores en los pasos de enviar la información a la GPU y la creación de los triangulos para el cubo. Al parecer, dependiendo de como añadamos los vértices en la matriz, el programa hace una cosa u otra y siempre crasheaba. No sabemos porqué, pero algunas veces el programa se ejecuta sin problemas y otras veces crashea por algún problema que no hemos conseguido resolver.
