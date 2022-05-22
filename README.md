@@ -5,7 +5,7 @@ Segona pràctica de GiVD 2021-22
 ## Equip:
 **AB01**
 * Endimbeer Enrique Nuñez Matos
-* Chan YE
+* Chan Ye
 * Noel Vázquez Caparrós
 * Pau Rodríguez Trens
     
