@@ -70,7 +70,8 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
 
 **Memòria**
 
-
+  * **Organització de la pràctica**
+        * Hem dividit els diferents apartats de la pràctica en parelles amb l'objectiu de poder ajudar-nos amb els dubtes. També hem realitzat sessions de pair programming per poder afrontar alguns apartats. 
 
 **Screenshots**
 
