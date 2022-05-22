@@ -11,11 +11,9 @@ Segona pràctica de GiVD 2021-22
     
 **Abstract**
 
-*(NOTA: Petit resum del què heu fet, no més de 200 paraules)*
+Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar algunes de les classes definides anteriorment com a base i a partir d'aquí adaptar-les i afegir canvis per poder fer ús de la GPU mitjançant shaders (Phong, Gouraud, Toon Shading...). A més, hem modificat la classe Mesh perquè pugui tenir una textura i els seus vèrtexs de textura associats a cada punt de l'objecte.
 
 **Features**
-
-*(NOTA: Quines parts heu desenvolupat i qui ho ha fet de l'equip. Editeu la llista que teniu a continuació afegint darrera de cada punt, la persona que ha treballat en aquell punt.) *
 
 - Fase 1
     - Adaptació a la lectura de fitxers de dades
@@ -70,7 +68,7 @@ Segona pràctica de GiVD 2021-22
 
 **Memòria**
 
-Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar algunes de les classes definides anteriorment com a base i a partir d'aquí adaptar-les i afegir canvis per poder fer ús de la GPU mitjançant shaders (Phong, Gouraud, Toon Shading...). A més, hem modificat la classe Mesh perquè pugui tenir una textura i els seus vèrtexs de textura associats a cada punt de l'objecte.
+
 
 **Screenshots**
 
