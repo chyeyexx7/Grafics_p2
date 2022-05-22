@@ -297,12 +297,13 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     ![image](https://user-images.githubusercontent.com/72166134/169710796-15e6e845-3719-4e73-a53d-78496f386e28.png)
     <br />
 
-    *Phong
+    Phong
+    
     ![Captura de pantalla 2022-05-22 201906](https://user-images.githubusercontent.com/72166134/169709956-5dac2078-1035-48de-ba45-61cda0eb69a3.png)
 
 
 
-    **Gouraud**
+    ** Gouraud **
 
     ![image](https://user-images.githubusercontent.com/72166134/169710008-7f154f35-028f-49d6-b5e6-983e4148cfd9.png)
         
