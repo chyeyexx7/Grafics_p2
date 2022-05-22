@@ -210,9 +210,9 @@ else if(toon >= 0.75)
 </pre>
 
   ### 5) Inclusió de les textures en les nostres visualitzacions
-En aquest apartat se'ns demana incloure textures en la visualització dels objtes que es carreguin. En els `.obj` tenim les coordenades de textura de les malles poligonals, i amb aquestes coordenades passades al fragment shader podem obtenir els píxels associats a cada píxel on es rasteritza l'objecte.
+En aquest apartat se'ns demana incloure textures en la visualització dels objectes que es carreguin. En els '.obj' tenim les coordenades de textura de les malles poligonals, i amb aquestes coordenades passades al fragment shader podem obtenir els píxels associats a cada píxel on es rasteritza l'objecte.
 
-Per a aconseguir això un dels métodes més importants és el `initTexture` de `Mesh.cpp`, que ens permet inicialitzar la textura de l'objecte i fer el bind.
+Per a aconseguir això un dels mètodes més importants és el 'initTexture' de 'Mesh.cpp', que ens permet inicialitzar la textura de l'objecte i fer el bind.
 <pre>
 void Mesh::initTexture()
 {
@@ -225,7 +225,7 @@ void Mesh::initTexture()
 }
 </pre>
 
-Al igual que els materials, les llums i les normals, també tenim que enviar les coordenades de textures a la GPU amb el métode:
+Igual que els materials, les llums i les normals, també hem d'enviar les coordenades de textures a la GPU amb el mètode:
 <pre>
 void Mesh::toGPUTexture(shared_ptr<QGLShaderProgram> pr){
     texture->bind(0);
@@ -233,7 +233,8 @@ void Mesh::toGPUTexture(shared_ptr<QGLShaderProgram> pr){
 }
 </pre>
 
-Desde `text_phong_vshader.glsl` rebem les coordenades i les pasem al fragment shader `text_phong_fshader.glsl`:
+Des de 'text_phong_vshader.glsl' rebem les coordenades i les passem al fragment shader 'text_phong_fshader.glsl':
+
 <pre>
 layout (location = 2) 
 in vec2 vCoordTexture;
@@ -242,7 +243,8 @@ out vec2 v_texcoord;
 v_texcoord = vCoordTexture;
 </pre>
 
-Finalment, desde `text_phong_fshader.glsl` simplement rebem les coordenades de textura i la textura texMap i ho afegim a la component difusa de Blinn Phong de la següent manera:
+Finalment, des de 'text_phong_fshader.glsl' simplement rebem les coordenades de textura i la textura 'texMap' que ens ha passat el vèrtex shader i ho afegim a la component difusa de Blinn Phong de la següent manera:
+
 <pre>
 out vec4 colorOut;
 uniform sampler2D texMap;
