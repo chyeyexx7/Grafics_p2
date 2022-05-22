@@ -301,7 +301,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
          Is = (1,1,1)
          Ia = (0.2,0.2,0.2)
          Luz Ambiente gloabl (0.3, 0.3, 0.3)
-</pre>
+         </pre>
 
          **Phong**
 
@@ -313,6 +313,8 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
         **Gouraud**
 
         ![image](https://user-images.githubusercontent.com/72166134/169710008-7f154f35-028f-49d6-b5e6-983e4148cfd9.png)
+        
+        ![Captura de pantalla 2022-05-22 201954](https://user- images.githubusercontent.com/72166134/169709957-32d8e817-411b-4fbb-8fd9-e5412f3585a5.png)
 
         
         -Toon-shading
@@ -325,6 +327,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
 ![Captura de pantalla 2022-05-22 201019](https://user-images.githubusercontent.com/72166134/169709729-9d162c10-6704-44e8-8ffd-d279a2082bb1.png)
 
+![Captura de pantalla 2022-05-22 201906](https://user-images.githubusercontent.com/72166134/169709956-5dac2078-1035-48de-ba45-61cda0eb69a3.png)
 
 **Additional Information**
 
@@ -334,7 +337,3 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 He empleado unas 4 horas a la semana, salvo en los últimos días en los cuales he dedicado prácticamente 2 o 3 días solo a la práctica. Mi principal problema han sido los errores con el orden en el cuál importaba las librerías que provocaban que el programa fallara. 
 
 También me costó la parte de texturas debido a que no controlaba si el fichero se había cargado o no. 
-
-
-![Captura de pantalla 2022-05-22 201954](https://user-images.githubusercontent.com/72166134/169709957-32d8e817-411b-4fbb-8fd9-e5412f3585a5.png)
-![Captura de pantalla 2022-05-22 201906](https://user-images.githubusercontent.com/72166134/169709956-5dac2078-1035-48de-ba45-61cda0eb69a3.png)
