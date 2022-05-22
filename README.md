@@ -85,8 +85,8 @@ Simplement, hem afegit els mètodes constructors (amb paràmetres i amb valors '
 El mètode 'toGPU' és el més interessant de tots, ja que és el que ens permet passar els valors del material als shaders, cosa que necessitarem per implementar models com el de Blinn Phong. Aquest mètode el cridarem des del draw de Mesh.cpp 'this->material->toGPU(program)'. El que fem és definir structs tant a la CPU com a la GPU per organitzar la informació del nostre material.
 
 //Struct material a CPU <br />
-struct {<br />
-   <br />  GLuint kd; <br />
+**struct {<br />
+    GLuint kd; <br />
     GLuint ks; <br />
     GLuint ka; <br />
     GLuint shine; <br />
@@ -94,7 +94,7 @@ struct {<br />
 }gl_material; <br />
 
 //Struct material a GPU <br />
-struct mtr{ <br />
+**struct mtr{ <br />
     vec3 Kd; <br />
     vec3 Ka; <br />
     vec3 Ks ;<br />
