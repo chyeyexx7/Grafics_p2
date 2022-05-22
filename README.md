@@ -11,7 +11,7 @@ Segona pràctica de GiVD 2021-22
     
 **Abstract**
 
-Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar algunes de les classes definides anteriorment com a base i a partir d'aquí adaptar-les i afegir canvis per poder fer ús de la GPU mitjançant shaders (Phong, Gouraud, Toon Shading...). A més, hem modificat la classe Mesh perquè pugui tenir una textura i els seus vèrtexs de textura associats a cada punt de l'objecte.
+Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar algunes de les classes definides prèviament com a base i a partir d'aquí adaptar-les i afegir canvis per poder fer ús de la GPU mitjançant shaders (Phong, Gouraud, Toon Shading...). A més, hem modificat la classe Mesh perquè pugui tenir una textura i els seus vèrtexs de textura associats a cada punt de l'objecte.
 
 **Features**
 
@@ -24,7 +24,8 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
           - Noel Vázquez Caparrós
           - Chang Ye
         - [ ] Escenes de dades Reals 
-    - Material [x]
+    - Material
+        - [x] Classe material
            - Endimbeer Enrique Nuñez Matos
     - Light
         - [x] Puntual
