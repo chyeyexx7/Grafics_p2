@@ -21,6 +21,7 @@ GLWidget::~GLWidget() {
 void GLWidget::setScene(shared_ptr<Scene> sc) {
     scene = sc;
     scene->setCamera(make_shared<Camera>(this->size().width(), this->size().height()));
+
     emit ObsCameraChanged(scene->camera);
     emit FrustumCameraChanged(scene->camera);
 }
@@ -64,9 +65,21 @@ void GLWidget::paintGL() {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-
+    qDebug() << scene->CUBEMAP;
+    if (scene->CUBEMAP) {
+        if (cubeTexture) {
+            // Seteamos textura de cub una única vez
+            scene->cub->initTextura();
+            qDebug() << "init";
+            cubeTexture = false;
+        }
+        scene->camera->toGPU(program);
+        scene->cub->toGPU(program);
+        scene->cub->draw();
+    }
     scene->camera->toGPU(program);
     scene->draw();
+    qDebug() << "paint";
 }
 
 /**
@@ -93,7 +106,7 @@ void GLWidget::initShadersGPU(){
     initShader(2, "://resources/gouraud_vshader.glsl", "://resources/gouraud_fshader.glsl");
     initShader(3, "://resources/toon_vshader.glsl", "://resources/toon_fshader.glsl");
     initShader(4, "://resources/text_phong_vshader.glsl", "://resources/text_phong_fshader.glsl");
-
+    initShader(5, "://resources/cube_vshader.glsl", "://resources/cube_fshader.glsl");
 }
 
 QSize GLWidget::minimumSizeHint() const {
@@ -156,7 +169,7 @@ void GLWidget::saveImage(){
 void GLWidget::updateObject(shared_ptr<Mesh> obj) {
     initShadersGPU();
     obj->toGPU(program);
-    scene->toGPU(program);
+    //scene->toGPU(program);
     updateGL();
 }
 
@@ -237,6 +250,15 @@ void GLWidget::activaBumpMapping() {
 void GLWidget::activaEnvMapping() {
     //TO DO: a implementar a la fase 2 de la practica 2
     qDebug()<<"Estic a Environmental Mapping";
+    qDebug()<< scene->CUBEMAP;
+    if (scene->CUBEMAP == false) {
+        scene->cub = make_shared<Cub>();
+        scene->CUBEMAP = true;
+    }
+    qDebug() << scene->CUBEMAP;
+    qDebug()<<"Estic a Environmental Mapping2";
+    program = shader_list[5];
+    updateShader();
 }
 
 void GLWidget::activaTransparency() {

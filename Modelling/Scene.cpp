@@ -10,8 +10,6 @@ Scene::Scene() {
     capsaMinima.h = 2;
     capsaMinima.p = 2;
     lightAmbientGlobal = vec3(0.3, 0.3, 0.3);
-
-
 }
 
 /**
@@ -41,6 +39,7 @@ void Scene::toGPU(shared_ptr<QGLShaderProgram> p) {
         objects.at(i)->toGPU(p);
     }
     if (this->base) this->base->toGPU(p);
+
 }
 
 /**

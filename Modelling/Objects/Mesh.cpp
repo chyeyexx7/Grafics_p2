@@ -12,8 +12,8 @@ Mesh::Mesh(int npoints, QObject *parent) : QObject(parent){
     normals= new point4[numPoints];
     colors = new point4[numPoints];
     textures = new vec2[numPoints];
-    this->material = make_shared<Material> ();
     make();
+    qDebug() << "Mesh constructor 1";
 }
 
 /**
@@ -141,7 +141,7 @@ void Mesh::make(){
 
     // TO  DO: A modificar a la fase 1 de la practica 2
     // Cal calcular la normal a cada vertex a la CPU
-
+    qDebug() << "Mesh make";
     Index = 0;
     for(unsigned int i=0; i<cares.size(); i++){
         for(unsigned int j=0; j<cares[i].idxVertices.size(); j++){
@@ -172,15 +172,11 @@ void Mesh::initTexture()
     // Cal inicialitzar la textura de l'objecte: veure l'exemple del CubGPUTextura
     qDebug() << "Initializing textures...";
 
-
-    qDebug() << "Initializing textures...";
     glActiveTexture(GL_TEXTURE0);
     texture->setWrapMode(QOpenGLTexture::Repeat);
     texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
     texture->setMagnificationFilter(QOpenGLTexture::Linear);
     texture->bind(0);
-
-
 }
 
 
