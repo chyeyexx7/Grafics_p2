@@ -20,7 +20,6 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
         - [x] Objectes
           - Endimbeer Enrique Nuñez Matos
           - Chang Ye
-          - Noel Vázquez Caparrós
         - [x] Escenes virtuals
           - Noel Vázquez Caparrós
           - Chang Ye
@@ -148,7 +147,7 @@ struct lightsGpu
 uniform lightsGpu lights[1];
 </pre>
 
-Llavors des del codi C++ el que fem és aconseguir els identificadors de la GPU per a cada dada de l'struct, com per exemple a `gl_IdLightsVec[i].type = program->uniformLocation(QString("lights[%1].lightType_gpu").arg(i))`.
+Llavors des del codi C++ el que fem és aconseguir els identificadors de la GPU per a cada dada de l'struct, com per exemple a `    gl_IdLightsVec[i].type = program->uniformLocation(QString("lights[%1].lightType_gpu").arg(i))`.
 
 A continuació, també desde la classe `Light.cpp` fem el bind de les zones de memòria que corresponen a la GPU a valors de les variables de l'struct de la CPU, com per exemple a `glUniform1i(gl_IdLightsVec[i].type, this->typeLight)`.
 
@@ -157,16 +156,16 @@ Per altra banda, és important tenir en compte que el mètode `Light::LightsToGP
 Finalment, la llum d'ambient global s'envia des de l'escena `setAmbientGlobalToGPU(shared_ptr program)` a `GLWidget::initializeGL()` i el toGpu de l'escena es crida també a `GLWidget` des de `updateObject` (cada vegada que carreguem un objecte), `updateScene` i `activaShader` (cada vegada que canviem de shader).
 
   ### 4) Implementació dels diferents tipus de shading (depth, Gouraud, Phong i toon-shading)
-En aquest apartat se'ns demana implementar 4 tipus de shading: Depth Shading, Gouraud, Phong i Toon Shading. Per a aconseguir això el que haurem de fer és crear diferents parelles de shader de tipus Vèrtex i Fragment `.glsl` a `/resources`. En general, aquests shaders necessitaran la posició del punt, normals als vèrtex, les llums, els materials i la llum ambiental global.
+En aquest apartat se'ns demana implementar 4 tipus de shading: Depth Shading, Gouraud, Phong i Toon Shading. Per a aconseguir això el que haurem de fer és crear diferents parelles de shader de tipus Vèrtex i Fragment '.glsl' a '/resources'. En general, aquests shaders necessitaran la posició del punt, normals als vèrtex, les llums, els materials i la llum ambiental global.
 
-Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental global ja s'estan enviant des dels seus respectius mètodes toGpu. Per tant, el que falta és enviar les normals. Això ho haurem de fer des de `Mesh.cpp`. Desde la Mesh calculem la normal a cada vèrtex a la CPU mitjançant un doble bucle for que passa per tots els vèrtex de totes les cares.
+Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental global ja s'estan enviant des dels seus respectius mètodes toGpu. Per tant, el que falta és enviar les normals. Això ho haurem de fer des de 'Mesh.cpp'. Desde la Mesh calculem la normal a cada vèrtex a la CPU mitjançant un doble bucle for que passa per tots els vèrtex de totes les cares.
 
 <pre>
     points[Index] = vertexs[cares[i].idxVertices[j]];
     normals[Index] = normalsVertexs[cares[i].idxNormals[j]];
 </pre>
 
-Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode `Mesh::toGPU(shared_ptr pr)` a `glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)`.
+Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode 'Mesh::toGPU(shared_ptr pr)' a 'glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)'.
 
 Finalment, un cop ja tenim totes les dades només queda implementar les fórmules de Phong, Gouraud, Depth i Toon als seus respectius shaders.
 
@@ -264,6 +263,70 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
 *(NOTA: Captures de pantalla de les proves que heu fet per a demostrar la funcionalitat de la vostra pràctica amb explicacions de la seva configuració i com les heu aconseguides)*
 
+- Fase 1
+    - Adaptació a la lectura de fitxers de dades
+      Escenas virtuales y lectura de objetos desde un fichero JSON.
+      Escena compuesta por las figuras de armadillo y el avión F16. 
+    ![image](https://user-images.githubusercontent.com/72166134/169703340-2453b547-7d0f-44f9-ba39-      84e489ffec86.png)
+
+    - Material y Ligth
+    
+    Pruebas del paso de las diferentes componentes a la GPU tanto para la luz como para el meterial: 
+    
+    Componente difusa:
+    ![image](https://user-images.githubusercontent.com/72166134/169706326-74ad48cd-c8ce-4365-91f7-8aa089ef6544.png)
+
+    Componente ambiental:
+    ![image](https://user-images.githubusercontent.com/72166134/169706490-d44411c2-2457-4c47-ae74-5a8a37631755.png)
+
+    
+    Componente Especular:
+    ![image](https://user-images.githubusercontent.com/72166134/169706639-0635dd63-04c7-4932-8ef0-b4ebf1dcd909.png)
+
+    - Shading
+        -Depth 
+        Imagen generada mediante el fichero f16.obj
+        
+![image](https://user-images.githubusercontent.com/72166134/169707708-9097871c-9041-436f-9626-5bcdbba1fae8.png)
+
+         Imagen generada mediante el fichero sphere0.obj:
+         Kd =(0.8,0.5,0.5)
+         Ka = (0.2,0.2,0.2)
+         Ks =(1.,1.,1.)
+         shineness 20;
+         Luz Puntual a (10, 10, 20)
+         Id= (0.8,0.8,0.8)
+         Is = (1,1,1)
+         Ia = (0.2,0.2,0.2)
+         Luz Ambiente gloabl (0.3, 0.3, 0.3)
+
+         **Phong**
+
+         ![image](https://user-images.githubusercontent.com/72166134/169707850-7fcaedff-5cbc-479e-b2b6-022b58f384e9.png)
+
+![image](https://user-images.githubusercontent.com/72166134/169708007-b0638070-2e2a-4a20-9651-bb2511faf0eb.png)
+
+        
+        **Gouraud**
+        ![image](https://user-images.githubusercontent.com/72166134/169707856-0e3b1d89-72d4-44ea-9911-af8317a8aac2.png)
+
+        
+        -Toon-shading
+        ![image](https://user-images.githubusercontent.com/72166134/169707927-dea0e5ba-44ec-47fb-ae56-da53b164767b.png)
+    
+    ![image](https://user-images.githubusercontent.com/72166134/169708108-8150c990-9efc-4006-9c90-40ae865ad1d7.png)
+
+    - Texturas
+      Textura con material en un objeto
+![Uploading image.png…]()
+
 **Additional Information**
 
 *(NOTA: Hores de dedicació i problemes que heu tingut fent la pràctica)*
+
+**Endimbeer Enrique Nuñez Matos
+He empleado unas 4 horas a la semana, salvo en los últimos días en los cuales he dedicado prácticamente 2 o 3 días solo a la práctica. Mi principal problema han sido los errores con el orden en el cuál importaba las librerías que provocaban que el programa fallara. 
+
+También me costó la parte de texturas debido a que no controlaba si el fichero se había cargado o no. 
+
+
