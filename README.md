@@ -30,7 +30,7 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
     - Light
         - [x] Puntual
           - Pau Rodríguez Trens
-        - [x] Direcciona
+        - [x] Direccional
           - Pau Rodríguez Trens
         - [ ] Spotlight
         - [x] Ambient Global
