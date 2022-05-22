@@ -593,7 +593,6 @@ void MainWindow::on_lightIs3Spin_valueChanged(double arg1)
 void MainWindow::on_textureFileEdit_returnPressed()
 {
     glWidget->setTextureFile(ui->textureFileEdit->text());
-
 }
 
 void MainWindow::on_browseTextureBtn_pressed()

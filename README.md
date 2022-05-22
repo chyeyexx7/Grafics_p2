@@ -1,45 +1,64 @@
 # RenderGPU
 Segona pràctica de GiVD 2021-22
 
-::
 
-    Aquest és el model base del README.rst que huarue d'omplir com a documentació de la pràctica. De cara a ala presentació d'qeust document, si us plau, esborreu les notes i aquest text. 
+## Equip:
+**AB01**
+* Endimbeer Enrique Nuñez Matos
+* Chan YE
+* Noel Vázquez Caparrós
+* Pau Rodríguez Trens
     
 **Abstract**
 
-*(NOTA: Petit resum del què heu fet, no més de 200 paraules)*
+Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar algunes de les classes definides prèviament com a base i a partir d'aquí adaptar-les i afegir canvis per poder fer ús de la GPU mitjançant shaders (Phong, Gouraud, Toon Shading...). A més, hem modificat la classe Mesh perquè pugui tenir una textura i els seus vèrtexs de textura associats a cada punt de l'objecte.
 
 **Features**
 
-*(NOTA: Quines parts heu desenvolupat i qui ho ha fet de l'equip. Editeu la llista que teniu a continuació afegint darrera de cada punt, la persona que ha treballat en aquell punt.) *
-
 - Fase 1
     - Adaptació a la lectura de fitxers de dades
-        - [ ] Objectes
-        - [ ] Escenes virtuals
+        - [x] Objectes
+          - Endimbeer Enrique Nuñez Matos
+          - Chang Ye
+        - [x] Escenes virtuals
+          - Noel Vázquez Caparrós
+          - Chang Ye
         - [ ] Escenes de dades Reals 
     - Material
+        - [x] Classe material
+           - Endimbeer Enrique Nuñez Matos
     - Light
-        - [ ] Puntual
-        - [ ] Direccional
+        - [x] Puntual
+          - Pau Rodríguez Trens
+        - [x] Direccional
+          - Pau Rodríguez Trens
         - [ ] Spotlight
-        - [ ] Ambient Global
+        - [x] Ambient Global
+          - Pau Rodríguez Trens
     - Shading
-        - [ ] Depth
-        - [ ] Phong
-        - [ ] Gouraud
-        - [ ] Toon-shading
+        - [x] Depth
+          - Endimbeer Enrique Nuñez Matos
+          - Chang Ye
+        - [x] Phong
+          - Pau Rodríguez Trens
+        - [x] Gouraud
+          - Pau Rodríguez Trens
+        - [x] Toon-shading
+          - Endimbeer Enrique Nuñez Matos
+          - Chang Ye
     - Textures
-        - [ ] Textura com material en un objecte
+        - [x] Textura com material en un objecte
+          - Endimbeer Enrique Nuñez Matos
         - [ ] Textura al pla base
-        
+          
 
 - Fase 2 
     - [ ] Èmfasi de siluetes
     - [ ] Mapping indirecte de textures
     - [ ] Animacions amb dades temporals
     - [ ] Normal mapping
-    - [ ] Entorn amb textures
+    - [x] Entorn amb textures
+    - Chang Ye
     - [ ] Reflexions
     - [ ] Transparències via objectes.
     - [ ] Transparències via environmental mapping.
@@ -51,7 +70,10 @@ Segona pràctica de GiVD 2021-22
 
 **Memòria**
 
-*(NOTA: Explicació dels diferents punts que heu desenvolupat detallant les estratègies que heu fet servir)*
+  * **Organització de la pràctica**
+        * Hem dividit els diferents apartats de la pràctica en parelles amb l'objectiu de poder ajudar-nos amb els dubtes. També hem realitzat sessions de pair programming per poder afrontar alguns apartats. 
+  ### 1) PAS 1. Construcció de l’escena virtual a partir de fitxers .obj, dades virtuals o dades geolocalitzades (adaptació del codi de la pràctica 1)
+El primer que hem fet és afegir el codi necessari a la classe Builder per poder llegir un .json que contingui la informació necessària per crear una escena virtual. Per a aconseguir això comprovem al mètode newVirtualScene que ens passin el nom d'un fitxer i que existeixi. A continuació llegim el seu contingut i el guardem en un QJsonObject. Finalment, per a cada objecte de l'escena cridem al constructor i en cas que tingui un material el llegim, li assignem i afegim l'objecte a la llista 'vector<shared_ptr> objects' de l'escena.
 
 **Screenshots**
 
