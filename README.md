@@ -278,7 +278,6 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
     Componente ambiental:
     ![image](https://user-images.githubusercontent.com/72166134/169706490-d44411c2-2457-4c47-ae74-5a8a37631755.png)
-
     
     Componente Especular:
     ![image](https://user-images.githubusercontent.com/72166134/169706639-0635dd63-04c7-4932-8ef0-b4ebf1dcd909.png)
@@ -305,11 +304,8 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
          **Phong**
 
-         ![image](https://user-images.githubusercontent.com/72166134/169707850-7fcaedff-5cbc-479e-b2b6-022b58f384e9.png)
+         ![Captura de pantalla 2022-05-22 201906](https://user-images.githubusercontent.com/72166134/169709956-5dac2078-1035-48de-ba45-61cda0eb69a3.png)
 
-         ![image](https://user-images.githubusercontent.com/72166134/169708007-b0638070-2e2a-4a20-9651-bb2511faf0eb.png)
-
-        
         **Gouraud**
 
         ![image](https://user-images.githubusercontent.com/72166134/169710008-7f154f35-028f-49d6-b5e6-983e4148cfd9.png)
@@ -327,7 +323,6 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
 ![Captura de pantalla 2022-05-22 201019](https://user-images.githubusercontent.com/72166134/169709729-9d162c10-6704-44e8-8ffd-d279a2082bb1.png)
 
-![Captura de pantalla 2022-05-22 201906](https://user-images.githubusercontent.com/72166134/169709956-5dac2078-1035-48de-ba45-61cda0eb69a3.png)
 
 **Additional Information**
 
