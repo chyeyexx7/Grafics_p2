@@ -1,9 +1,13 @@
 # RenderGPU
 Segona pràctica de GiVD 2021-22
 
-::
 
-    Aquest és el model base del README.rst que huarue d'omplir com a documentació de la pràctica. De cara a ala presentació d'qeust document, si us plau, esborreu les notes i aquest text. 
+## Equip:
+**AB01**
+* Endimbeer Enrique Nuñez Matos
+* Chan YE
+* Noel Vázquez Caparrós
+* Pau Rodríguez Trens
     
 **Abstract**
 
@@ -16,23 +20,37 @@ Segona pràctica de GiVD 2021-22
 - Fase 1
     - Adaptació a la lectura de fitxers de dades
         - [x] Objectes
+          - Endimbeer Enrique Nuñez Matos
+          - Chang Ye
         - [x] Escenes virtuals
+          - Noel Vázquez Caparrós
+          - Chang Ye
         - [ ] Escenes de dades Reals 
     - Material
     - Light
         - [x] Puntual
-        - [x] Direccional
+          - Pau Rodríguez Trens
+        - [x] Direcciona
+          - Pau Rodríguez Trens
         - [ ] Spotlight
         - [x] Ambient Global
+          - Pau Rodríguez Trens
     - Shading
         - [x] Depth
+          - Endimbeer Enrique Nuñez Matos
+          - Chang Ye
         - [x] Phong
+          - Pau Rodríguez Trens
         - [x] Gouraud
+          - Pau Rodríguez Trens
         - [x] Toon-shading
+          - Endimbeer Enrique Nuñez Matos
+          - Chang Ye
     - Textures
         - [x] Textura com material en un objecte
+          - Endimbeer Enrique Nuñez Matos
         - [ ] Textura al pla base
-        
+          
 
 - Fase 2 
     - [ ] Èmfasi de siluetes
@@ -40,6 +58,7 @@ Segona pràctica de GiVD 2021-22
     - [ ] Animacions amb dades temporals
     - [ ] Normal mapping
     - [x] Entorn amb textures
+    - Chang Ye
     - [ ] Reflexions
     - [ ] Transparències via objectes.
     - [ ] Transparències via environmental mapping.
