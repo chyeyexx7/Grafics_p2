@@ -173,10 +173,10 @@ Finalment, un cop ja tenim totes les dades només queda implementar les fórmule
 <br />Implementació de la fórmula de Blinn Phong al fhsader:
 ![image](https://user-images.githubusercontent.com/72156170/169694406-8484427b-c2fb-4c27-bfca-18545d3b8681.png)
 
-* Gouraud
-<br />En el cas de Gouraud, la diferència amb Phong és que en comptes de fer el càlcul de la Itotal al fshader, ho fem al vshader. D'aquesta manera aconseguim tenir el promig de les normals a cada vèrtex, aplica el model de `Blinn-Phong` a cadascus dels vèrtexs i interpolar les intensitats de cada vèrtex a cada polígon.
+* Gouraud**
+<br />En el cas de Gouraud, la diferència amb Phong és que en comptes de fer el càlcul de la Itotal al fshader, ho fem al vshader. D'aquesta manera aconseguim tenir el promig de les normals a cada vèrtex, aplicar el model de `Blinn-Phong` a cadascun dels vèrtexs i interpolar les intensitats de cada vèrtex a cada polígon.
 
-* Toon shading
+* Toon shading**
 <br />A Toon shading el que busquem és que els objectes tinguin una il·luminació similar a l'estil cartoon. Per aconseguir això calculem el producte entre el vector L (vector normalitzat entre la llum i el punt) i la normal i limitem el color resultant en quatre nivells amb una variable factorToon al fshader.
 <pre>
 toon = dot(L,N);
@@ -188,7 +188,7 @@ else if(toon<0.75)
 else if(toon >= 0.75)
     factorToon = 0.75;
 </pre>
-* Depth shading
+* Depth shading**
 <br />Finalment, amb el Depth shading volem pintar en grisos la profunditat del triangle que s'ha rasteritzat en el píxel. Això ho aconseguim des de el fragment shader 'depth_fshader.glslde' la següent forma:
 
 <pre>
