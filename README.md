@@ -269,7 +269,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
       Escena compuesta por las figuras de armadillo y el avión F16. 
     ![image](https://user-images.githubusercontent.com/72166134/169703340-2453b547-7d0f-44f9-ba39-      84e489ffec86.png)
 
-    - Material y Ligth
+    - Material y Light
     
     Pruebas del paso de las diferentes componentes a la GPU tanto para la luz como para el meterial: 
     
@@ -304,7 +304,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
          ![image](https://user-images.githubusercontent.com/72166134/169707850-7fcaedff-5cbc-479e-b2b6-022b58f384e9.png)
 
-![image](https://user-images.githubusercontent.com/72166134/169708007-b0638070-2e2a-4a20-9651-bb2511faf0eb.png)
+        ![image](https://user-images.githubusercontent.com/72166134/169708007-b0638070-2e2a-4a20-9651-bb2511faf0eb.png)
 
         
         **Gouraud**
@@ -314,11 +314,12 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
         -Toon-shading
         ![image](https://user-images.githubusercontent.com/72166134/169707927-dea0e5ba-44ec-47fb-ae56-da53b164767b.png)
     
-    ![image](https://user-images.githubusercontent.com/72166134/169708108-8150c990-9efc-4006-9c90-40ae865ad1d7.png)
+        ![image](https://user-images.githubusercontent.com/72166134/169708108-8150c990-9efc-4006-9c90-40ae865ad1d7.png)
 
     - Texturas
       Textura con material en un objeto
-![Uploading image.png…]()
+
+
 
 **Additional Information**
 
