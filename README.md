@@ -15,22 +15,22 @@ Segona pràctica de GiVD 2021-22
 
 - Fase 1
     - Adaptació a la lectura de fitxers de dades
-        - [ ] Objectes
-        - [ ] Escenes virtuals
+        - [x] Objectes
+        - [x] Escenes virtuals
         - [ ] Escenes de dades Reals 
     - Material
     - Light
-        - [ ] Puntual
-        - [ ] Direccional
+        - [x] Puntual
+        - [x] Direccional
         - [ ] Spotlight
-        - [ ] Ambient Global
+        - [x] Ambient Global
     - Shading
-        - [ ] Depth
-        - [ ] Phong
-        - [ ] Gouraud
-        - [ ] Toon-shading
+        - [x] Depth
+        - [x] Phong
+        - [x] Gouraud
+        - [x] Toon-shading
     - Textures
-        - [ ] Textura com material en un objecte
+        - [x] Textura com material en un objecte
         - [ ] Textura al pla base
         
 
@@ -39,7 +39,7 @@ Segona pràctica de GiVD 2021-22
     - [ ] Mapping indirecte de textures
     - [ ] Animacions amb dades temporals
     - [ ] Normal mapping
-    - [ ] Entorn amb textures
+    - [x] Entorn amb textures
     - [ ] Reflexions
     - [ ] Transparències via objectes.
     - [ ] Transparències via environmental mapping.
