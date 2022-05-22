@@ -283,13 +283,15 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     Componente Especular:
     ![image](https://user-images.githubusercontent.com/72166134/169706639-0635dd63-04c7-4932-8ef0-b4ebf1dcd909.png)
 
-    - Shading
-        -Depth 
+**Shading**
+        Depth 
         Imagen generada mediante el fichero f16.obj
         
 ![image](https://user-images.githubusercontent.com/72166134/169707708-9097871c-9041-436f-9626-5bcdbba1fae8.png)
 
          Imagen generada mediante el fichero sphere0.obj:
+         <pre>
+
          Kd =(0.8,0.5,0.5)
          Ka = (0.2,0.2,0.2)
          Ks =(1.,1.,1.)
@@ -299,16 +301,18 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
          Is = (1,1,1)
          Ia = (0.2,0.2,0.2)
          Luz Ambiente gloabl (0.3, 0.3, 0.3)
+</pre>
 
          **Phong**
 
          ![image](https://user-images.githubusercontent.com/72166134/169707850-7fcaedff-5cbc-479e-b2b6-022b58f384e9.png)
 
-        ![image](https://user-images.githubusercontent.com/72166134/169708007-b0638070-2e2a-4a20-9651-bb2511faf0eb.png)
+         ![image](https://user-images.githubusercontent.com/72166134/169708007-b0638070-2e2a-4a20-9651-bb2511faf0eb.png)
 
         
         **Gouraud**
-        ![image](https://user-images.githubusercontent.com/72166134/169707856-0e3b1d89-72d4-44ea-9911-af8317a8aac2.png)
+
+        ![image](https://user-images.githubusercontent.com/72166134/169710008-7f154f35-028f-49d6-b5e6-983e4148cfd9.png)
 
         
         -Toon-shading
@@ -332,3 +336,5 @@ He empleado unas 4 horas a la semana, salvo en los últimos días en los cuales 
 También me costó la parte de texturas debido a que no controlaba si el fichero se había cargado o no. 
 
 
+![Captura de pantalla 2022-05-22 201954](https://user-images.githubusercontent.com/72166134/169709957-32d8e817-411b-4fbb-8fd9-e5412f3585a5.png)
+![Captura de pantalla 2022-05-22 201906](https://user-images.githubusercontent.com/72166134/169709956-5dac2078-1035-48de-ba45-61cda0eb69a3.png)
