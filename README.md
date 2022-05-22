@@ -152,9 +152,9 @@ Llavors des del codi C++ el que fem és aconseguir els identificadors de la GPU 
 
 A continuació, també desde la classe `Light.cpp` fem el bind de les zones de memòria que corresponen a la GPU a valors les variables de l'struct de la CPU, com per exemple a `glUniform1i(gl_IdLightsVec[i].type, this->typeLight)`.
 
-Per altra banda, és important tenir en compte que el mètode 'Light::LightsToGPU' es crida a 'Scene::lightsToGPU'. El que fem és un bucle a 'Scene.cpp' que passa per totes les llums de la seva llista i per cada una d'elles crida al seu mètode LightsToGPU. I el mètode 'Scene::lightsToGPU' es crida des de 'GLWidget::initializeGL()' i també al mètode general toGpu de Scene.cpp (on a part de les llums també s'envia la informació dels objectes de la llista. 
+Per altra banda, és important tenir en compte que el mètode `Light::LightsToGPU` es crida a `Scene::lightsToGPU`. El que fem és un bucle a `Scene.cpp` que passa per totes les llums de la seva llista i per cada una d'elles crida al seu mètode LightsToGPU. I el mètode `Scene::lightsToGPU` es crida des de `GLWidget::initializeGL()` i també al mètode general `toGpu` de `Scene.cpp` (on a part de les llums també s'envia la informació dels objectes de la llista. 
 
-Finalment, la llum d'ambient global s'envia des de l'escena 'setAmbientGlobalToGPU(shared_ptr program)' a 'GLWidget::initializeGL()' i el toGpu de l'escena es crida també a GLWidget des de updateObject (cada vegada que carreguem un objecte), updateScene i activaShader (cada vegada que canviem de shader).
+Finalment, la llum d'ambient global s'envia des de l'escena `setAmbientGlobalToGPU(shared_ptr program)` a `GLWidget::initializeGL()` i el toGpu de l'escena es crida també a `GLWidget` des de `updateObject` (cada vegada que carreguem un objecte), `updateScene` i `activaShader` (cada vegada que canviem de shader).
 
 **Screenshots**
 
