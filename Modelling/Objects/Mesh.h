@@ -48,7 +48,9 @@ protected:
 
     // Els colors s'usen en la primera execució però després son prescindibles
     point4 *colors;
+    vec2 *textures;
 
+    bool hasTexture = false;
     int Index; // index de control del numero de vertexs a passar a la GPU
 
     shared_ptr<QGLShaderProgram> program;
@@ -61,10 +63,9 @@ public:
     Mesh(const int npoints, QString n);
     ~Mesh();
 
-
     void setMaterial(shared_ptr<Material> m);
     void parseObjFile(const QString &fileName);
-
+    void toGPUTexture(shared_ptr<QGLShaderProgram> pr);
     void setTexture(shared_ptr<QOpenGLTexture> t);
 
     virtual void make();

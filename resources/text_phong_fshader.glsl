@@ -2,8 +2,10 @@
 
 in vec4 normal;
 in vec4 position;
+in vec2 v_texcoord;
 out vec4 colorOut;
 
+uniform sampler2D texMap;
 
 //Struct luces
 struct lightsGpu
@@ -75,7 +77,7 @@ void main()
             attenuation = 1.0;
         }
         H = normalize(L+V);
-        idkd = lights[i].lightID_gpu * material.Kd  * max(dot(N,L), 0.0);
+        idkd = lights[i].lightID_gpu * (texture(texMap, v_texcoord).rgb)  * max(dot(N,L), 0.0);
         isks = lights[i].lightIS_gpu * material.Ks * pow(max(dot(N,H), 0.0), material.shininess);
         iaka = lights[i].lightIA_gpu * material.Ka;
         //Para hacer pruebas con los ejemplos del campus hemos quitado la atenuación de la fórmula de phong

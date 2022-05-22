@@ -10,5 +10,7 @@
         <file>resources/toon_fshader.glsl</file>
         <file>resources/depth_vshader.glsl</file>
         <file>resources/depth_fshader.glsl</file>
+        <file>resources/text_phong_vshader.glsl</file>
+        <file>resources/text_phong_fshader.glsl</file>
     </qresource>
 </RCC>
