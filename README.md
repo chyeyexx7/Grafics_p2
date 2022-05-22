@@ -319,6 +319,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     - Texturas
       Textura con material en un objeto
 
+![Captura de pantalla 2022-05-22 201019](https://user-images.githubusercontent.com/72166134/169709729-9d162c10-6704-44e8-8ffd-d279a2082bb1.png)
 
 
 **Additional Information**
