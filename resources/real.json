@@ -1,0 +1,47 @@
+{
+"scene": "dadesBCN",
+"typeScene": "REALDATA",
+"base" : {
+   "type": "FITTEDPLANE",
+   "normal": [0.0, 1.0, 0.0],
+   "point": [0.0, -1.0, 0.0],
+   "pmin": [-5.0, -5.0],
+   "pmax": [5.0, 5.0],
+   "material": {
+   "ka": [0.1, 0.1, 0.1],
+   "kd": [0.7,0.4,0.4],
+   "ks": [1.0, 1.0, 1.0],
+   "shininess": 50.0,
+   "textureFile": "://resources/mapBCN.png"
+    }
+},
+"Real": {
+  "minPoint": [2.1103, 41.3581],
+  "maxPoint": [2.2075, 41.4423]
+},
+"Virtual": {
+  "minPoint": [-5,  -1, -5],
+  "maxPoint": [ 5,  2,  5.31]
+},"properties": [
+{
+"name": "AssistenciaConcerts",
+"gyzmo": "mesh",
+"minValue": 1800,
+"maxValue": 382703,
+"colorMap": "COLOR_MAP_TYPE_PLASMA",
+"objFileName": "../p2-gpurendering-ab01/resources/models/sphere0.obj",
+"material": {
+    "type": "METAL",
+    "ka": [0.2, 0.2, 0.2],
+    "kd": [0.7,0.6,0.5],
+    "ks": [0.7, 0.7, 0.7],
+    "kt": [0.6, 0.6, 0.6],
+    "nut" : 1.0,
+    "shininess": 10.0
+ },
+"data": [
+ [2.1621234, 41.4056165,  6100]
+ ]
+ }
+ ]
+}
