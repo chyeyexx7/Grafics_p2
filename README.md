@@ -72,6 +72,8 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
 
   * **Organització de la pràctica**
         * Hem dividit els diferents apartats de la pràctica en parelles amb l'objectiu de poder ajudar-nos amb els dubtes. També hem realitzat sessions de pair programming per poder afrontar alguns apartats. 
+  ### 1) PAS 1. Construcció de l’escena virtual a partir de fitxers .obj, dades virtuals o dades geolocalitzades (adaptació del codi de la pràctica 1)
+El primer que hem fet és afegir el codi necessari a la classe Builder per poder llegir un .json que contingui la informació necessària per crear una escena virtual. Per a aconseguir això comprovem al mètode newVirtualScene que ens passin el nom d'un fitxer i que existeixi. A continuació llegim el seu contingut i el guardem en un QJsonObject. Finalment, per a cada objecte de l'escena cridem al constructor i en cas que tingui un material el llegim, li assignem i afegim l'objecte a la llista 'vector<shared_ptr> objects' de l'escena.
 
 **Screenshots**
 
