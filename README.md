@@ -24,7 +24,8 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
           - Noel Vázquez Caparrós
           - Chang Ye
         - [ ] Escenes de dades Reals 
-    - Material
+    - Material [x]
+           - Endimbeer Enrique Nuñez Matos
     - Light
         - [x] Puntual
           - Pau Rodríguez Trens
