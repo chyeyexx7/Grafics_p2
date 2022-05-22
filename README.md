@@ -339,7 +339,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
 *(NOTA: Hores de dedicació i problemes que heu tingut fent la pràctica)*
 
-**Endimbeer Enrique Nuñez Matos
+** Endimbeer Enrique Nuñez Matos
 He empleado unas 4 horas a la semana, salvo en los últimos días en los cuales he dedicado prácticamente 2 o 3 días solo a la práctica. Mi principal problema han sido los errores con el orden en el cuál importaba las librerías que provocaban que el programa fallara. 
 
 También me costó la parte de texturas debido a que no controlaba si el fichero se había cargado o no. 
