@@ -209,17 +209,13 @@ else if(toon >= 0.75)
     shader_list[2]->bind();
 </pre>
 
-  ### 5) Inclusió de les textures en les teves visualitzacions
+  ### 5) Inclusió de les textures en les nostres visualitzacions
 En aquest apartat se'ns demana incloure textures en la visualització dels objtes que es carreguin. En els `.obj` tenim les coordenades de textura de les malles poligonals, i amb aquestes coordenades passades al fragment shader podem obtenir els píxels associats a cada píxel on es rasteritza l'objecte.
 
+Per a aconseguir això un dels métodes més importants és el `initTexture` de `Mesh.cpp`, que ens permet inicialitzar la textura de l'objecte i fer el bind.
 <pre>
 void Mesh::initTexture()
 {
-    // TO DO: A implementar a la fase 1 de la practica 2
-    // Cal inicialitzar la textura de l'objecte: veure l'exemple del CubGPUTextura
-    qDebug() << "Initializing textures...";
-
-
     qDebug() << "Initializing textures...";
     glActiveTexture(GL_TEXTURE0);
     texture->setWrapMode(QOpenGLTexture::Repeat);
@@ -227,6 +223,21 @@ void Mesh::initTexture()
     texture->setMagnificationFilter(QOpenGLTexture::Linear);
     texture->bind(0);
 }
+</pre>
+
+Al igual que els materials, les llums i les normals, també tenim que enviar les coordenades de textures a la GPU amb el métode:
+<pre>
+void Mesh::toGPUTexture(shared_ptr<QGLShaderProgram> pr){
+    texture->bind(0);
+    pr->setUniformValue("texMap", 0);
+}
+</pre>
+
+Desde `text_phong_vshader.glsl` rebem les coordenades i les pasem al fragment shader `text_phong_fshader.glsl`:
+<pre>
+layout (location = 2) in vec2 vCoordTexture;
+out vec2 v_texcoord;
+v_texcoord = vCoordTexture;
 </pre>
 
 **Screenshots**
