@@ -267,15 +267,15 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     - Adaptació a la lectura de fitxers de dades
     
     <br />
-      Escenas virtuales y lectura de objetos desde un fichero JSON.
-      <br />
+      Escenas virtuales y lectura de objetos desde un fichero JSON
       Escena compuesta por las figuras de armadillo y el avión F16. 
       <br />
-    ![image](https://user-images.githubusercontent.com/72166134/169703340-2453b547-7d0f-44f9-ba39-84e489ffec86.png)
-
+      ![image](https://user-images.githubusercontent.com/72166134/169710703-8366ff1b-2aee-4b19-94fb-67f185c0028b.png)
+    
+    <br/>
     - Material y Light
     
-    Pruebas del paso de las diferentes componentes a la GPU tanto para la luz como para el meterial: 
+    Pruebas del paso de las diferentes componentes a la GPU tanto para la luz como para el material: 
     
     Componente difusa:
     
@@ -289,14 +289,15 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     
     ![image](https://user-images.githubusercontent.com/72166134/169706639-0635dd63-04c7-4932-8ef0-b4ebf1dcd909.png)
 
-        **Shading**
+    *Shading
         
-        *Depth 
-        <br />
+    *Depth
+        
+    ![image](https://user-images.githubusercontent.com/72166134/169710796-15e6e845-3719-4e73-a53d-78496f386e28.png)
+    <br />
         
         Imagen generada mediante el fichero f16.obj
         
-        ![image](https://user-images.githubusercontent.com/72166134/169707708-9097871c-9041-436f-9626-5bcdbba1fae8.png)
         <br />
          Imagen generada mediante el fichero sphere0.obj
          Kd =(0.8,0.5,0.5)
