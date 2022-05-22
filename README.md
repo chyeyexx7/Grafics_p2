@@ -119,7 +119,6 @@ Aquests dos tipus de llum (també hi ha un tercer tipus 'Spot' opcional que NO h
 Finalment, per enviar les dades a la GPU el procés és exactament el mateix que amb el material en quant a la definició dels structs:
 
 
-
 <pre>
 //Struct llums a CPU <br />
 struct lightsid
