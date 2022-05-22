@@ -1,7 +1,7 @@
 #version 330
 
-IN vec2 v_texcoord;
-OUT vec4 colorOut;
+in vec3 v_texcoord;
+out vec4 colorOut;
 
 uniform samplerCube texMap;
 

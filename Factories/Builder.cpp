@@ -4,7 +4,6 @@ Builder::Builder(GLWidget *glWid)
 {
     glWidget = glWid;
     scene = glWidget->getScene();
-
 }
 
 void Builder::newObjFromFile()

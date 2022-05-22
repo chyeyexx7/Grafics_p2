@@ -1,20 +1,39 @@
-#include <cub.h>
+#include "Modelling/Objects/Cub.h"
 
-Cub::Cub(): Mesh(8.0)
+Cub::Cub(): Cub(10.0)
 {
     qDebug() <<"Estic en el constructor del cub\n";
 }
 
-// Constructora amb tots els parametres
-Cub::Cub(float p): Mesh(8.0)
+// Constructora amb tots els parametres, un cub té 8 punts
+Cub::Cub(float p): Mesh(8)
 {
     qDebug() <<"Estic en el constructor parametritzat del cub\n";
-    a = an;
-    h = al;
-    p = profu;
-    xorig = x0;
-    yorig = y0;
-    zorig = z0;
+
+    /**
+        Definimos las coordenadas de los 8 vértices del cubo usando p como punto 0,0,0 del escenario
+        n sentido reloj, empezando desde -xyz, parte de arriba primero
+              v1/--------/v2
+               /|       /|
+            v5/--------/v6
+              | |v0    | |
+              |/-------|-/v3
+              |--------|/
+             v4        v7
+
+      **/
+    vertexs.push_back(point4(-p/2, -p/2,  p/2, 1.0));   // v0
+    vertexs.push_back(point4(-p/2,  p/2,  p/2, 1.0));   // v1
+    vertexs.push_back(point4( p/2,  p/2,  p/2, 1.0));   // v2
+    vertexs.push_back(point4( p/2, -p/2,  p/2, 1.0));   // v3
+
+    vertexs.push_back(point4(-p/2, -p/2, -p/2, 1.0));   // v4
+    vertexs.push_back(point4(-p/2,  p/2, -p/2, 1.0));   // v5
+    vertexs.push_back(point4( p/2,  p/2, -p/2, 1.0));   // v6
+    vertexs.push_back(point4( p/2, -p/2, -p/2, 1.0));   // v7
+
+    initVertex();
+    make();
 }
 
 // Destructora
@@ -22,41 +41,19 @@ Cub::~Cub()
 {
 }
 
-// quad generates two triangles for each face and assigns colors
-//    to the vertices
-
-void Cub::quad( int a, int b, int c, int d )
-{
-    points[Index] = vertices[a];
-    vertexsTextura[Index] = vec2(0.0, 0.0); Index++;
-    points[Index] = vertices[b];
-    vertexsTextura[Index] = vec2(1.0, 0.0); Index++;
-    points[Index] = vertices[c];
-    vertexsTextura[Index] = vec2(1.0, 1.0); Index++;
-    points[Index] = vertices[a];
-    vertexsTextura[Index] = vec2(0.0, 0.0); Index++;
-    points[Index] = vertices[c];
-    vertexsTextura[Index] = vec2(1.0, 1.0); Index++;
-    points[Index] = vertices[d];
-    vertexsTextura[Index] = vec2(0.0, 1.0); Index++;
-}
-
 
 // Realitzacio de la geometria del cub en una genList o en el vertex array, segons el que visualitzem
 
 void Cub::make()
 {
-     qDebug() <<"Estic en el make del cub\n";
-    // generacio de la geometria dels triangles per a visualitzar-lo
      Index = 0;
+     qDebug() << cares[0].idxVertices[2];
      for(unsigned int i=0; i<cares.size(); i++){
          for(unsigned int j=0; j<cares[i].idxVertices.size(); j++){
-             points[Index] = vertexsTextura[cares[i].idxVertices[j]];
+             points[Index] = vertexs[cares[i].idxVertices[j]];
              Index++;
          }
      }
-    initTextura();
-
 }
 
 void Cub::initTextura()
@@ -66,12 +63,14 @@ void Cub::initTextura()
      QImage img[6];
 
      for(GLuint i=0; i<faces.size(); i++) {
-        img[i] = QImage(´faces[i]).convertToFormat(QImage::Format_RGBA8888);
+        img[i] = QImage(faces[i]).convertToFormat(QImage::Format_RGBA8888);
      }
      // Carregar la textura
      glActiveTexture(GL_TEXTURE0);
 
-     texture = QOpenGLTexture(QOpenGLTexutre::TargetCubeMap);
+     texture = make_shared<QOpenGLTexture>(QOpenGLTexture::TargetCubeMap);
+     qDebug() <<"texture id: ";
+     qDebug() << texture->textureId();
      if(!texture->isCreated()) texture->create();
 
      glBindTexture(GL_TEXTURE_CUBE_MAP, texture->textureId());
@@ -83,38 +82,37 @@ void Cub::initTextura()
 
      texture->setData(0, 0, QOpenGLTexture::CubeMapPositiveX, QOpenGLTexture::RGBA,
                       QOpenGLTexture::UInt8, (const void*)img[0].constBits(), 0);
-     texture->setData(0, 0, QOpenGLTexture::CubeMapPositiveY, QOpenGLTexture::RGBA,
-                      QOpenGLTexture::UInt8, (const void*)img[1].constBits(), 0);
-     texture->setData(0, 0, QOpenGLTexture::CubeMapPositiveZ, QOpenGLTexture::RGBA,
-                      QOpenGLTexture::UInt8, (const void*)img[2].constBits(), 0);
      texture->setData(0, 0, QOpenGLTexture::CubeMapNegativeX, QOpenGLTexture::RGBA,
-                      QOpenGLTexture::UInt8, (const void*)img[3].constBits(), 0);
+                      QOpenGLTexture::UInt8, (const void*)img[1].constBits(), 0);
      texture->setData(0, 0, QOpenGLTexture::CubeMapNegativeY, QOpenGLTexture::RGBA,
+                      QOpenGLTexture::UInt8, (const void*)img[2].constBits(), 0);
+     texture->setData(0, 0, QOpenGLTexture::CubeMapPositiveY, QOpenGLTexture::RGBA,
+                      QOpenGLTexture::UInt8, (const void*)img[3].constBits(), 0);
+     texture->setData(0, 0, QOpenGLTexture::CubeMapPositiveZ, QOpenGLTexture::RGBA,
                       QOpenGLTexture::UInt8, (const void*)img[4].constBits(), 0);
      texture->setData(0, 0, QOpenGLTexture::CubeMapNegativeZ, QOpenGLTexture::RGBA,
                       QOpenGLTexture::UInt8, (const void*)img[5].constBits(), 0);
 
-     texture->setWrapMpde(QOPenGLTexture::ClampToEdge);
+     texture->setWrapMode(QOpenGLTexture::ClampToEdge);
      texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
      texture->setMagnificationFilter(QOpenGLTexture::LinearMipMapLinear);
 
-     glGenerationMipMap(GL_TEXTURE_CUBE_MAP);
+     glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 
  }
 
 // Carrega a la GPU del cub
 
-void Cub::toGPU(QGLShaderProgram *program){
+void Cub::toGPU(shared_ptr<QGLShaderProgram> pr){
     qDebug() << "Passo el Cub a la GPU.....\n";
+    program = pr;
 
     // S'activa la textura i es passa a la GPU
-    texture->bind(0);
-    program->setUniformValue("texMap", 0);
+    texture->bind(texture->textureId());
+    program->setUniformValue("texEnvironment", texture->textureId());
 
     // Creació d'un vertex array object
-    GLuint vao;
     glGenVertexArrays( 1, &vao );
-    glBindVertexArray( vao );
 
     // Creacio i inicialitzacio d'un vertex buffer object (VBO)
     glGenBuffers( 1, &buffer );
@@ -123,18 +121,17 @@ void Cub::toGPU(QGLShaderProgram *program){
     glBindBuffer( GL_ARRAY_BUFFER, buffer );
 
     // Transferència dels punts, colors i coordenades de textura al vertex buffer object
-    glBufferData( GL_ARRAY_BUFFER, sizeof(points)*Index,
+    glBufferData( GL_ARRAY_BUFFER, sizeof(point4)*Index,
                   NULL, GL_STATIC_DRAW );
-    glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(points)*Index, points );
+    glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(point4)*Index, points );
 
 
     // set up vertex arrays
-
+    glBindVertexArray( vao );
     glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0,  0);
     glEnableVertexAttribArray(0);
 
-
-    glEnable( GL_DEPTH_TEST );
+    glEnable(GL_TEXTURE_CUBE_MAP);
 }
 
 
@@ -144,26 +141,59 @@ void Cub::draw()
     glEnableVertexAttribArray(0);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDepthFunc(GL_EQUAL);
-    glDrawArrays( GL_TRIANGLES, 0, Index );
+    glDepthFunc(GL_LEQUAL);
+    glDrawArrays(GL_TRIANGLES, 0, Index);
+    glDepthFunc(GL_LESS);
 
     glDisableVertexAttribArray(0);
 
-    glDisable(GL_TEXTURE_CUBE_MAP)
+    glDisable(GL_TEXTURE_CUBE_MAP);
 }
 
-void Cub::aplicaTG(mat4 m)
-{
-    point4  transformed_points[NumVertices];
+void Cub::initVertex() {
 
-    for ( int i = 0; i < NumVertices; ++i ) {
-        transformed_points[i] = m * points[i];
-    }
+    // Bottom
+    Cara *bottom1 = new Cara(4, 0, 7, -1);
+    Cara *bottom2 = new Cara(7, 0, 3, -1);
 
-    glBindBuffer( GL_ARRAY_BUFFER, buffer );
-    // Actualitzacio del vertex array per a preparar per pintar
-    glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(transformed_points),
-                     transformed_points );
+    //Front
+    Cara *front1 = new Cara(0, 1, 3, -1);
+    Cara *front2 = new Cara(3, 1, 2, -1);
 
+    // Top
+    Cara *top1 = new Cara(1, 5, 2, -1);
+    Cara *top2 = new Cara(2, 5, 6, -1);
 
+    // Right
+    Cara *right1 = new Cara(3, 2, 7, -1);
+    Cara *right2 = new Cara(7, 2, 6, -1);
+
+    // Left
+    Cara *left1 = new Cara(4, 5, 0, -1);
+    Cara *left2 = new Cara(0, 5, 1, -1);
+
+    // Back
+    Cara *back1 = new Cara(7, 6, 4, -1);
+    Cara *back2 = new Cara(4, 6, 5, -1);
+
+    cares.push_back(*bottom1);
+    cares.push_back(*bottom2);
+    cares.push_back(*front1);
+    cares.push_back(*front2);
+    cares.push_back(*top1);
+    cares.push_back(*top2);
+    cares.push_back(*right1);
+    cares.push_back(*right2);
+    cares.push_back(*left1);
+    cares.push_back(*left2);
+    cares.push_back(*back1);
+    cares.push_back(*back2);
+
+    faces.push_back(QImage("://resources/textures/yokohama/posx.jpg"));
+    faces.push_back(QImage("://resources/textures/yokohama/negx.jpg"));
+    faces.push_back(QImage("://resources/textures/yokohama/negy.jpg"));
+    faces.push_back(QImage("://resources/textures/yokohama/posy.jpg"));
+    faces.push_back(QImage("://resources/textures/yokohama/posz.jpg"));
+    faces.push_back(QImage("://resources/textures/yokohama/negz.jpg"));
 }
+

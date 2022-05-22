@@ -2,13 +2,12 @@
 
 #include <library/Common.h>
 #include <QGLShaderProgram>
-#include "Modelling/Materials/Material.h"
+#include <Modelling/Materials/Material.h>
 
 #include <stdio.h>
 
-const int NumVertices = 6;
-
 typedef vec4  point4;
+const int NumVertices = 6;
 
 class Plane
 {

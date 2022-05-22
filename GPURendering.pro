@@ -45,7 +45,6 @@ HEADERS += \
     Modelling/Objects/Cub.h \
     Modelling/Objects/Mesh.h \
     Modelling/Objects/Plane.h \
-    Modelling/Objects/object.h \
     Modelling/Scene.h \
     Modelling/TG/TG.h \
     Modelling/TG/TranslateTG.h \
@@ -74,38 +73,4 @@ DISTFILES += \
     libWin32/glut.lib \
     libWin32/glut32.dll \
     libWin32/glut32.lib \
-    resources/README.fst \
-    resources/cub_fshader.glsl \
-    resources/cub_vshader.glsl \
-    resources/fshader1.glsl \
-    resources/gouraud_fshader.glsl \
-    resources/gouraud_vshader.glsl \
-    resources/models/common-cockle.mtl \
-    resources/models/cruiser.mtl \
-    resources/models/f16.mtl \
-    resources/models/sphere0.mtl \
-    resources/models/sphere1.mtl \
-    resources/phong_fshader.glsl \
-    resources/phong_vshader.glsl \
-    resources/textures/2k_earth_clouds.jpg \
-    resources/textures/2k_earth_daymap.jpg \
-    resources/textures/2k_earth_nightmap.jpg \
-    resources/textures/2k_earth_normal_map.tif \
-    resources/textures/2k_earth_specular_map.tif \
-    resources/textures/2k_jupiter.jpg \
-    resources/textures/2k_mars.jpg \
-    resources/textures/2k_mercury.jpg \
-    resources/textures/2k_moon.jpg \
-    resources/textures/2k_saturn.jpg \
-    resources/textures/2k_stars+milky_way.jpg \
-    resources/textures/2k_sun.jpg \
-    resources/textures/2k_uranus.jpg \
-    resources/textures/2k_venus_atmosphere.jpg \
-    resources/textures/2k_venus_surface.jpg \
-    resources/textures/bricks.png \
-    resources/textures/earth1.png \
-    resources/textures/earth3.png \
-    resources/textures/ennis.png \
-    resources/textures/grace-new.png \
-    resources/textures/metal_crosshatch_pattern_6190173.JPG \
-    resources/vshader1.glsl
+

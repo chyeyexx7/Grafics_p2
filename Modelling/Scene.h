@@ -21,6 +21,7 @@ using namespace Common;
 
 
 #include <Modelling/Objects/Mesh.h>
+#include <Modelling/Objects/Cub.h>
 #include <Modelling/Objects/Plane.h>
 #include <Modelling/Lights/Light.h>
 #include <Rendering/Camera.h>
@@ -41,8 +42,10 @@ class Scene {
 public:
 
     vector<shared_ptr<Mesh>> objects;
-    vector<shared_ptr<Light>>  lights;
+    vector<shared_ptr<Light>> lights;
     shared_ptr<Plane> base;
+    shared_ptr<Cub> cub; // cube Map
+    bool CUBEMAP = false;
 
     vec3 lightAmbientGlobal;
     shared_ptr<Camera> camera;
