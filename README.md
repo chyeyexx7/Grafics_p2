@@ -165,7 +165,7 @@ Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental 
     normals[Index] = normalsVertexs[cares[i].idxNormals[j]];
 </pre>
 
-Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode 'Mesh::toGPU(shared_ptr pr)' a 'glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)'.
+Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode `Mesh::toGPU(shared_ptr pr)` a `glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)`.
 
 Finalment, un cop ja tenim totes les dades només queda implementar les fórmules de Phong, Gouraud, Depth i Toon als seus respectius shaders.
 
