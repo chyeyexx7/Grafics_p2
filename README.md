@@ -73,7 +73,39 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
   * **Organització de la pràctica**
         * Hem dividit els diferents apartats de la pràctica en parelles amb l'objectiu de poder ajudar-nos amb els dubtes. També hem realitzat sessions de pair programming per poder afrontar alguns apartats. 
   ### 1) Construcció de l’escena virtual a partir de fitxers .obj, dades virtuals o dades geolocalitzades (adaptació del codi de la pràctica 1)
-El primer que hem fet és afegir el codi necessari a la classe Builder per poder llegir un .json que contingui la informació necessària per crear una escena virtual. Per a aconseguir això comprovem al mètode newVirtualScene que ens passin el nom d'un fitxer i que existeixi. A continuació llegim el seu contingut i el guardem en un QJsonObject. Finalment, per a cada objecte de l'escena cridem al constructor i en cas que tingui un material el llegim, li assignem i afegim l'objecte a la llista `vector<shared_ptr> objects` de l'escena.
+El primer que hem fet és afegir el codi necessari a la classe Builder per poder llegir un `.json` que contingui la informació necessària per crear una escena virtual. 
+
+Per a aconseguir això comprovem al mètode newVirtualScene que ens passin el nom d'un fitxer i que existeixi. A continuació llegim el seu contingut i el guardem en un `QJsonObject`. Finalment, per a cada objecte de l'escena cridem al constructor i en cas que tingui un material el llegim, li assignem i afegim l'objecte a la llista `vector<shared_ptr> objects` de l'escena.
+
+  ### 2) Modificació de la classe Material i pas a la GPU dels valors de materials
+En aquest pas se'ns demana basar-nos en la classe 'Material' de la pràctica de 'Raytracing' i afegir el codi necessari per poder passar les seves dades (Components especular, ambiental i difusa, shininess i opacitat) als shaders de la GPU. 
+
+Simplement, hem afegit els mètodes constructors (amb paràmetres i amb valors 'hardcodejats'), 'read (const QJsonObject &json)', 'write(QJsonObject &json) const', 'print(int indentation) const' i 'toGPU(shared_ptr program)'.
+
+El mètode 'toGPU' és el més interessant de tots, ja que és el que ens permet passar els valors del material als shaders, cosa que necessitarem per implementar models com el de Blinn Phong. Aquest mètode el cridarem des del draw de Mesh.cpp 'this->material->toGPU(program)'. El que fem és definir structs tant a la CPU com a la GPU per organitzar la informació del nostre material.
+
+//Struct material a CPU
+struct {
+    GLuint kd;
+    GLuint ks;
+    GLuint ka;
+    GLuint shine;
+    GLuint opac;
+}gl_material;
+
+//Struct material a GPU
+struct mtr{
+    vec3 Kd;
+    vec3 Ka;
+    vec3 Ks;
+    float shininess;
+    float opacity;
+};
+uniform mtr material;
+    
+Llavors des del codi C++ el que fem és aconseguir els identificadors de la GPU per a cada dada de l'struct, com per exemple a `gl_material.kd = program->uniformLocation("material.Kd")`.
+
+A continuació, també desde la classe `Material.cpp` fem el bind de les zones de memòria que corresponen a la GPU a valors les variables de l'struct de la CPU, com per exemple a `glUniform3fv(gl_material.kd, 1, Kd)`.
 
 **Screenshots**
 
