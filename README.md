@@ -265,29 +265,39 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
 - Fase 1
     - Adaptació a la lectura de fitxers de dades
+    
+    <br />
       Escenas virtuales y lectura de objetos desde un fichero JSON.
+      <br />
       Escena compuesta por las figuras de armadillo y el avión F16. 
-    ![image](https://user-images.githubusercontent.com/72166134/169703340-2453b547-7d0f-44f9-ba39-      84e489ffec86.png)
+      <br />
+    ![image](https://user-images.githubusercontent.com/72166134/169703340-2453b547-7d0f-44f9-ba39-84e489ffec86.png)
 
     - Material y Light
     
     Pruebas del paso de las diferentes componentes a la GPU tanto para la luz como para el meterial: 
     
     Componente difusa:
+    
     ![image](https://user-images.githubusercontent.com/72166134/169706326-74ad48cd-c8ce-4365-91f7-8aa089ef6544.png)
 
     Componente ambiental:
+    
     ![image](https://user-images.githubusercontent.com/72166134/169706490-d44411c2-2457-4c47-ae74-5a8a37631755.png)
     
     Componente Especular:
+    
     ![image](https://user-images.githubusercontent.com/72166134/169706639-0635dd63-04c7-4932-8ef0-b4ebf1dcd909.png)
 
-**Shading**
-        Depth 
+        **Shading**
+        
+        *Depth 
+        <br />
+        
         Imagen generada mediante el fichero f16.obj
         
-![image](https://user-images.githubusercontent.com/72166134/169707708-9097871c-9041-436f-9626-5bcdbba1fae8.png)
-
+        ![image](https://user-images.githubusercontent.com/72166134/169707708-9097871c-9041-436f-9626-5bcdbba1fae8.png)
+        <br />
          Imagen generada mediante el fichero sphere0.obj
          Kd =(0.8,0.5,0.5)
          Ka = (0.2,0.2,0.2)
@@ -299,8 +309,8 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
          Ia = (0.2,0.2,0.2)
          Luz Ambiente gloabl (0.3, 0.3, 0.3)
 
-
-         **Phong**
+        <br />
+         *Phong
 
          ![Captura de pantalla 2022-05-22 201906](https://user-images.githubusercontent.com/72166134/169709956-5dac2078-1035-48de-ba45-61cda0eb69a3.png)
 
@@ -308,13 +318,12 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
         ![image](https://user-images.githubusercontent.com/72166134/169710008-7f154f35-028f-49d6-b5e6-983e4148cfd9.png)
         
-        ![Captura de pantalla 2022-05-22 201954](https://user- images.githubusercontent.com/72166134/169709957-32d8e817-411b-4fbb-8fd9-e5412f3585a5.png)
+        ![Captura de pantalla 2022-05-22 201954](https://user-images.githubusercontent.com/72166134/169709957-32d8e817-411b-4fbb-8fd9-e5412f3585a5.png)
 
         
         -Toon-shading
-        ![image](https://user-images.githubusercontent.com/72166134/169707927-dea0e5ba-44ec-47fb-ae56-da53b164767b.png)
-    
-        ![image](https://user-images.githubusercontent.com/72166134/169708108-8150c990-9efc-4006-9c90-40ae865ad1d7.png)
+        
+
 
         - Texturas
           Textura con material en un objeto
