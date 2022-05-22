@@ -288,9 +288,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
         
 ![image](https://user-images.githubusercontent.com/72166134/169707708-9097871c-9041-436f-9626-5bcdbba1fae8.png)
 
-         Imagen generada mediante el fichero sphere0.obj:
-         <pre>
-
+         Imagen generada mediante el fichero sphere0.obj
          Kd =(0.8,0.5,0.5)
          Ka = (0.2,0.2,0.2)
          Ks =(1.,1.,1.)
@@ -300,7 +298,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
          Is = (1,1,1)
          Ia = (0.2,0.2,0.2)
          Luz Ambiente gloabl (0.3, 0.3, 0.3)
-         </pre>
+
 
          **Phong**
 
