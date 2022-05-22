@@ -294,26 +294,26 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
     - Shading
         
-    Depth
+    ### Depth
     Imagen generada mediante el fichero f16.obj
     
     ![image](https://user-images.githubusercontent.com/72166134/169710796-15e6e845-3719-4e73-a53d-78496f386e28.png)
     <br />
 
-    Phong
+    ### Phong
     
     ![Captura de pantalla 2022-05-22 201906](https://user-images.githubusercontent.com/72166134/169709956-5dac2078-1035-48de-ba45-61cda0eb69a3.png)
 
     ![Captura de pantalla 2022-05-22 201954](https://user-images.githubusercontent.com/72166134/169709957-32d8e817-411b-4fbb-8fd9-e5412f3585a5.png)
 
     
-    Gouraud
+    ### Gouraud
 
     ![image](https://user-images.githubusercontent.com/72166134/169710008-7f154f35-028f-49d6-b5e6-983e4148cfd9.png)
         
 
         
-    Toon-shading
+    ### Toon-shading
 
     ![image](https://user-images.githubusercontent.com/72166134/169711097-896a8ce1-71e5-4423-ba05-0dde7dd85ee6.png)
 
@@ -339,7 +339,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
 *(NOTA: Hores de dedicació i problemes que heu tingut fent la pràctica)*
 
-## Endimbeer Enrique Nuñez Matos
+### Endimbeer Enrique Nuñez Matos
 He empleado unas 4 horas a la semana, salvo en los últimos días en los cuales he dedicado prácticamente 2 o 3 días solo a la práctica. Mi principal problema han sido los errores con el orden en el cuál importaba las librerías que provocaban que el programa fallara. 
 
 También me costó la parte de texturas debido a que no controlaba si el fichero se había cargado o no. 
