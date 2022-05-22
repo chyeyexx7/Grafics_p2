@@ -160,6 +160,17 @@ En aquest apartat se'ns demana implementar 4 tipus de shading: Depth Shading, Go
 
 Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental global ja s'estan enviant des dels seus respectius mètodes toGpu. Per tant, el que falta és enviar les normals. Això ho haurem de fer des de 'Mesh.cpp'. Desde la Mesh calculem la normal a cada vèrtex a la CPU mitjançant un doble bucle for que passa per tots els vèrtex de totes les cares.
 
+<pre>
+    Index = 0;
+    for(unsigned int i=0; i<cares.size(); i++){
+        for(unsigned int j=0; j<cares[i].idxVertices.size(); j++){
+            points[Index] = vertexs[cares[i].idxVertices[j]];
+            normals[Index] = normalsVertexs[cares[i].idxNormals[j]];
+            Index++;
+        }
+    }
+</pre>
+
 Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode 'Mesh::toGPU(shared_ptr pr)' a 'glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)'.
 
 Finalment, un cop ja tenim totes les dades només queda implementar les fórmules de Phong, Gouraud, Depth i Toon als seus respectius shaders.
@@ -167,10 +178,10 @@ Finalment, un cop ja tenim totes les dades només queda implementar les fórmule
 * **Blinn Phong**
 ![image](https://user-images.githubusercontent.com/72156170/169694406-8484427b-c2fb-4c27-bfca-18545d3b8681.png)
 
-* Gouraud **
+* **Gouraud **
 En el cas de Gouraud, la diferència amb Phong és que en comptes de fer el càlcul de la Itotal al fshader, ho fem al vshader. D'aquesta manera aconseguim tenir el promig de les normals a cada vèrtex, aplica el model de Blinn-Phong a cadascus dels vèrtexs i interpolar les intensitats de cada vèrtex a cada polígon.
 
-* Toon shading **
+* **Toon shading **
 A Toon shading el que busquem és que els objectes tinguin una il·luminació similar a l'estil cartoon. Per aconseguir això calculem el producte entre el vector L (vector normalitzat entre la llum i el punt) i la normal i limitem el color resultant en quatre nivells amb una variable factorToon al fshader.
 <pre>
 toon = dot(L,N);
@@ -182,7 +193,7 @@ else if(toon<0.75)
 else if(toon >= 0.75)
     factorToon = 0.75;
 </pre>
-* Depth shading **
+* **Depth shading **
 Finalment, amb el Depth shading volem pintar en grisos la profunditat del triangle que s'ha rasteritzat en el píxel. Això ho aconseguim des de el fragment shader 'depth_fshader.glslde' la següent forma:
 
 <pre>
