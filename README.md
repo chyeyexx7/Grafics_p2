@@ -158,15 +158,7 @@ Finalment, la llum d'ambient global s'envia des de l'escena `setAmbientGlobalToG
   ### 4) Implementació dels diferents tipus de shading (depth, Gouraud, Phong i toon-shading)
 En aquest apartat se'ns demana implementar 4 tipus de shading: Depth Shading, Gouraud, Phong i Toon Shading. Per a aconseguir això el que haurem de fer és crear diferents parelles de shader de tipus Vèrtex i Fragment '.glsl' a '/resources'. En general, aquests shaders necessitaran la posició del punt, normals als vèrtex, les llums, els materials i la llum ambiental global.
 
-Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental global ja s'estan enviant des dels seus respectius mètodes toGpu. Per tant, el que falta és enviar les normals. Això ho haurem de fer des de 'Mesh.cpp'. Desde la Mesh calculem la normal a cada vèrtex a la CPU mitjançant un doble bucle for que passa per tots els vèrtex de totes les cares:
-
-<pre>
-for(unsigned int i=0; i<cares.size(); i++)
-    for(unsigned int j=0; j<cares[i].idxVertices.size(); j++)
-        points[Index] = vertexs[cares[i].idxVertices[j]];
-        normals[Index] = normalsVertexs[cares[i].idxNormals[j]];
-        Index++;
-</pre>
+Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental global ja s'estan enviant des dels seus respectius mètodes toGpu. Per tant, el que falta és enviar les normals. Això ho haurem de fer des de 'Mesh.cpp'. Desde la Mesh calculem la normal a cada vèrtex a la CPU mitjançant un doble bucle for que passa per tots els vèrtex de totes les cares.
 
 Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode 'Mesh::toGPU(shared_ptr pr)' a 'glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)'.
 
