@@ -87,7 +87,7 @@ El mètode 'toGPU' és el més interessant de tots, ja que és el que ens permet
 <pre>
 //Struct material a CPU <br />
 struct {<br />
-    &nbsp; GLuint kd; <br />
+    GLuint kd; <br />
     GLuint ks; <br />
     GLuint ka; <br />
     GLuint shine; <br />
@@ -108,6 +108,53 @@ uniform mtr material;<br />
 Llavors des del codi C++ el que fem és aconseguir els identificadors de la GPU per a cada dada de l'struct, com per exemple a `gl_material.kd = program->uniformLocation("material.Kd")`.
 
 A continuació, també desde la classe `Material.cpp` fem el bind de les zones de memòria que corresponen a la GPU a valors les variables de l'struct de la CPU, com per exemple a `glUniform3fv(gl_material.kd, 1, Kd)`.
+
+  ### 3) Modificació de la classe llum i pas a la GPU
+De forma molt similar al material del pas anterior, en aquest se'ns demana basar-nos en la classe 'Light' de la pràctica de 'Raytracing' i afegir el codi necessari per poder passar les seves dades (Components especular, ambiental i difusa...) als shaders de la GPU. 
+
+A més, tindrem dos tipus de llums, `Puntuals` i `Direccionals`. Les llums puntuals no tenen dimensió, ni direcció (emeten en forma radial). Es caracteritzen per la posició i la seva emissió (o intensitat). Per altra banda les llums direccionals tenen un focus a l'infinit i es caracteritzen per la seva direcció i intensitat.
+
+Aquests dos tipus de llum (també hi ha un tercer tipus `Spot` opcional que NO hem implementat) no s'implementen mitjançant una jerarquia de classes que heredi de `Lihgt.h` com a la pràctica anterior, sino que dintre de Light tenim definit un LightType de tipus enum que ens permet saber si la llum es Puntual o Direccional. Per tant tindrem un constructor comú als diferents tipus de llum i una llista de llums a l'escena, que s'afegeixen desde el métode `initializeGL` a `GLWidget`.
+
+Finalment, per enviar les dades a la GPU el procés és exactament el mateix que amb el material en quant a la definició dels structs:
+
+
+
+<pre>
+//Struct llums a CPU <br />
+struct lightsid
+{
+    GLuint type; <br />
+    GLuint lightIS; <br />
+    GLuint lightID; <br />
+    GLuint lightIA; <br />
+    GLuint coeficients; <br />
+    GLuint lightPosition; <br />
+    GLuint lightDirection; <br />
+};
+lightsid gl_IdLightsVec[MAX];
+
+//Struct llums a GPU
+struct lightsGpu
+{
+    int lightType_gpu; <br />
+    vec3 lightIS_gpu; <br />
+    vec3 lightID_gpu; <br />
+    vec3 lightIA_gpu; <br />
+    vec3 coeficients_gpu; <br />
+    vec4 lightPosition_gpu; <br />
+    vec4 lightDirection_gpu; <br />
+};
+uniform lightsGpu lights[1];
+</pre>
+
+Llavors des del codi C++ el que fem és aconseguir els identificadors de la GPU per a cada dada de l'struct, com per exemple a `    gl_IdLightsVec[i].type = program->uniformLocation(QString("lights[%1].lightType_gpu").arg(i))`.
+
+A continuació, també desde la classe `Light.cpp` fem el bind de les zones de memòria que corresponen a la GPU a valors les variables de l'struct de la CPU, com per exemple a `glUniform1i(gl_IdLightsVec[i].type, this->typeLight)`.
+
+Per altra banda, és important tenir en compte que el mètode 'Light::LightsToGPU' es crida a 'Scene::lightsToGPU'. El que fem és un bucle a 'Scene.cpp' que passa per totes les llums de la seva llista i per cada una d'elles crida al seu mètode LightsToGPU. I el mètode 'Scene::lightsToGPU' es crida des de 'GLWidget::initializeGL()' i també al mètode general toGpu de Scene.cpp (on a part de les llums també s'envia la informació dels objectes de la llista. 
+
+Finalment, la llum d'ambient global s'envia des de l'escena 'setAmbientGlobalToGPU(shared_ptr program)' a 'GLWidget::initializeGL()' i el toGpu de l'escena es crida també a GLWidget des de updateObject (cada vegada que carreguem un objecte), updateScene i activaShader (cada vegada que canviem de shader).
 
 **Screenshots**
 
