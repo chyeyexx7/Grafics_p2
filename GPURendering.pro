@@ -18,9 +18,9 @@ SOURCES += \
     Modelling/Materials/ColorMapStatic.cpp \
     Modelling/Materials/Material.cpp \
     Modelling/Objects/Cara.cpp \
+    Modelling/Objects/Cub.cpp \
     Modelling/Objects/Mesh.cpp \
     Modelling/Objects/Plane.cpp \
-    Modelling/Objects/object.cpp \
     Modelling/Scene.cpp \
     Modelling/TG/TG.cpp \
     Modelling/TG/TranslateTG.cpp \
@@ -42,6 +42,7 @@ HEADERS += \
     Modelling/Materials/ColorMapStatic.h \
     Modelling/Materials/Material.h \
     Modelling/Objects/Cara.h \
+    Modelling/Objects/Cub.h \
     Modelling/Objects/Mesh.h \
     Modelling/Objects/Plane.h \
     Modelling/Objects/object.h \
@@ -74,6 +75,8 @@ DISTFILES += \
     libWin32/glut32.dll \
     libWin32/glut32.lib \
     resources/README.fst \
+    resources/cub_fshader.glsl \
+    resources/cub_vshader.glsl \
     resources/fshader1.glsl \
     resources/gouraud_fshader.glsl \
     resources/gouraud_vshader.glsl \
