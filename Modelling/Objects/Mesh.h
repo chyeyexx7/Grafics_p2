@@ -63,7 +63,6 @@ public:
     Mesh(const int npoints, QString n);
     ~Mesh();
 
-
     void setMaterial(shared_ptr<Material> m);
     void parseObjFile(const QString &fileName);
     void toGPUTexture(shared_ptr<QGLShaderProgram> pr);

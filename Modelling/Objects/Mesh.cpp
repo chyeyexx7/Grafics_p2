@@ -83,7 +83,6 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
     //Textures
     glBufferSubData(GL_ARRAY_BUFFER, sizeof(point4)*Index * 2,sizeof(vec2) * Index,textures);
 
-    qDebug() << "Buffer asignado";
 
 
     // set up vertex arrays
@@ -93,7 +92,6 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
 
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0,  (void*)(sizeof(point4)*Index));
     glEnableVertexAttribArray(1);
-    qDebug() << "Antes de habilitar texturas ";
 
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0,  (void*)(2*sizeof(point4)*Index));
     glEnableVertexAttribArray(2);
@@ -101,7 +99,6 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
     glEnable( GL_DEPTH_TEST );
     glEnable(GL_TEXTURE_2D);
 
-    qDebug() << "Después de habilitar texturas ";
 
 }
 
@@ -119,7 +116,6 @@ void Mesh::draw(){
 
     this->material->toGPU(program);
     if(texture){
-        qDebug()<<"Envio a GPU TEXT";
         this->toGPUTexture(program);
     }
     glBindVertexArray( vao );
@@ -146,21 +142,12 @@ void Mesh::make(){
     // TO  DO: A modificar a la fase 1 de la practica 2
     // Cal calcular la normal a cada vertex a la CPU
 
-    /*
-    static vec3  base_colors[] = {
-        vec3( 1.0, 0.0, 0.0 ),
-        vec3( 0.0, 1.0, 0.0 ),
-        vec3( 0.0, 0.0, 1.0 ),
-        vec3( 1.0, 1.0, 0.0 )
-    };*/
-
     Index = 0;
     for(unsigned int i=0; i<cares.size(); i++){
         for(unsigned int j=0; j<cares[i].idxVertices.size(); j++){
             points[Index] = vertexs[cares[i].idxVertices[j]];
             normals[Index] = normalsVertexs[cares[i].idxNormals[j]];
             if(hasTexture){
-                qDebug() << "Prueba";
                 textures[Index] = textVertexs[cares[i].idxTextures[j]];
             }
 
@@ -186,7 +173,7 @@ void Mesh::initTexture()
     qDebug() << "Initializing textures...";
 
 
-    qDebug() << "Initializing 222 textures...";
+    qDebug() << "Initializing textures...";
     glActiveTexture(GL_TEXTURE0);
     texture->setWrapMode(QOpenGLTexture::Repeat);
     texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
