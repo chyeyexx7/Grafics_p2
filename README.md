@@ -235,10 +235,27 @@ void Mesh::toGPUTexture(shared_ptr<QGLShaderProgram> pr){
 
 Desde `text_phong_vshader.glsl` rebem les coordenades i les pasem al fragment shader `text_phong_fshader.glsl`:
 <pre>
-layout (location = 2) in vec2 vCoordTexture;
+layout (location = 2) 
+in vec2 vCoordTexture;
 out vec2 v_texcoord;
+...
 v_texcoord = vCoordTexture;
 </pre>
+
+Finalment, desde `text_phong_fshader.glsl` simplement rebem les coordenades de textura i la textura texMap i ho afegim a la component difusa de Blinn Phong de la següent manera:
+<pre>
+out vec4 colorOut;
+uniform sampler2D texMap;
+...
+
+idkd = lights[i].lightID_gpu * (texture(texMap, v_texcoord).rgb)  * max(dot(N,L), 0.0);
+isks = lights[i].lightIS_gpu * material.Ks * pow(max(dot(N,H), 0.0), material.shininess);
+iaka = lights[i].lightIA_gpu * material.Ka;
+//Para hacer pruebas con los ejemplos del campus hemos quitado la atenuación de la fórmula de phong
+//Itotal += ((idkd + isks)/attenuation) + iaka;
+Itotal += ((idkd + isks)/attenuation) + iaka;
+</pre>
+
 
 **Screenshots**
 
