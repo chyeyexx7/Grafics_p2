@@ -20,6 +20,7 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
         - [x] Objectes
           - Endimbeer Enrique Nuñez Matos
           - Chang Ye
+          - Noel Vázquez Caparrós
         - [x] Escenes virtuals
           - Noel Vázquez Caparrós
           - Chang Ye
