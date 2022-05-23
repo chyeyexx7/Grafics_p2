@@ -335,9 +335,14 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     <br/>
 
 
-    Entorn amb textures
+    Entorn amb textura (CubeMap)
     
     ![image](https://user-images.githubusercontent.com/72166134/169711246-98bcbd2c-9c4d-4ff9-9986-a961662801ea.png)
+    
+    Ènfasi de siluetes
+    
+    ![image](https://user-images.githubusercontent.com/72078368/169883339-30d88056-aed8-46a6-909f-7ec40982d450.jpg)
+
 
 
 
@@ -352,9 +357,9 @@ He empleado unas 4 horas a la semana, salvo en los últimos días en los cuales 
 También me costó la parte de texturas debido a que no controlaba si el fichero se había cargado o no. 
 
 ### Chang Ye
-Alrededor de 3 o 4 horas (sin contar las de laboratorio) a la semana, aunque durante la última semana he estado 3 días seguidas (10h diarias). 
+Unes 3 o 4 hores a la setmana + 2 hores de laboratori, encara que durant la última setmana vaig dedicar més temps.
 
-Unos de los problemas principales que tuve era al hacer el <pre>Environment Mapping</pre>, el QTCreator siempre me daba muchos errores en los pasos de enviar la información a la GPU y la creación de los triangulos para el cubo. Al parecer, dependiendo de como añadamos los vértices en la matriz, el programa hace una cosa u otra y siempre crasheaba. No sabemos porqué, pero algunas veces el programa se ejecuta sin problemas y otras veces crashea por algún problema que no hemos conseguido resolver.
+Uns dels problemes que vaig tenir va ser a l'hora de fer <pre>Environment Mapping</pre>, ja que el QTCreator no em indicava exactament on teniem l'error. L'error va ser un problema de l'espai reservat a l'hora de inicialitzar el Cub, perquè vaig assignar 8 punts a la constructura de Mesh i necessitava 36 puts.
 
 ### Pau Rodríguez Trens
 Unes 3 hores a la setmana + 2 hores de laboratori a classe i una mica més durant els darrers dies abans del lliurament. Sobretot m'he encarregat d'implementar tot allò relacionat amb la llum, fer proves per enviar normals i també fer el pas de dades a la GPU.
