@@ -274,8 +274,6 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     
     ![image](https://user-images.githubusercontent.com/72166134/169711331-434f4141-9250-4c06-bd71-48024f6528de.png)
     
-
-    
     - Material y Light
      <br/>   
     Pruebas del paso de las diferentes componentes a la GPU tanto para la luz como para el material: 
@@ -292,6 +290,13 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     
     ![image](https://user-images.githubusercontent.com/72166134/169706639-0635dd63-04c7-4932-8ef0-b4ebf1dcd909.png)
 
+
+    Paso de las normales:
+    
+    <img width="215" alt="image" src="https://user-images.githubusercontent.com/72166134/169840524-af632713-99ff-4f01-9623-7cfb9f8513da.png">
+
+    
+    
     - Shading
         
     ### Depth
