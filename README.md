@@ -348,3 +348,12 @@ También me costó la parte de texturas debido a que no controlaba si el fichero
 Alrededor de 3 o 4 horas (sin contar las de laboratorio) a la semana, aunque durante la última semana he estado 3 días seguidas (10h diarias). 
 
 Unos de los problemas principales que tuve era al hacer el <pre>Environment Mapping</pre>, el QTCreator siempre me daba muchos errores en los pasos de enviar la información a la GPU y la creación de los triangulos para el cubo. Al parecer, dependiendo de como añadamos los vértices en la matriz, el programa hace una cosa u otra y siempre crasheaba. No sabemos porqué, pero algunas veces el programa se ejecuta sin problemas y otras veces crashea por algún problema que no hemos conseguido resolver.
+
+### Pau Rodríguez Trens
+Unes 3 hores a la setmana + 2 hores de laboratori a classe i una mica més durant els darrers dies abans del lliurament. Sobretot m'he encarregat d'implementar tot allò relacionat amb la llum, fer proves per enviar normals i també fer el pas de dades a la GPU.
+
+D'altra banda, també vaig estar fent els dos primers Shaders (Phong i Gouraud). Per fer Phong simplement vaig prendre com a base la fórmula que ja havíem implementat a la pràctica 1 però aquesta vegada posant-la al Fragment Shader.
+
+Per Gouraud sí que vaig tenir algun dubte al principi, ja que no tenia molt clar a quin shader fer el càlcul (vertex o fragment) però revisant la teoria sí que vaig veure que havia de ser en el Vertex Shader.
+
+Tant amb Gouraud com amb Phong vaig tenir bastants problemes per poder activar aquests Shaders des de GLWidget. Originalment, només teníem un únic programa definit a GLWidget.h, però el vaig haver de canviar per tenir una llista i poder guardar les parelles de shaders vertex-fragment. El probelma es que desde Phong cridava un struct amb un nom incorrecte i com el compilador no m'avisava vaig perdre molt de temps buscant-lo. A part d'això, no vaig tenir gaires problemes amb la meva part.
