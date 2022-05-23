@@ -179,14 +179,16 @@ Finalment, un cop ja tenim totes les dades només queda implementar les fórmule
 * Toon shading
 <br />A Toon shading el que busquem és que els objectes tinguin una il·luminació similar a l'estil cartoon. Per aconseguir això calculem el producte entre el vector L (vector normalitzat entre la llum i el punt) i la normal i limitem el color resultant en quatre nivells amb una variable factorToon al fshader.
 <pre>
-toon = dot(L,N);
+toon = dot(light_direction, normal);
 
-if(toon>=0.25 && toon<=0.5)
-    factorToon = 0.25;
-else if(toon<0.75)
-    factorToon = 0.50;
-else if(toon >= 0.75)
-    factorToon = 0.75;
+if(toon > 0.75)
+    color = vec4(1.0, 0.5, 0.5, 1.0);
+else if(toon > 0.5)
+    color = vec4(0.6, 0.3, 0.3, 1.0);
+else if(toon > 0.25)
+    color = vec4(0.4, 0.2, 0.2, 1.0);
+else
+    color = vec4(0.2, 0.1, 0.1, 1.0);
 </pre>
 * Depth shading
 <br />Finalment, amb el Depth shading volem pintar en grisos la profunditat del triangle que s'ha rasteritzat en el píxel. Això ho aconseguim des de el fragment shader 'depth_fshader.glslde' la següent forma:
@@ -320,7 +322,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
         
     ### Toon-shading
 
-    ![image](https://user-images.githubusercontent.com/72166134/169711097-896a8ce1-71e5-4423-ba05-0dde7dd85ee6.png)
+    ![image](https://user-images.githubusercontent.com/72078368/169876279-c7298097-80e0-46ee-9a2c-5be58f4f0ecc.jpg)
 
 
     - Texturas
