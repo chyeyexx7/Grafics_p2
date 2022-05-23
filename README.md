@@ -181,7 +181,7 @@ Finalment, un cop ja tenim totes les dades només queda implementar les fórmule
 <pre>
 toon = dot(light_direction, normal);
 
-if(toon > 0.75)
+if(toon > 0.95)
     color = vec4(1.0, 0.5, 0.5, 1.0);
 else if(toon > 0.5)
     color = vec4(0.6, 0.3, 0.3, 1.0);
