@@ -397,3 +397,11 @@ D'altra banda, també vaig estar fent els dos primers Shaders (Phong i Gouraud).
 Per Gouraud sí que vaig tenir algun dubte al principi, ja que no tenia molt clar a quin shader fer el càlcul (vertex o fragment) però revisant la teoria sí que vaig veure que havia de ser en el Vertex Shader.
 
 Tant amb Gouraud com amb Phong vaig tenir bastants problemes per poder activar aquests Shaders des de GLWidget. Originalment, només teníem un únic programa definit a GLWidget.h, però el vaig haver de canviar per tenir una llista i poder guardar les parelles de shaders vertex-fragment. El probelma es que desde Phong cridava un struct amb un nom incorrecte i com el compilador no m'avisava vaig perdre molt de temps buscant-lo. A part d'això, no vaig tenir gaires problemes amb la meva part.
+
+### Noel Vázquez Caparrós
+
+Les hores que vam tenir disponibles de practiques a laboratori, dues hores setmanals, només podia treballar allà perque la instalació del qt a casa em donava problemes
+
+Vam perdre algunes hores de laboratori, perque el projecte no era compatible amb les versions de laboratori, i despres van haver uns dies que no es podia treballar perque havien instalat uns orinadors sense linux ni qt
+
+He dedicat el meu temps principalment a l'escena virtual i a l'escena de dades. Els problemes que tenim sempre son perque els atributs es guarden d'alguna manera que no sabem dins el json, o en el cas del real data, s'ens fa complicat treballar perque el projecte no mostra correctament el que esperem
