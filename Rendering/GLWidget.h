@@ -87,6 +87,9 @@ protected:
     void saveFrame();
 private:
     shared_ptr<Scene>  scene; // Escena que es pinta al GLWidget
+    enum ShaderType {DEPTH, PHONG, GOURAUD, TOON, TEXT_PHONG, CUBEMAP};
+    ShaderType currentShader;
+    bool cubeTexture = true;
 
     QTimer *timer;
     unsigned int currentFrame;
@@ -101,6 +104,6 @@ private:
     void initShadersGPU();
     void updateShader();
     void updateShaderTexture();
-    bool cubeTexture = true;
+    void useShader(ShaderType s);
 };
 

@@ -5,20 +5,21 @@ Cub::Cub(): Cub(10.0)
     qDebug() <<"Estic en el constructor del cub\n";
 }
 
-// Constructora amb tots els parametres, un cub té 8 punts
-Cub::Cub(float p): Mesh(8)
+// Constructora amb tots els parametres, un cub té 36 punts
+Cub::Cub(float p): Mesh(36)
 {
     qDebug() <<"Estic en el constructor parametritzat del cub\n";
 
     /**
         Definimos las coordenadas de los 8 vértices del cubo usando p como punto 0,0,0 del escenario
-        n sentido reloj, empezando desde -xyz, parte de arriba primero
-              v1/--------/v2
-               /|       /|
-            v5/--------/v6
-              | |v0    | |
-              |/-------|-/v3
-              |--------|/
+        n sentido reloj, empezando desde (-x,-y,z), parte de arriba primero
+                 _________
+              v1/        /|v2
+               /|       / |
+            v5/--------/v6|
+              | |______|__|
+              |/ v0    | /v3
+              |________|/
              v4        v7
 
       **/

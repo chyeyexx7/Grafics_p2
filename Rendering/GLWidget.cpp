@@ -40,9 +40,7 @@ void GLWidget::initializeGL() {
     //Inicializamos la lista de shaders
     initShadersGPU();
     //Indicamos que shader de la lista queremos utilizar
-    program = shader_list[2];
-    shader_list[2]->link();
-    shader_list[2]->bind();
+    useShader(ShaderType::PHONG);
 
     // Creacio d'una Light per a poder modificar el seus valors amb la interficie
     auto l  = make_shared<Light>(Puntual);
@@ -65,18 +63,19 @@ void GLWidget::paintGL() {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    qDebug() << scene->CUBEMAP;
     if (scene->CUBEMAP) {
+        useShader(ShaderType::CUBEMAP);
         if (cubeTexture) {
             // Seteamos textura de cub una única vez
             scene->cub->initTextura();
-            qDebug() << "init";
             cubeTexture = false;
         }
         scene->camera->toGPU(program);
         scene->cub->toGPU(program);
         scene->cub->draw();
+        useShader(currentShader);
     }
+    scene->toGPU(program);
     scene->camera->toGPU(program);
     scene->draw();
     qDebug() << "paint";
@@ -204,27 +203,31 @@ void GLWidget::saveAnimation() {
 void GLWidget::activaDepthShader() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Depth";
-    program = shader_list[0];
+    currentShader = ShaderType::DEPTH;
+    useShader(currentShader);
     updateShader();
 }
 
 void GLWidget::activaGouraudShader() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Gouraud";
-    program = shader_list[2];
+    currentShader = ShaderType::GOURAUD;
+    useShader(currentShader);
     updateShader();
 
 }
 void GLWidget::activaPhongShader() {
     //Opcional: A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Phong";
-    program = shader_list[1];
+    currentShader = ShaderType::PHONG;
+    useShader(currentShader);
     updateShader();
 }
 void GLWidget::activaToonShader() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Toon";
-    program = shader_list[3];
+    currentShader = ShaderType::PHONG;
+    useShader(currentShader);
     updateShader();
 
 }
@@ -232,7 +235,8 @@ void GLWidget::activaToonShader() {
 void GLWidget::activaPhongTex() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Phong Tex";
-    program = shader_list[4];
+    currentShader = ShaderType::TEXT_PHONG;
+    useShader(currentShader);
     updateShader();
 
 }
@@ -250,14 +254,11 @@ void GLWidget::activaBumpMapping() {
 void GLWidget::activaEnvMapping() {
     //TO DO: a implementar a la fase 2 de la practica 2
     qDebug()<<"Estic a Environmental Mapping";
-    qDebug()<< scene->CUBEMAP;
     if (scene->CUBEMAP == false) {
         scene->cub = make_shared<Cub>();
         scene->CUBEMAP = true;
     }
-    qDebug() << scene->CUBEMAP;
-    qDebug()<<"Estic a Environmental Mapping2";
-    program = shader_list[5];
+    useShader(ShaderType::CUBEMAP);
     updateShader();
 }
 
@@ -268,8 +269,6 @@ void GLWidget::activaTransparency() {
 
 //Metode  per canviar de shaders.
 void GLWidget::updateShader(){
-    program->link();
-    program->bind();
     scene->toGPU(program);
     updateGL();
 }
@@ -423,5 +422,32 @@ void GLWidget::Zoom (int positiu) {
     emit FrustumCameraChanged(scene->camera);
 
     updateGL();
+}
+
+void GLWidget::useShader(ShaderType s) {
+    switch (s) {
+        case DEPTH:
+            program = shader_list[0];
+            break;
+        case PHONG:
+            program = shader_list[1];
+            break;
+        case GOURAUD:
+            program = shader_list[2];
+            break;
+        case TOON:
+            program = shader_list[3];
+            break;
+        case TEXT_PHONG:
+            program = shader_list[4];
+            break;
+        case CUBEMAP:
+            program = shader_list[5];
+            break;
+        default:
+            program = shader_list[1];
+    }
+    program->link();
+    program->bind();
 }
 
