@@ -366,7 +366,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     
     ![image](https://user-images.githubusercontent.com/72166134/169711246-98bcbd2c-9c4d-4ff9-9986-a961662801ea.png)
     
-    Ènfasi de siluetes
+    Ènfasi de siluetes amb Toon shading
     
     ![image](https://user-images.githubusercontent.com/72078368/169883339-30d88056-aed8-46a6-909f-7ec40982d450.jpg)
 
