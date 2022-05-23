@@ -265,13 +265,31 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
 *(NOTA: Captures de pantalla de les proves que heu fet per a demostrar la funcionalitat de la vostra pràctica amb explicacions de la seva configuració i com les heu aconseguides)*
 
+<prev>
+    Per fer les proves hem utilitzat la configuració següent: 
+
+    Material
+    Kd =(0.8,0.5,0.5)
+    Ka = (0.2,0.2,0.2)
+    Ks = (1.,1.,1.)
+    shineness 20
+
+    llum puntual situada a la posició (10, 10, 20)
+    Id= (0.8,0.8,0.8)
+    Is = (1,1,1)
+    Ia = (0.2,0.2,0.2), sense atenuació;
+    la llum ambient global a (0.3, 0.3, 0.3)
+</prev>
+
+
+
 - Fase 1
 
-    - Adaptación a la lectura de ficheros de datos
+    - Adaptació a la lectura de fitxers de dades
     
     <br/>
-    Escenas virtuales y lectura de objetos desde un fichero JSON
-    Escena compuesta por las figuras de armadillo y el avión F16. 
+    Escenes virtuals 
+    Escena composta per les figures d'armadillo.obj i f16.obj. 
 
     
     ![image](https://user-images.githubusercontent.com/72166134/169711331-434f4141-9250-4c06-bd71-48024f6528de.png)
@@ -280,20 +298,20 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
      <br/>   
     Pruebas del paso de las diferentes componentes a la GPU tanto para la luz como para el material: 
     
-    Componente difusa:
+    Component difosa:
     
     ![image](https://user-images.githubusercontent.com/72166134/169706326-74ad48cd-c8ce-4365-91f7-8aa089ef6544.png)
 
-    Componente ambiental:
+    Component ambiental:
     
     ![image](https://user-images.githubusercontent.com/72166134/169706490-d44411c2-2457-4c47-ae74-5a8a37631755.png)
     
-    Componente Especular:
+    Component Especular:
     
     ![image](https://user-images.githubusercontent.com/72166134/169706639-0635dd63-04c7-4932-8ef0-b4ebf1dcd909.png)
 
 
-    Paso de las normales:
+    Pas de les normals:
     
     <img width="215" alt="image" src="https://user-images.githubusercontent.com/72166134/169840524-af632713-99ff-4f01-9623-7cfb9f8513da.png">
 
@@ -325,8 +343,8 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     ![image](https://user-images.githubusercontent.com/72078368/169876279-c7298097-80e0-46ee-9a2c-5be58f4f0ecc.jpg)
 
 
-    - Texturas
-    Textura con material en un objeto
+    - Textures
+    Textura amb material en un únic objecte
 
     ![Captura de pantalla 2022-05-22 201019](https://user-images.githubusercontent.com/72166134/169709729-9d162c10-6704-44e8-8ffd-d279a2082bb1.png)
     
