@@ -226,7 +226,7 @@ void GLWidget::activaPhongShader() {
 void GLWidget::activaToonShader() {
     //A implementar a la fase 1 de la practica 2
     qDebug()<<"Estic a Toon";
-    currentShader = ShaderType::PHONG;
+    currentShader = ShaderType::TOON;
     useShader(currentShader);
     updateShader();
 
