@@ -359,7 +359,7 @@ También me costó la parte de texturas debido a que no controlaba si el fichero
 ### Chang Ye
 Unes 3 o 4 hores a la setmana + 2 hores de laboratori, encara que durant la última setmana vaig dedicar més temps.
 
-Uns dels problemes que vaig tenir va ser a l'hora de fer 'Environment Mapping', ja que el QTCreator no em indicava exactament on teniem l'error. L'error va ser un problema de l'espai reservat a l'hora de inicialitzar el Cub, perquè vaig assignar 8 punts a la constructura de Mesh i necessitava 36 puts.
+Uns dels problemes que vaig tenir va ser a l'hora de fer `Environment Mapping` `Environment Mapping`, ja que el QTCreator no em indicava exactament on teniem l'error. L'error va ser un problema de l'espai reservat a l'hora de inicialitzar el Cub, perquè vaig assignar 8 punts a la constructura de Mesh i necessitava 36 puts.
 
 ### Pau Rodríguez Trens
 Unes 3 hores a la setmana + 2 hores de laboratori a classe i una mica més durant els darrers dies abans del lliurament. Sobretot m'he encarregat d'implementar tot allò relacionat amb la llum, fer proves per enviar normals i també fer el pas de dades a la GPU.
