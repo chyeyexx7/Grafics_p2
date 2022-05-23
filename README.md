@@ -72,6 +72,8 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
 
   * **Organització de la pràctica**
         * Hem dividit els diferents apartats de la pràctica en parelles amb l'objectiu de poder ajudar-nos amb els dubtes. També hem realitzat sessions de pair programming per poder afrontar alguns apartats. 
+
+## Fase 1
   ### 1) Construcció de l’escena virtual a partir de fitxers .obj, dades virtuals o dades geolocalitzades (adaptació del codi de la pràctica 1)
 El primer que hem fet és afegir el codi necessari a la classe Builder per poder llegir un `.json` que contingui la informació necessària per crear una escena virtual. 
 
@@ -110,11 +112,11 @@ Llavors des del codi C++ el que fem és aconseguir els identificadors de la GPU 
 A continuació, també desde la classe `Material.cpp` fem el bind de les zones de memòria que corresponen a la GPU a valors de les variables de l'struct de la CPU, com per exemple a `glUniform3fv(gl_material.kd, 1, Kd)`.
 
   ### 3) Modificació de la classe llum i pas a la GPU
-De forma molt similar al material del pas anterior, en aquest se'ns demana basar-nos en la classe `Light` de la pràctica de 'Raytracing' i afegir el codi necessari per poder passar les seves dades (Components especular, ambiental i difusa...) als shaders de la GPU. 
+De forma molt similar al material del pas anterior, en aquest se'ns demana basar-nos en la classe `Light` de la pràctica de `Raytracing` i afegir el codi necessari per poder passar les seves dades (Components especular, ambiental i difusa...) als shaders de la GPU. 
 
 A més, tindrem dos tipus de llums, `Puntuals` i `Direccionals`. Les llums puntuals no tenen dimensió, ni direcció (emeten en forma radial). Es caracteritzen per la posició i la seva emissió (o intensitat). Per altra banda les llums direccionals tenen un focus a l'infinit i es caracteritzen per la seva direcció i intensitat.
 
-Aquests dos tipus de llum (també hi ha un tercer tipus 'Spot' opcional que NO hem implementat) no s'implementen mitjançant una jerarquia de classes que hereti de `Lihgt.h` com a la pràctica anterior, sino que dintre de Light tenim definit un LightType de tipus enum que ens permet saber si la llum es Puntual o Direccional. Per tant tindrem un constructor comú als diferents tipus de llum i una llista de llums a l'escena, que s'afegeixen desde el métode `initializeGL` a `GLWidget`.
+Aquests dos tipus de llum (també hi ha un tercer tipus `Spot` opcional que NO hem implementat) no s'implementen mitjançant una jerarquia de classes que hereti de `Lihgt.h` com a la pràctica anterior, sino que dintre de Light tenim definit un LightType de tipus enum que ens permet saber si la llum es Puntual o Direccional. Per tant tindrem un constructor comú als diferents tipus de llum i una llista de llums a l'escena, que s'afegeixen desde el métode `initializeGL` a `GLWidget`.
 
 Finalment, per enviar les dades a la GPU el procés és exactament el mateix que amb el material en quant a la definició dels structs:
 
@@ -156,7 +158,7 @@ Per altra banda, és important tenir en compte que el mètode `Light::LightsToGP
 Finalment, la llum d'ambient global s'envia des de l'escena `setAmbientGlobalToGPU(shared_ptr program)` a `GLWidget::initializeGL()` i el toGpu de l'escena es crida també a `GLWidget` des de `updateObject` (cada vegada que carreguem un objecte), `updateScene` i `activaShader` (cada vegada que canviem de shader).
 
   ### 4) Implementació dels diferents tipus de shading (depth, Gouraud, Phong i toon-shading)
-En aquest apartat se'ns demana implementar 4 tipus de shading: Depth Shading, Gouraud, Phong i Toon Shading. Per a aconseguir això el que haurem de fer és crear diferents parelles de shader de tipus Vèrtex i Fragment '.glsl' a '/resources'. En general, aquests shaders necessitaran la posició del punt, normals als vèrtex, les llums, els materials i la llum ambiental global.
+En aquest apartat se'ns demana implementar 4 tipus de shading: Depth Shading, Gouraud, Phong i Toon Shading. Per a aconseguir això el que haurem de fer és crear diferents parelles de shader de tipus Vèrtex i Fragment `.glsl` a `/resources`. En general, aquests shaders necessitaran la posició del punt, normals als vèrtex, les llums, els materials i la llum ambiental global.
 
 Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental global ja s'estan enviant des dels seus respectius mètodes toGpu. Per tant, el que falta és enviar les normals. Això ho haurem de fer des de 'Mesh.cpp'. Desde la Mesh calculem la normal a cada vèrtex a la CPU mitjançant un doble bucle for que passa per tots els vèrtex de totes les cares.
 
@@ -165,7 +167,7 @@ Tal com hem explicat anteriorment, les llums, els materials i la llum ambiental 
     normals[Index] = normalsVertexs[cares[i].idxNormals[j]];
 </pre>
 
-Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode 'Mesh::toGPU(shared_ptr pr)' a 'glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)'.
+Per altra banda, un cop calculades enviem les normals a la GPU amb el mètode `Mesh::toGPU(shared_ptr pr)` a `glBufferSubData( GL_ARRAY_BUFFER, sizeof(point4)*Index, sizeof(point4)*Index, normals)`.
 
 Finalment, un cop ja tenim totes les dades només queda implementar les fórmules de Phong, Gouraud, Depth i Toon als seus respectius shaders.
 
@@ -191,7 +193,7 @@ else
     color = vec4(0.2, 0.1, 0.1, 1.0);
 </pre>
 * Depth shading
-<br />Finalment, amb el Depth shading volem pintar en grisos la profunditat del triangle que s'ha rasteritzat en el píxel. Això ho aconseguim des de el fragment shader 'depth_fshader.glslde' la següent forma:
+<br />Finalment, amb el Depth shading volem pintar en grisos la profunditat del triangle que s'ha rasteritzat en el píxel. Això ho aconseguim des de el fragment shader `depth_fshader.glsl` de la següent forma:
 
 <pre>
 
@@ -235,7 +237,7 @@ void Mesh::toGPUTexture(shared_ptr<QGLShaderProgram> pr){
 }
 </pre>
 
-Des de 'text_phong_vshader.glsl' rebem les coordenades i les passem al fragment shader 'text_phong_fshader.glsl':
+Des de `text_phong_vshader.glsl` rebem les coordenades i les passem al fragment shader `text_phong_fshader.glsl`:
 
 <pre>
 layout (location = 2) 
@@ -245,7 +247,7 @@ out vec2 v_texcoord;
 v_texcoord = vCoordTexture;
 </pre>
 
-Finalment, des de 'text_phong_fshader.glsl' simplement rebem les coordenades de textura i la textura 'texMap' que ens ha passat el vèrtex shader i ho afegim a la component difusa de Blinn Phong de la següent manera:
+Finalment, des de `text_phong_fshader.glsl` simplement rebem les coordenades de textura i la textura `texMap` que ens ha passat el vèrtex shader i ho afegim a la component difusa de Blinn Phong de la següent manera:
 
 <pre>
 out vec4 colorOut;
@@ -259,6 +261,13 @@ iaka = lights[i].lightIA_gpu * material.Ka;
 //Itotal += ((idkd + isks)/attenuation) + iaka;
 Itotal += ((idkd + isks)/attenuation) + iaka;
 </pre>
+
+## Fase 2
+
+### 1) Environment mapping
+    TO DO
+### 2) Ènfasi de siluetes
+     TO DO
 
 
 **Screenshots**
