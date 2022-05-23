@@ -12,8 +12,7 @@ Mesh::Mesh(int npoints, QObject *parent) : QObject(parent){
     normals= new point4[numPoints];
     colors = new point4[numPoints];
     textures = new vec2[numPoints];
-    make();
-    qDebug() << "Mesh constructor 1";
+    this->material = make_shared<Material> ();
 }
 
 /**
