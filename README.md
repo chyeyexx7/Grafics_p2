@@ -53,8 +53,7 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
           
 
 - Fase 2 
-    - [x] Èmfasi de siluetes
-    - Chang Ye
+    - [ ] Èmfasi de siluetes
     - [ ] Mapping indirecte de textures
     - [ ] Animacions amb dades temporals
     - [ ] Normal mapping
@@ -353,9 +352,10 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 *(NOTA: Hores de dedicació i problemes que heu tingut fent la pràctica)*
 
 ### Endimbeer Enrique Nuñez Matos
-He empleado unas 4 horas a la semana, salvo en los últimos días en los cuales he dedicado prácticamente 2 o 3 días solo a la práctica. Mi principal problema han sido los errores con el orden en el cuál importaba las librerías que provocaban que el programa fallara. 
 
-También me costó la parte de texturas debido a que no controlaba si el fichero se había cargado o no. 
+He fet servir unes 4 hores a la setmana, tret dels darrers dies en els quals he dedicat pràcticament 2 o 3 dies només a la pràctica. El meu principal problema han estat els errors amb l'ordre en què importava les llibreries que provocaven que el programa fallés.
+
+També em va costar la part de textures perquè no controlava si el fitxer s'havia carregat o no.
 
 ### Chang Ye
 Unes 3 o 4 hores a la setmana + 2 hores de laboratori, encara que durant la última setmana vaig dedicar més temps.
