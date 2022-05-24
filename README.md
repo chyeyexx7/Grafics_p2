@@ -376,8 +376,6 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 
 **Additional Information**
 
-*(NOTA: Hores de dedicació i problemes que heu tingut fent la pràctica)*
-
 ### Endimbeer Enrique Nuñez Matos
 
 He fet servir unes 4 hores a la setmana, tret dels darrers dies en els quals he dedicat pràcticament 2 o 3 dies només a la pràctica. El meu principal problema han estat els errors amb l'ordre en què importava les llibreries que provocaven que el programa fallés.
