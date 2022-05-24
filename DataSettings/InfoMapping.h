@@ -15,7 +15,7 @@
 //#include "glm/glm.hpp"
 #include "Modelling/Scene.h"
 //#include "Factories/ObjectFactory.h"
-//#include "Modelling/Materials/ColorMapStatic.h"
+#include "Modelling/Materials/ColorMapStatic.h"
 //#include "Modelling/Materials/Texture.h"
 //#include "Factories/MaterialFactory.h"
 #include "PropertyInfo.h"

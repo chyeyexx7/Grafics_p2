@@ -5,16 +5,17 @@ PropertyInfo::PropertyInfo()
 {
 }
 
-#include <iostream>
+
 //! [0]
 void PropertyInfo::read(const QJsonObject &json)
 {
+
     if (json.contains("name") && json["name"].isString()) {
         name = json["name"].toString().toUpper();
     }
-    if (json.contains("gyzmo") && json["gyzmo"].isString()) {
-        QString objStr = json["gyzmo"].toString().toUpper();
-        //gyzmo = ObjectFactory::getInstance().getObjectType(objStr);
+    if (json.contains("objFileName") && json["objFileName"].isString()) {
+        QString objStr = json["objFileName"].toString();
+        gyzmo = objStr;
     }
     if (json.contains("minValue") && json["minValue"].isDouble()) {
         minValue = json["minValue"].toDouble();
@@ -28,7 +29,8 @@ void PropertyInfo::read(const QJsonObject &json)
             QString tipus = auxMat["type"].toString().toUpper();
             //MaterialFactory::MATERIAL_TYPES t = MaterialFactory::getInstance().getMaterialType(tipus);
             //material = MaterialFactory::getInstance().createMaterial(t);
-            //material->read(auxMat);
+            material = make_shared<Material>();
+            material->read(auxMat);
         }
     }
     if (json.contains("colorMap") && json["colorMap"].isString()) {

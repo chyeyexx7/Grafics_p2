@@ -15,8 +15,8 @@ class Builder : public QObject {
 
 public:
     Builder(GLWidget *glWid);
-    void buildRealScene(QString filename);
     shared_ptr<Material> mapeigMaterial(shared_ptr<PropertyInfo> propinfo, ColorMapStatic::ColorMapType tCM, double valorMonReal);
+    void buildRealScene();
 
 
 public slots:

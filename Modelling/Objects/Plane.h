@@ -34,7 +34,7 @@ private:
     shared_ptr<Material> material;
 
     int Index;
-    point4 points[NumVertices]; // 6 punts
+    point4 points[NumVertices];
 
     GLuint buffer;
 };

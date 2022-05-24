@@ -110,7 +110,7 @@ void Plane::aplicaTG(mat4 m)
 
 }
 
-void Plane::read (const QJsonObject &json)
+void Plane::read(const QJsonObject &json)
 {
     /*if (json.contains("pmin") && json["pmin"].isArray()) {
         QJsonArray auxVec = json["pmin"].toArray();

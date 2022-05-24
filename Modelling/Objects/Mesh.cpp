@@ -54,7 +54,6 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
     // Creació d'un vertex array object
 
     // S'activa la textura i es passa a la GPU
-
     glGenVertexArrays( 1, &vao );
 
     // Creacio i inicialitzacio d'un vertex buffer object (VBO)
@@ -67,9 +66,6 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
 
     // TO  DO: A modificar a la fase 1 de la practica 2
     // Cal passar les normals a la GPU
-
-
-
     glBufferData( GL_ARRAY_BUFFER, sizeof(point4)*Index * 2 + sizeof(vec2) * Index , NULL, GL_STATIC_DRAW );
     glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(point4)*Index, points );
 
@@ -78,11 +74,8 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
 
     qDebug() << "Normales asignadas";
 
-
     //Textures
-    glBufferSubData(GL_ARRAY_BUFFER, sizeof(point4)*Index * 2,sizeof(vec2) * Index,textures);
-
-
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(point4)*Index * 2,sizeof(vec2) * Index, textures);
 
     // set up vertex arrays
     glBindVertexArray( vao );
@@ -97,8 +90,6 @@ void Mesh::toGPU(shared_ptr<QGLShaderProgram> pr) {
 
     glEnable( GL_DEPTH_TEST );
     glEnable(GL_TEXTURE_2D);
-
-
 }
 
 
@@ -112,7 +103,6 @@ void Mesh::draw(){
     // Activació a GL del Vertex Buffer Object.
     // TO  DO: A modificar a la fase 1 de la practica 2
     // Cal activar també les normals  a la GPU
-
     this->material->toGPU(program);
     if(texture){
         this->toGPUTexture(program);
@@ -125,12 +115,9 @@ void Mesh::draw(){
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays( GL_TRIANGLES, 0, Index );
 
-
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
-
-
 }
 
 /**
@@ -140,7 +127,6 @@ void Mesh::make(){
 
     // TO  DO: A modificar a la fase 1 de la practica 2
     // Cal calcular la normal a cada vertex a la CPU
-    qDebug() << "Mesh make";
     Index = 0;
     for(unsigned int i=0; i<cares.size(); i++){
         for(unsigned int j=0; j<cares[i].idxVertices.size(); j++){
@@ -149,17 +135,14 @@ void Mesh::make(){
             if(hasTexture){
                 textures[Index] = textVertexs[cares[i].idxTextures[j]];
             }
-
             Index++;
         }
     }
-
 }
 
 void Mesh::setTexture(shared_ptr<QOpenGLTexture> t){
     texture = t;
     initTexture();
-
 }
 
 /**
