@@ -41,14 +41,11 @@ Cub::Cub(float p): Mesh(36)
 Cub::~Cub()
 {
 }
-
-
 // Realitzacio de la geometria del cub en una genList o en el vertex array, segons el que visualitzem
 
 void Cub::make()
 {
      Index = 0;
-     qDebug() << cares[0].idxVertices[2];
      for(unsigned int i=0; i<cares.size(); i++){
          for(unsigned int j=0; j<cares[i].idxVertices.size(); j++){
              points[Index] = vertexs[cares[i].idxVertices[j]];
@@ -66,12 +63,12 @@ void Cub::initTextura()
      for(GLuint i=0; i<faces.size(); i++) {
         img[i] = QImage(faces[i]).convertToFormat(QImage::Format_RGBA8888);
      }
-     // Carregar la textura
+     // Cargar la textura
      glActiveTexture(GL_TEXTURE0);
 
      texture = make_shared<QOpenGLTexture>(QOpenGLTexture::TargetCubeMap);
-     qDebug() <<"texture id: ";
-     qDebug() << texture->textureId();
+
+     // Si la textura no se ha iniciado, la creamos.
      if(!texture->isCreated()) texture->create();
 
      glBindTexture(GL_TEXTURE_CUBE_MAP, texture->textureId());
@@ -81,6 +78,7 @@ void Cub::initTextura()
      texture->generateMipMaps();
      texture->allocateStorage();
 
+     // Asignamos las imágenes a cada eje
      texture->setData(0, 0, QOpenGLTexture::CubeMapPositiveX, QOpenGLTexture::RGBA,
                       QOpenGLTexture::UInt8, (const void*)img[0].constBits(), 0);
      texture->setData(0, 0, QOpenGLTexture::CubeMapNegativeX, QOpenGLTexture::RGBA,
@@ -99,7 +97,6 @@ void Cub::initTextura()
      texture->setMagnificationFilter(QOpenGLTexture::LinearMipMapLinear);
 
      glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
-
  }
 
 // Carrega a la GPU del cub
@@ -190,6 +187,7 @@ void Cub::initVertex() {
     cares.push_back(*back1);
     cares.push_back(*back2);
 
+    // Las imágenes que usará cada cara.
     faces.push_back(QImage("://resources/textures/yokohama/posx.jpg"));
     faces.push_back(QImage("://resources/textures/yokohama/negx.jpg"));
     faces.push_back(QImage("://resources/textures/yokohama/negy.jpg"));

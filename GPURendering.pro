@@ -10,7 +10,6 @@ CONFIG += c++11
 
 SOURCES += \
     DataSettings/InfoMapping.cpp \
-    DataSettings/Serializable.cpp \
     DataSettings/propertyinfo.cpp \
     Factories/Builder.cpp \
     Modelling/Animation.cpp \
@@ -33,7 +32,6 @@ SOURCES += \
 HEADERS += \
     DataSettings/InfoMapping.h \
     DataSettings/PropertyInfo.h \
-    DataSettings/Serializable.h \
     Factories/Builder.h \
     IncludeWin32/GL/glut.h \
     Modelling/Animation.h \
@@ -72,5 +70,18 @@ DISTFILES += \
     libWin32/glut.dll \
     libWin32/glut.lib \
     libWin32/glut32.dll \
-    libWin32/glut32.lib \
+    libWin32/glut32.lib \ \
+    resources/cube_fshader.glsl \
+    resources/cube_vshader.glsl \
+    resources/depth_fshader.glsl \
+    resources/depth_vshader.glsl \
+    resources/gouraud_fshader.glsl \
+    resources/gouraud_vshader.glsl \
+    resources/phong_fshader.glsl \
+    resources/phong_vshader.glsl \
+    resources/text_phong_fshader.glsl \
+    resources/text_phong_vshader.glsl \
+    resources/toon_fshader.glsl \
+    resources/toon_vshader.glsl \
+    resources/vshader1.glsl
 

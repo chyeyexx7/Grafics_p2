@@ -86,6 +86,6 @@ void main()
     }
     //El color de salida será el calculado con la fórmula de phong
 
-    colorOut =  vec4(Itotal,1.0);
+    colorOut =  vec4(Itotal, 1.0);
 }
 

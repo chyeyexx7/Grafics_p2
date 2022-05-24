@@ -20,7 +20,7 @@ public:
     vec3 getPuntBase(shared_ptr<Plane> base, vec2 puntReal);
 
     QString name;
-    //ObjectFactory::OBJECT_TYPES gyzmo;
+    QString gyzmo;
     float minValue;
     float maxValue;
     shared_ptr<Material> material;

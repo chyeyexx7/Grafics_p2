@@ -28,16 +28,16 @@
 "gyzmo": "mesh",
 "minValue": 1800,
 "maxValue": 382703,
-"colorMap": "COLOR_MAP_TYPE_PLASMA",
+"colorMap": "COLOR_MAP_TYPE_INFERNO",
 "objFileName": "../p2-gpurendering-ab01/resources/models/sphere0.obj",
 "material": {
     "type": "METAL",
     "ka": [0.2, 0.2, 0.2],
-    "kd": [0.7,0.6,0.5],
-    "ks": [0.7, 0.7, 0.7],
+    "kd": [1.0, 1.0, 1.0],
+    "ks": [0.8, 0.5, 0.5],
     "kt": [0.6, 0.6, 0.6],
     "nut" : 1.0,
-    "shininess": 10.0
+    "shininess": 20.0
  },
 "data": [
  [2.1621234, 41.4056165,  6100]

@@ -79,7 +79,7 @@ void Builder::newVirtualScene() {
             }
         }
     }
-     emit newScene(scene);
+    emit newScene(scene);
 }
 
 
@@ -111,30 +111,29 @@ void Builder::newDataScene()
             qWarning("Parse error in json virtual scene file.");
         } else{
             QJsonObject json = loadDoc.object();
+
             if (json.contains("base") && json["base"].isObject()) {
                 QJsonObject jbase = json["base"].toObject();
-                shared_ptr<Plane> o;
+                //shared_ptr<Plane> o = make_shared<Plane>();
+                //shared_ptr<Material> material = make_shared<Material>();
+                //o->make();
+                //o->setMaterial(material);
                 //o->read(jbase);
                 //scene->addObject(o);
-                scene->base = dynamic_pointer_cast<Plane>(o);
+                //scene->base = o;
             }
 
             mapping = make_shared<InfoMapping>();
             mapping->read(json);
-            cout <<"hola\n";
-            if (json.contains("objFileName") && json["objFileName"].isString()) {
-                QString filename = json["objFileName"].toString();
-                buildRealScene(filename);
-                cout <<"hola2\n";
-                return;
-            }
+            buildRealScene();
+
          }
     }
     emit newScene(scene);
 }
 
-#include <iostream>
-void Builder::buildRealScene(QString filename) {
+
+void Builder::buildRealScene() {
 
     float maxX = mapping->Vxmax;
     float maxY = mapping->Vzmax;
@@ -159,8 +158,7 @@ void Builder::buildRealScene(QString filename) {
              // Col.locació de l'objecte o gizmo del valor de la dada al Mon Virtual
              //  TODO Fase 2: Cal calcular l'escalat del gizmo segons el valor llegit
              //QString s = "ObjectFactory::getInstance().getNameType(propinfo->gyzmo);"
-             auto o = make_shared<Mesh>(1000000, filename);
-             cout << mapping->props[i].second[j][2];
+             shared_ptr<Mesh> o = make_shared<Mesh>(1000000, propinfo->gyzmo);
              //shared_ptr<Mesh> o = make_shared<Mesh>(s, mapping->props[i].second[j][2]);
 
              o->setMaterial(mapeigMaterial(propinfo, propinfo->colorMapType,
@@ -170,7 +168,7 @@ void Builder::buildRealScene(QString filename) {
              float rX = ((mapping->props[i].second[j][0] - baseX) / rangeX) * (maxX - minX) + minX;
              float rY = ((mapping->props[i].second[j][1] - baseY) / rangeY) * (maxY - minY) + minY;
 
-             vec3 trans(rX, 0, -rY);
+             //vec3 trans(rX, 0, -rY);
 
              //o->aplicaTG(make_shared<TranslateTG>(trans));
 
@@ -180,10 +178,9 @@ void Builder::buildRealScene(QString filename) {
              //o->aplicaTG(make_shared<ScaleTG>(value));
 
              // Afegir objecte a l'escena
-             scene->objects.push_back(o);
+             scene->addObject(o);
          }
     }
-    emit newScene(scene);
 }
 
 shared_ptr<Material> Builder::mapeigMaterial(shared_ptr<PropertyInfo> propinfo, ColorMapStatic::ColorMapType tCM, double valorMonReal) {
@@ -194,8 +191,9 @@ shared_ptr<Material> Builder::mapeigMaterial(shared_ptr<PropertyInfo> propinfo, 
 
     auto cm = make_shared<ColorMapStatic>(tCM);
     int idx = (int)(255.0*(valorMonReal-propinfo->minValue)/(propinfo->maxValue-propinfo->minValue));
+
     shared_ptr<Material> mat = make_shared<Material>(propinfo->material->Ka,
-                                                     cm->getColor(idx),
+                                                     vec3(0.8,0.5,0.5),
                                                      propinfo->material->Ks,
                                                      propinfo->material->shininess,
                                                      propinfo->material->opacity);

@@ -41,8 +41,8 @@ void main()
     // Calculamos la silueta con la fórmula cos(alfa), donde alfa es el producto escalar entre normal y vector visión.
     // Si alfa = 0 tenemos un borde.
     silhouette = dot(normal, normalize(obs - position));
-    //if (silhouette < 0.1)
-      //  color *= silhouette;
+    if (silhouette < 0.1)
+        color *= silhouette;
 
     colorOut = color;
 }
