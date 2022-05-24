@@ -53,7 +53,8 @@ Aquesta pràctica és una continuació de l'anterior. El que hem fet és agafar 
           
 
 - Fase 2 
-    - [ ] Èmfasi de siluetes
+    - [x] Èmfasi de siluetes
+    - Chng Ye
     - [ ] Mapping indirecte de textures
     - [ ] Animacions amb dades temporals
     - [ ] Normal mapping
