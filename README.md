@@ -265,9 +265,54 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 ## Fase 2
 
 ### 1) Environment mapping
-    TO DO
-### 2) Ènfasi de siluetes
-     TO DO
+En aquest apartat se'ns demana crear un cub amb textura des de l'interior i afegint la textura a la part interior del cub. Com que a la teoria ja ens donava part del codi relacionat a l'enviament a GPU, aleshores només m'he centrat a construir un cub format 12 triangles. He creat una classe 'Cub.h' que hereta de 'Mesh.h' per poder aprofitar els atributs d'un mesh.
+
+A continuació veiem el codi que s'ha utilitzat per crear les 12 cares.
+<pre>
+         _________
+      v1/        /|v2
+       /|       / |
+    v5/--------/v6|
+      | |______|__|
+      |/ v0    | /v3
+      |________|/
+     v4        v7
+     
+         // Bottom
+    Cara *bottom1 = new Cara(4, 0, 7, -1);
+    Cara *bottom2 = new Cara(7, 0, 3, -1);
+
+    //Front
+    Cara *front1 = new Cara(0, 1, 3, -1);
+    Cara *front2 = new Cara(3, 1, 2, -1);
+
+    // Top
+    Cara *top1 = new Cara(1, 5, 2, -1);
+    Cara *top2 = new Cara(2, 5, 6, -1);
+
+    // Right
+    Cara *right1 = new Cara(3, 2, 7, -1);
+    Cara *right2 = new Cara(7, 2, 6, -1);
+
+    // Left
+    Cara *left1 = new Cara(4, 5, 0, -1);
+    Cara *left2 = new Cara(0, 5, 1, -1);
+
+    // Back
+    Cara *back1 = new Cara(7, 6, 4, -1);
+    Cara *back2 = new Cara(4, 6, 5, -1);
+</pre>
+
+Quan s'envia la informació a la GPU, al vshader enviem 'v_texcoord = normalize(position.xyz);' al fragment shader per després fer 'colorOut = vec4(texture(texMap, v_texcoord.xyz).rgb, 1.0f);'. Com que hem definit la imatge que correspon a cada cara dins de la classe 'Cub', ja podem assignar el color com la textura de la imatge assignada.
+
+### 2) Èmfasi de siluetes
+L'èmfasi de siluetes només l'hem implementat a 'toon_fshader.glsl', ja que és el shader que dóna millor resultats.
+Per saber si un píxel és silueta hem de calcular l'angle entre el vector normal i vector visió. Si el valor obtingut és 0, tenim una silueta i en cas contrari, no ho és.
+
+silhouette = dot(normal, normalize(obs - position));
+if (silhouette < 0.1)
+color *= silhouette;
+Hem decidit que tots els píxels que ens doni un factor de silhouette menor a 0.1 siguin una silueta, aquest és un valor que podem anar modificant per aconseguir uns resultats diferents.
 
 
 **Screenshots**
@@ -366,7 +411,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
     
     ![image](https://user-images.githubusercontent.com/72166134/169711246-98bcbd2c-9c4d-4ff9-9986-a961662801ea.png)
     
-    Ènfasi de siluetes amb Toon shading
+    Èmfasi de siluetes amb Toon shading
     
     ![image](https://user-images.githubusercontent.com/72078368/169883339-30d88056-aed8-46a6-909f-7ec40982d450.jpg)
 
