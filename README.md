@@ -266,7 +266,7 @@ Itotal += ((idkd + isks)/attenuation) + iaka;
 ## Fase 2
 
 ### 1) Environment mapping
-En aquest apartat se'ns demana crear un cub amb textura des de l'interior i afegint la textura a la part interior del cub. Com que a la teoria ja ens donava part del codi relacionat a l'enviament a GPU, aleshores només m'he centrat a construir un cub format 12 triangles. He creat una classe 'Cub.h' que hereta de 'Mesh.h' per poder aprofitar els atributs d'un mesh.
+En aquest apartat se'ns demana crear un cub amb textura des de l'interior i afegint la textura a la part interior del cub. Com que a la teoria ja ens donava part del codi relacionat a l'enviament a GPU, aleshores només m'he centrat a construir un cub format 12 triangles. He creat una classe `Cub.h` que hereta de `Mesh.h` per poder aprofitar els atributs d'un mesh.
 
 A continuació veiem el codi que s'ha utilitzat per crear les 12 cares.
 <pre>
@@ -304,15 +304,18 @@ A continuació veiem el codi que s'ha utilitzat per crear les 12 cares.
     Cara *back2 = new Cara(4, 6, 5, -1);
 </pre>
 
-Quan s'envia la informació a la GPU, al vshader enviem 'v_texcoord = normalize(position.xyz);' al fragment shader per després fer 'colorOut = vec4(texture(texMap, v_texcoord.xyz).rgb, 1.0f);'. Com que hem definit la imatge que correspon a cada cara dins de la classe 'Cub', ja podem assignar el color com la textura de la imatge assignada.
+Quan s'envia la informació a la GPU, al vshader enviem `v_texcoord = normalize(position.xyz);` al fragment shader per després fer `colorOut = vec4(texture(texMap, v_texcoord.xyz).rgb, 1.0f);`. Com que hem definit la imatge que correspon a cada cara dins de la classe `Cub`, ja podem assignar el color com la textura de la imatge assignada.
 
 ### 2) Èmfasi de siluetes
-L'èmfasi de siluetes només l'hem implementat a 'toon_fshader.glsl', ja que és el shader que dóna millor resultats.
+L'èmfasi de siluetes només l'hem implementat a `toon_fshader.glsl`, ja que és el shader que dóna millor resultats.
 Per saber si un píxel és silueta hem de calcular l'angle entre el vector normal i vector visió. Si el valor obtingut és 0, tenim una silueta i en cas contrari, no ho és.
 
+<prev>
 silhouette = dot(normal, normalize(obs - position));
 if (silhouette < 0.1)
 color *= silhouette;
+</prev>
+
 Hem decidit que tots els píxels que ens doni un factor de silhouette menor a 0.1 siguin una silueta, aquest és un valor que podem anar modificant per aconseguir uns resultats diferents.
 
 
